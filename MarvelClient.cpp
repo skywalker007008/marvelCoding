@@ -11,9 +11,21 @@
 #include "MarvelClient.h"
 #include "MarvelConstant.h"
 #include "MarvelException.h"
+#include "MarvelLog.h"
 
-marvel::MarvelClient::MarvelClient(uint32_t host, uint16_t port, const std::string& name)
-        :host_(host), port_(port), name_(name) {}
+marvel::MarvelClient::MarvelClient(const std::string& name, uint32_t host, uint16_t port)
+        :host_(host), port_(port), name_(name) {
+    std::string file_name = "client_" + name_ + ".txt";
+    if (stream_ != nullptr) {
+        stream_.open(file_name, std::ios::out);
+    }
+}
+
+marvel::MarvelClient::~MarvelClient() {
+    if (stream_ != nullptr) {
+        stream_.close();
+    }
+}
 
 void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) {
     int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -40,34 +52,37 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
     }
 
     // init server's address
-    memset(&serv_addr, 0, sizeof(serv_addr));
+    memset(&serv_addr, 0, ADDRIN_SIZE);
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = host;
     serv_addr.sin_port = htons(port);
 
     // check if connection successful
-    if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+    if (connect(sock, (struct sockaddr*)&serv_addr, ADDR_SIZE) < 0) {
         err::SocketException exp(err::SOCKET_CONNECT_FAILED, serv_addr);
 
         // marvel::err::errMsg(SOCKET_CONNECT_FAILED);
         // exit(1);
     } else {
-        marvel::log::socket_connected(&serv_addr);
+        marvel::log::client::SocketConnected(this, &serv_addr);
     }
 
     // start-to-send
-    sendMessage(sock, msg);
+    sendMessage(sock, message, &serv_addr);
 
 
 }
 
-void marvel::MarvelClient::sendMessage(int sock, char* msg) {
-    int remain = strlen(msg);
+void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr) {
+    int length = strlen(msg);
+    int remain = length;
     int sendBytes;
     while (remain > 0) {
         if (remain >= PER_TRANS_SIZE) {
             sendBytes = send(sock, msg, PER_TRANS_SIZE, 0);
-            marvel::log::client::sendMessage(host_, msg, PER_TRANS_SIZE);
+            remain -= PER_TRANS_SIZE;
+            marvel::log::client::SendMessage(
+                    this, serv_addr -> sin_addr.s_addr, serv_addr -> sin_port, msg, sendBytes, length - remain);
             if (sendBytes < 0) {
                 marvel::err::errMsg(SEND_FAILED); // miss
                 exit(1); // no need
@@ -76,10 +91,10 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg) {
                 exit(1); // actually no need
             }
             msg += PER_TRANS_SIZE;
-            remain -= PER_TRANS_SIZE;
         } else {
             sendBytes = send(sock, msg, remain, 0);
-            marvel::log::client::sendMessage(host_, msg, remain);
+            marvel::log::client::SendMessage(
+                    this, serv_addr -> sin_addr.s_addr, serv_addr -> sin_port, msg, sendBytes, length - remain);
             if (sendBytes < 0) {
                 marvel::err::errMsg(SEND_FAILED); // miss
                 exit(1); // no need
@@ -90,6 +105,10 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg) {
             break;
         }
     }
+}
+
+std::ofstream marvel::MarvelClient::GetStream() {
+    return stream_;
 }
 
 

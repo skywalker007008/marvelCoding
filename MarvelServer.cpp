@@ -17,10 +17,22 @@
 using namespace marvel;
 
 MarvelServer::MarvelServer(
-        uint32_t host, uint16_t port)
-        :host_(host), port_(port) {}
+        uint32_t host, uint16_t port, const std::string& name)
+        :host_(host), port_(port), name_(name) {
+    std::string file_name;
+    if (stream_ != nullptr) {
+        file_name = "server_" + name_ + ".txt";
+        stream_.open(file_name, std::ios::out);
+    }
+}
 
-void MarvelServer::start() {
+MarvelServer::~MarvelServer() {
+    if (stream_ != nullptr) {
+        stream_.close();
+    }
+}
+
+void MarvelServer::start() { //
     int serv_socket;
     int clnt_socket;
 
@@ -30,7 +42,7 @@ void MarvelServer::start() {
     struct sockaddr_in clnt_addr;
     socklen_t clnt_addr_size;
 
-    char message[MAX_BUF_SIZE];
+    char message[PER_TRANS_SIZE]; // One Time Buffer
     int length;
     int recv_bytes = 0;
 
@@ -65,7 +77,8 @@ void MarvelServer::start() {
                 err::errMsg(err::RECV_FAILED);
             }
             recv_bytes += length;
-            log::RecvMessage(host_, port_, msg, length, recv_bytes);
+            log::server::RecvMessage(this, host_, port_, message, length, recv_bytes);
+            memset(message, 0, PER_TRANS_SIZE);
         }
 
         id++;

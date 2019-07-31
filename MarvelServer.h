@@ -11,16 +11,20 @@
 #include <cstdint>
 #include <string>
 #include <sys/socket.h>
+#include <fstream>
 
 namespace marvel {
     class MarvelServer {
     public:
-        MarvelServer(uint32_t host, uint16_t port);
+        MarvelServer(uint32_t host, uint16_t port, const std::string& name);
+        ~MarvelServer();
         void start();
 
     private:
         uint32_t host_;
         uint16_t port_;
+        std::string name_;
+        std::ofstream stream_;
     };
 }
 

@@ -10,15 +10,18 @@
 
 #include <cstdint>
 #include <string>
+#include "MarvelClient.h"
+#include "MarvelServer.h"
 
 namespace marvel::log {
     namespace server {
-        void RecvMessage(uint32_t host, uint16_t port, char *msg, int recv_bytes, int total_bytes);
+        void RecvMessage(marvel::MarvelServer* server, uint32_t host, uint16_t port, char *msg, int recv_bytes, int total_bytes);
     } // namespace server
     namespace client {
-        void SendMessage(uint32_t host, uint16_t port, char *msg,
-                         int send_bytes, int total_bytes, std::string &client_name);
+        void SendMessage(marvel::MarvelClient* client, uint32_t host, uint16_t port, char *msg,
+                         int send_bytes, int total_bytes);
+        void SocketConnected(MarvelClient* client, struct sockaddr_in* sockaddr);
     } // namespace client
- // namespace marvel::log
+} // namespace marvel::log
 
 #endif //MARVELCODING_MARVELLOG_H
