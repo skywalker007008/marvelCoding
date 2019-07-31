@@ -19,6 +19,7 @@ namespace marvel {
         MarvelServer(uint32_t host, uint16_t port, const std::string& name);
         ~MarvelServer();
         void start();
+        std::ofstream GetStream();
 
     private:
         uint32_t host_;

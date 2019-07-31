@@ -5,8 +5,8 @@
  * 
  */
 
-#include "MarvelException.h"
-#include "MarvelConstant.h"
+#include "marvel_exception.h"
+#include "marvel_constant.h"
 
 using namespace marvel;
 

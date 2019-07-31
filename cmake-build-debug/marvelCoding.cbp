@@ -114,6 +114,12 @@
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelServer.h">
 			<Option target="marvelCoding"/>
 		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelSocket.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelSocket.h">
+			<Option target="marvelCoding"/>
+		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/main.cpp">
 			<Option target="marvelCoding"/>
 		</Unit>

@@ -8,10 +8,11 @@
 #include <string>
 #include <netinet/in.h>
 #include <cstring>
-#include "MarvelClient.h"
-#include "MarvelConstant.h"
-#include "MarvelException.h"
-#include "MarvelLog.h"
+#include "marvel_client.h"
+#include "marvel_constant.h"
+#include "marvel_exception.h"
+#include "marvel_log.h"
+#include "marvel_socket.h"
 
 marvel::MarvelClient::MarvelClient(const std::string& name, uint32_t host, uint16_t port)
         :host_(host), port_(port), name_(name) {
@@ -30,11 +31,7 @@ marvel::MarvelClient::~MarvelClient() {
 void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) {
     int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     struct sockaddr_in serv_addr;
-    char message[MAX_BUF_SIZE];
-
-    int str_len;
-    int idx;
-    int read_len;
+    char message[MAX_BUF_SIZE + 1];
 
     // check if socket created successfully
     if (sock == -1) {
@@ -52,10 +49,7 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
     }
 
     // init server's address
-    memset(&serv_addr, 0, ADDRIN_SIZE);
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = host;
-    serv_addr.sin_port = htons(port);
+    PackSockaddr(&serv_addr, AF_INET, host, port);
 
     // check if connection successful
     if (connect(sock, (struct sockaddr*)&serv_addr, ADDR_SIZE) < 0) {
@@ -82,7 +76,7 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
             sendBytes = send(sock, msg, PER_TRANS_SIZE, 0);
             remain -= PER_TRANS_SIZE;
             marvel::log::client::SendMessage(
-                    this, serv_addr -> sin_addr.s_addr, serv_addr -> sin_port, msg, sendBytes, length - remain);
+                    this, serv_addr, msg, sendBytes, length - remain);
             if (sendBytes < 0) {
                 marvel::err::errMsg(SEND_FAILED); // miss
                 exit(1); // no need
@@ -94,7 +88,7 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
         } else {
             sendBytes = send(sock, msg, remain, 0);
             marvel::log::client::SendMessage(
-                    this, serv_addr -> sin_addr.s_addr, serv_addr -> sin_port, msg, sendBytes, length - remain);
+                    this, serv_addr, msg, sendBytes, length - remain);
             if (sendBytes < 0) {
                 marvel::err::errMsg(SEND_FAILED); // miss
                 exit(1); // no need

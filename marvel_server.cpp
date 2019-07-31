@@ -8,11 +8,12 @@
 #include <netinet/in.h>
 #include <cstring>
 #include <iostream>
-#include "MarvelServer.h"
-#include "MarvelConstant.h"
-#include "MarvelException.h"
+#include "marvel_server.h"
+#include "marvel_constant.h"
+#include "marvel_exception.h"
 #include <unistd.h>
-#include "MarvelLog.h"
+#include "marvel_log.h"
+#include "marvel_socket.h"
 
 using namespace marvel;
 
@@ -42,7 +43,7 @@ void MarvelServer::start() { //
     struct sockaddr_in clnt_addr;
     socklen_t clnt_addr_size;
 
-    char message[PER_TRANS_SIZE]; // One Time Buffer
+    char message[PER_TRANS_SIZE + 1]; // One Time Buffer
     int length;
     int recv_bytes = 0;
 
@@ -50,10 +51,7 @@ void MarvelServer::start() { //
     if (serv_socket < 0) {
         err::errMsg(err::SOCKET_CREATE_FAILED);
     }
-    memset(&serv_addr, 0, ADDRIN_SIZE);
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = host_;
-    serv_addr.sin_port = htons(port_);
+    PackSockaddr(&serv_addr, AF_INET, host_, port_);
 
     if (bind(serv_socket, (struct sockaddr*)&serv_addr, ADDRIN_SIZE) < 0) {
         err::errMsg(err::SOCKET_BIND_FAILED);
@@ -67,7 +65,8 @@ void MarvelServer::start() { //
 
     for(int i = 0; i < MAX_CONNECT_NUM; i++) {
         recv_bytes = 0;
-        clnt_socket = accept(serv_socket, (sockaddr*)&clnt_addr, &clnt_addr_size);
+        clnt_socket = accept(serv_socket, (struct sockaddr*)&clnt_addr, &clnt_addr_size);
+        log::server::SocketAccepted(this, &serv_addr, &clnt_addr);
         if (clnt_socket < 0) {
             err::errMsg(err::ACCEPT_FAILED);
         }
@@ -77,7 +76,7 @@ void MarvelServer::start() { //
                 err::errMsg(err::RECV_FAILED);
             }
             recv_bytes += length;
-            log::server::RecvMessage(this, host_, port_, message, length, recv_bytes);
+            log::server::RecvMessage(this, &serv_addr, message, length, recv_bytes);
             memset(message, 0, PER_TRANS_SIZE);
         }
 
@@ -88,5 +87,9 @@ void MarvelServer::start() { //
     }
     close(serv_socket);
     // shutdown(serv_socket, SHUT_RDWR);
+}
+
+std::ofstream MarvelServer::GetStream() {
+    return stream_;
 }
 

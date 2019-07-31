@@ -258,6 +258,33 @@ MarvelServer.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.s
 .PHONY : MarvelServer.cpp.s
 
+MarvelSocket.o: MarvelSocket.cpp.o
+
+.PHONY : MarvelSocket.o
+
+# target to build an object file
+MarvelSocket.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o
+.PHONY : MarvelSocket.cpp.o
+
+MarvelSocket.i: MarvelSocket.cpp.i
+
+.PHONY : MarvelSocket.i
+
+# target to preprocess a source file
+MarvelSocket.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.i
+.PHONY : MarvelSocket.cpp.i
+
+MarvelSocket.s: MarvelSocket.cpp.s
+
+.PHONY : MarvelSocket.s
+
+# target to generate assembly for a file
+MarvelSocket.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.s
+.PHONY : MarvelSocket.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -309,6 +336,9 @@ help:
 	@echo "... MarvelServer.o"
 	@echo "... MarvelServer.i"
 	@echo "... MarvelServer.s"
+	@echo "... MarvelSocket.o"
+	@echo "... MarvelSocket.i"
+	@echo "... MarvelSocket.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
