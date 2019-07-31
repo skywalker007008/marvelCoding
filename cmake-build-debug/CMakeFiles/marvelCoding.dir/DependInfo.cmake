@@ -5,6 +5,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/MarvelException.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelException.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/main.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

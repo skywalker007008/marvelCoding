@@ -1,6 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/marvelCoding.dir/main.cpp.o"
   "CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o"
+  "CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o"
+  "CMakeFiles/marvelCoding.dir/MarvelException.cpp.o"
+  "CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o"
   "marvelCoding.pdb"
   "marvelCoding"
 )

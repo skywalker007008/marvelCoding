@@ -150,6 +150,87 @@ MarvelClient.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelClient.cpp.s
 .PHONY : MarvelClient.cpp.s
 
+MarvelConstant.o: MarvelConstant.cpp.o
+
+.PHONY : MarvelConstant.o
+
+# target to build an object file
+MarvelConstant.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o
+.PHONY : MarvelConstant.cpp.o
+
+MarvelConstant.i: MarvelConstant.cpp.i
+
+.PHONY : MarvelConstant.i
+
+# target to preprocess a source file
+MarvelConstant.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.i
+.PHONY : MarvelConstant.cpp.i
+
+MarvelConstant.s: MarvelConstant.cpp.s
+
+.PHONY : MarvelConstant.s
+
+# target to generate assembly for a file
+MarvelConstant.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.s
+.PHONY : MarvelConstant.cpp.s
+
+MarvelException.o: MarvelException.cpp.o
+
+.PHONY : MarvelException.o
+
+# target to build an object file
+MarvelException.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.o
+.PHONY : MarvelException.cpp.o
+
+MarvelException.i: MarvelException.cpp.i
+
+.PHONY : MarvelException.i
+
+# target to preprocess a source file
+MarvelException.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.i
+.PHONY : MarvelException.cpp.i
+
+MarvelException.s: MarvelException.cpp.s
+
+.PHONY : MarvelException.s
+
+# target to generate assembly for a file
+MarvelException.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.s
+.PHONY : MarvelException.cpp.s
+
+MarvelServer.o: MarvelServer.cpp.o
+
+.PHONY : MarvelServer.o
+
+# target to build an object file
+MarvelServer.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o
+.PHONY : MarvelServer.cpp.o
+
+MarvelServer.i: MarvelServer.cpp.i
+
+.PHONY : MarvelServer.i
+
+# target to preprocess a source file
+MarvelServer.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.i
+.PHONY : MarvelServer.cpp.i
+
+MarvelServer.s: MarvelServer.cpp.s
+
+.PHONY : MarvelServer.s
+
+# target to generate assembly for a file
+MarvelServer.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.s
+.PHONY : MarvelServer.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -189,6 +270,15 @@ help:
 	@echo "... MarvelClient.o"
 	@echo "... MarvelClient.i"
 	@echo "... MarvelClient.s"
+	@echo "... MarvelConstant.o"
+	@echo "... MarvelConstant.i"
+	@echo "... MarvelConstant.s"
+	@echo "... MarvelException.o"
+	@echo "... MarvelException.i"
+	@echo "... MarvelException.s"
+	@echo "... MarvelServer.o"
+	@echo "... MarvelServer.i"
+	@echo "... MarvelServer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -90,6 +90,24 @@
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelClient.h">
 			<Option target="marvelCoding"/>
 		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelConstant.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelException.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelException.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelServer.h">
+			<Option target="marvelCoding"/>
+		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/main.cpp">
 			<Option target="marvelCoding"/>
 		</Unit>

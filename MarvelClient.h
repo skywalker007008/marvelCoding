@@ -19,8 +19,8 @@ namespace marvel {
     class MarvelClient {
     public:
         MarvelClient(const std::string& host, uint16_t port);
-        void send();
-        void start();
+        void sendMessage(int sock, char* msg);
+        void start(const char* msg);
 
     private:
         std::string host_;
