@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <exception>
 #include <sys/socket.h>
+#include <netinet/in.h>
 
 namespace marvel::err {
     enum ErrorType {
@@ -34,13 +35,28 @@ namespace marvel::err {
 
     class MarvelException : public std::exception {
     public:
+        virtual void print();
+    };
+
+    class SocketCreateFailedException : public MarvelException {
+    public:
+        SocketCreateFailedException();
         void print();
     };
 
-    class SocketException : public MarvelException {
+    class MessageOversizedException : public MarvelException {
     public:
-        SocketException(ErrorType type, struct sockaddr_in& sockaddr);
-        void print();
+        MessageOversizedException();
+    };
+
+    class SocketConnectFailedException : public MarvelException {
+    public:
+        SocketConnectFailedException(struct sockaddr_in sockaddr);
+    };
+
+    class MessageSendFailedException : public MarvelException {
+    public:
+        MessageSendFailedException(int pos, int size);
     };
 } // namespace marvel::err
 

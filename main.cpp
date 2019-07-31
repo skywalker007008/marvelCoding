@@ -1,6 +1,7 @@
 #include <iostream>
+#include "marvel_log.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    base = clock();
+
 }

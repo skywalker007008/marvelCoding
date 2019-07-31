@@ -13,6 +13,8 @@
 #include "marvel_client.h"
 #include "marvel_server.h"
 
+extern clock_t base;
+
 namespace marvel::log {
     namespace server {
         void RecvMessage(MarvelServer *server, struct sockaddr_in* sockaddr,
@@ -25,6 +27,9 @@ namespace marvel::log {
                          char *msg, int send_bytes, int total_bytes);
         void SocketConnected(MarvelClient* client, struct sockaddr_in* sockaddr);
     } // namespace client
+
+    void log(std::ofstream stream, const std::string& string);
+    inline clock_t pass_time();
 } // namespace marvel::log
 
 #endif //MARVELCODING_MARVELLOG_H

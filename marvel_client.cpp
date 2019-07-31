@@ -29,21 +29,29 @@ marvel::MarvelClient::~MarvelClient() {
 }
 
 void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) {
-    int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    int sock;
     struct sockaddr_in serv_addr;
     char message[MAX_BUF_SIZE + 1];
 
-    // check if socket created successfully
-    if (sock == -1) {
-        marvel::err::errMsg(err::SOCKET_CREATE_FAILED);
-        exit(1);
+    for (int i = 0; i < MAX_RETRY_TIME; i++) {
+        // check if socket created successfully
+        sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+        if (sock < 0) {
+            log::log(stream_, "Socket Create Failed. Retrying...");
+            // marvel::err::errMsg(err::SOCKET_CREATE_FAILED);
+            if (i == MAX_RETRY_TIME) {
+                throw err::SocketCreateFailedException();
+            }
+        }
+        else {
+            break;
+        }
     }
 
     // check if msg longer than maxmium length
 
     if (strlen(msg) > MAX_BUF_SIZE) {
-        marvel::err::errMsg(err::DATA_OVERSIZED);
-        exit(1);
+        throw marvel::err::MessageOversizedException();
     } else {
         strcpy(message, msg);
     }
@@ -51,19 +59,28 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
     // init server's address
     PackSockaddr(&serv_addr, AF_INET, host, port);
 
-    // check if connection successful
-    if (connect(sock, (struct sockaddr*)&serv_addr, ADDR_SIZE) < 0) {
-        err::SocketException exp(err::SOCKET_CONNECT_FAILED, serv_addr);
-
-        // marvel::err::errMsg(SOCKET_CONNECT_FAILED);
-        // exit(1);
-    } else {
-        marvel::log::client::SocketConnected(this, &serv_addr);
+    for (int i = 0; i < MAX_RETRY_TIME; i++) {
+        // check if connection successful
+        if (connect(sock, (struct sockaddr *) &serv_addr, ADDR_SIZE) < 0) {
+            log::log(stream_, "Socket Connect Failed. Retrying...");
+            // err::SocketException exp(err::SOCKET_CONNECT_FAILED, serv_addr);
+            // marvel::err::errMsg(SOCKET_CONNECT_FAILED);
+            // exit(1);
+            if (i == MAX_RETRY_TIME) {
+                throw err::SocketConnectFailedException(serv_addr);
+            }
+        } else {
+            marvel::log::client::SocketConnected(this, &serv_addr);
+            break;
+        }
     }
 
     // start-to-send
-    sendMessage(sock, message, &serv_addr);
-
+    try {
+        sendMessage(sock, message, &serv_addr);
+    } catch (err::MarvelException exp) {
+        throw exp;
+    }
 
 }
 
@@ -77,12 +94,16 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
             remain -= PER_TRANS_SIZE;
             marvel::log::client::SendMessage(
                     this, serv_addr, msg, sendBytes, length - remain);
-            if (sendBytes < 0) {
-                marvel::err::errMsg(SEND_FAILED); // miss
-                exit(1); // no need
+            if (sendBytes < 0) { // no Retry, only stop here
+                throw err::MessageSendFailedException(
+                        length - remain - PER_TRANS_SIZE, PER_TRANS_SIZE);
+                // marvel::err::errMsg(SEND_FAILED); // miss
+                // exit(1); // no need
             } else if (sendBytes < PER_TRANS_SIZE) {
-                marvel::err::errMsg(SEND_INCOMPLETE); // loss
-                exit(1); // actually no need
+                log::log(stream_, "Message Sent Loss. Lost size: "
+                                  + std::to_string(PER_TRANS_SIZE - sendBytes));
+                // marvel::err::errMsg(SEND_INCOMPLETE); // loss
+                // exit(1); // actually no need
             }
             msg += PER_TRANS_SIZE;
         } else {
@@ -90,11 +111,14 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
             marvel::log::client::SendMessage(
                     this, serv_addr, msg, sendBytes, length - remain);
             if (sendBytes < 0) {
-                marvel::err::errMsg(SEND_FAILED); // miss
-                exit(1); // no need
+                throw err::MessageSendFailedException(length - remain, remain);
+                // marvel::err::errMsg(SEND_FAILED); // miss
+                // exit(1); // no need
             } else if (sendBytes < remain) {
-                marvel::err::errMsg(SEND_INCOMPLETE); // loss
-                exit(1); // actually no need
+                log::log(stream_, "Message Sent Loss. Lost size: "
+                                  + std::to_string(remain - sendBytes));
+                // marvel::err::errMsg(SEND_INCOMPLETE); // loss
+                // exit(1); // actually no need
             }
             break;
         }

@@ -22,6 +22,7 @@ namespace marvel {
     constexpr int MAX_BUF_SIZE = 1024;
     constexpr int PER_TRANS_SIZE = 32;
     constexpr int MAX_CONNECT_NUM = 2;
+    constexpr int MAX_RETRY_TIME = 2;
 }
 
 #endif //MARVELCODING_MARVELCONSTANT_H
