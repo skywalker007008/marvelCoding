@@ -37,7 +37,7 @@ void MarvelServer::start() { //
     int serv_socket;
     int clnt_socket;
 
-    int id = INIT_SERVER_ID;
+
 
     struct sockaddr_in serv_addr;
     struct sockaddr_in clnt_addr;
@@ -47,28 +47,44 @@ void MarvelServer::start() { //
     int length;
     int recv_bytes = 0;
 
-    serv_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    if (serv_socket < 0) {
-        err::errMsg(err::SOCKET_CREATE_FAILED);
+    try {
+        // create a socket
+        serv_socket = NewSocket(stream_);
+        // add details
+        PackSockaddr(&serv_addr, AF_INET, host_, port_);
+        // bind the socket
+        BindSocket(stream_, serv_socket, &serv_addr);
+        // now listen
+        ListenSocket(stream_, serv_socket, &serv_addr);
+    } catch (err::MarvelException exp) {
+        throw exp;
     }
-    PackSockaddr(&serv_addr, AF_INET, host_, port_);
 
-    if (bind(serv_socket, (struct sockaddr*)&serv_addr, ADDRIN_SIZE) < 0) {
-        err::errMsg(err::SOCKET_BIND_FAILED);
+    // now accept and recv
+    try {
+        RecvMessage(serv_socket, &serv_addr);
+    } catch (err::SocketAcceptFailedException exp) {
+        throw exp; // ???
+    } catch (err::MessageRecvFailedException exp) {
+        throw exp; // ???
     }
 
-    if (listen(serv_socket, MAX_CONNECT_NUM) < 0) {
-        err::errMsg(err::SOCKET_LISTEN_FAILED);
-    }
+}
 
-    clnt_addr_size = ADDR_SIZE;
-
+void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
+    int id = INIT_SERVER_ID;
+    int clnt_socket;
+    socklen_t clnt_addr_size = ADDR_SIZE;
+    struct sockaddr_in clnt_addr;
+    char message[PER_TRANS_SIZE + 1]; // One Time Buffer
+    int length;
+    int recv_bytes = 0;
     for(int i = 0; i < MAX_CONNECT_NUM; i++) {
         recv_bytes = 0;
-        clnt_socket = accept(serv_socket, (struct sockaddr*)&clnt_addr, &clnt_addr_size);
-        log::server::SocketAccepted(this, &serv_addr, &clnt_addr);
-        if (clnt_socket < 0) {
-            err::errMsg(err::ACCEPT_FAILED);
+        try {
+            clnt_socket = AcceptSocket(stream_, serv_socket, serv_addr, &clnt_addr, &clnt_addr_size);
+        } catch (err::SocketAcceptFailedException exp) {
+            throw exp;
         }
 
         while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
@@ -76,7 +92,7 @@ void MarvelServer::start() { //
                 err::errMsg(err::RECV_FAILED);
             }
             recv_bytes += length;
-            log::server::RecvMessage(this, &serv_addr, message, length, recv_bytes);
+            log::server::RecvMessage(this, serv_addr, message, length, recv_bytes);
             memset(message, 0, PER_TRANS_SIZE);
         }
 

@@ -15,8 +15,8 @@
 constexpr int INIT_SERVER_ID = 1;
 
 
-constexpr socklen_t ADDRIN_SIZE = sizeof(struct sockaddr_in);
-constexpr socklen_t ADDR_SIZE = sizeof(struct sockaddr);
+constexpr int ADDRIN_SIZE = sizeof(struct sockaddr_in);
+constexpr int ADDR_SIZE = sizeof(struct sockaddr);
 
 namespace marvel {
     constexpr int MAX_BUF_SIZE = 1024;

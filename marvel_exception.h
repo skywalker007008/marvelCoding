@@ -58,6 +58,26 @@ namespace marvel::err {
     public:
         MessageSendFailedException(int pos, int size);
     };
+
+    class MessageRecvFailedException : public MarvelException {
+    public:
+        MessageRecvFailedException(int pos, int size);
+    };
+
+    class SocketBindFailedException : public MarvelException {
+    public:
+        SocketBindFailedException(struct sockaddr_in sockaddr);
+    };
+
+    class SocketListenFailedException : public MarvelException {
+    public:
+        SocketListenFailedException(struct sockaddr_in sockaddr);
+    };
+
+    class SocketAcceptFailedException : public MarvelException {
+    public:
+        SocketAcceptFailedException(struct sockaddr_in sockaddr);
+    };
 } // namespace marvel::err
 
 

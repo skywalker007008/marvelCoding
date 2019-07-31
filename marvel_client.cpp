@@ -33,6 +33,14 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
     struct sockaddr_in serv_addr;
     char message[MAX_BUF_SIZE + 1];
 
+    // check if msg longer than maxmium length
+    if (strlen(msg) > MAX_BUF_SIZE) {
+        throw marvel::err::MessageOversizedException();
+    } else {
+        strcpy(message, msg);
+    }
+
+    // create a socket
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if socket created successfully
         sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -48,17 +56,10 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
         }
     }
 
-    // check if msg longer than maxmium length
-
-    if (strlen(msg) > MAX_BUF_SIZE) {
-        throw marvel::err::MessageOversizedException();
-    } else {
-        strcpy(message, msg);
-    }
-
     // init server's address
     PackSockaddr(&serv_addr, AF_INET, host, port);
 
+    // connect
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if connection successful
         if (connect(sock, (struct sockaddr *) &serv_addr, ADDR_SIZE) < 0) {
