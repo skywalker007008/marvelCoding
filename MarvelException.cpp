@@ -10,11 +10,13 @@
 
 using namespace marvel;
 
-void err::errMsg(err::ErrorType type) {
+void err::errMsg(err::ErrorType type, void* data = nullptr) {
     switch (type) {
         case SOCKET_CREATE_FAILED : {
-            err_file
+
         }
     }
 }
+
+
 

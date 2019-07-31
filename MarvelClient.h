@@ -18,12 +18,13 @@
 namespace marvel {
     class MarvelClient {
     public:
-        MarvelClient(const std::string& host, uint16_t port);
+        MarvelClient(uint32_t host, uint16_t port, const std::string& name);
         void sendMessage(int sock, char* msg);
         void start(const char* msg);
 
     private:
-        std::string host_;
+        std::string name_;
+        uint32_t host_;
         uint16_t port_;
     };
 }

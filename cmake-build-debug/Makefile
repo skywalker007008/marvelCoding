@@ -204,6 +204,33 @@ MarvelException.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.s
 .PHONY : MarvelException.cpp.s
 
+MarvelLog.o: MarvelLog.cpp.o
+
+.PHONY : MarvelLog.o
+
+# target to build an object file
+MarvelLog.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o
+.PHONY : MarvelLog.cpp.o
+
+MarvelLog.i: MarvelLog.cpp.i
+
+.PHONY : MarvelLog.i
+
+# target to preprocess a source file
+MarvelLog.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.i
+.PHONY : MarvelLog.cpp.i
+
+MarvelLog.s: MarvelLog.cpp.s
+
+.PHONY : MarvelLog.s
+
+# target to generate assembly for a file
+MarvelLog.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.s
+.PHONY : MarvelLog.cpp.s
+
 MarvelServer.o: MarvelServer.cpp.o
 
 .PHONY : MarvelServer.o
@@ -276,6 +303,9 @@ help:
 	@echo "... MarvelException.o"
 	@echo "... MarvelException.i"
 	@echo "... MarvelException.s"
+	@echo "... MarvelLog.o"
+	@echo "... MarvelLog.i"
+	@echo "... MarvelLog.s"
 	@echo "... MarvelServer.o"
 	@echo "... MarvelServer.i"
 	@echo "... MarvelServer.s"

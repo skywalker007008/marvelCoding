@@ -102,6 +102,12 @@
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelException.h">
 			<Option target="marvelCoding"/>
 		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelLog.h">
+			<Option target="marvelCoding"/>
+		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp">
 			<Option target="marvelCoding"/>
 		</Unit>

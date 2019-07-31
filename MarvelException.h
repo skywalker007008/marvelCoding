@@ -10,27 +10,39 @@
 #define MARVELCODING_MARVELEXCEPTION_H
 
 #include <cstdint>
-namespace marvel {
-    namespace err {
-        enum ErrorType {
-            // socket
-            SOCKET_CREATE_FAILED,
-            SOCKET_CONNECT_FAILED,
-            SOCKET_BIND_FAILED,
-            SOCKET_LISTEN_FAILED,
+#include <exception>
+#include <sys/socket.h>
 
-            // send & recv
-            SEND_FAILED,
-            SEND_INCOMPLETE,
-            ACCEPT_FAILED,
-            RECV_FAILED,
+namespace marvel::err {
+    enum ErrorType {
+        // socket
+        SOCKET_CREATE_FAILED,
+        SOCKET_CONNECT_FAILED,
+        SOCKET_BIND_FAILED,
+        SOCKET_LISTEN_FAILED,
 
-            // data
-            DATA_OVERSIZED,
-        };
-        void errMsg(ErrorType type);
-    } // namespace err
-} // namespace marvel
+        // send & recv
+        SEND_FAILED,
+        SEND_INCOMPLETE,
+        ACCEPT_FAILED,
+        RECV_FAILED,
+
+        // data
+        DATA_OVERSIZED,
+    };
+    void errMsg(ErrorType type, void* data = nullptr);
+
+    class MarvelException : public std::exception {
+    public:
+        void print();
+    };
+
+    class SocketException : public MarvelException {
+    public:
+        SocketException(ErrorType type, struct sockaddr_in& sockaddr);
+        void print();
+    };
+} // namespace marvel::err
 
 
 

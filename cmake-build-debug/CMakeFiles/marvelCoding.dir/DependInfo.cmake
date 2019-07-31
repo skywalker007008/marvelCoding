@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/MarvelException.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelException.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/main.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/main.cpp.o"
   )

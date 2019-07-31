@@ -15,11 +15,11 @@
 namespace marvel {
     class MarvelServer {
     public:
-        MarvelServer(const std::string& host, uint16_t port);
-        void start(const char* msg);
+        MarvelServer(uint32_t host, uint16_t port);
+        void start();
 
     private:
-        std::string host_;
+        uint32_t host_;
         uint16_t port_;
     };
 }

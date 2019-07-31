@@ -10,11 +10,12 @@
 #include <cstring>
 #include "MarvelClient.h"
 #include "MarvelConstant.h"
+#include "MarvelException.h"
 
-marvel::MarvelClient::MarvelClient(const std::string& host, uint16_t port)
-        :host_(host), port_(port) {}
+marvel::MarvelClient::MarvelClient(uint32_t host, uint16_t port, const std::string& name)
+        :host_(host), port_(port), name_(name) {}
 
-void marvel::MarvelClient::start(const char* msg) {
+void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) {
     int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     struct sockaddr_in serv_addr;
     char message[MAX_BUF_SIZE];
@@ -25,14 +26,14 @@ void marvel::MarvelClient::start(const char* msg) {
 
     // check if socket created successfully
     if (sock == -1) {
-        marvel::err::errMsg(SOCKET_CREATE_FAILED);
+        marvel::err::errMsg(err::SOCKET_CREATE_FAILED);
         exit(1);
     }
 
     // check if msg longer than maxmium length
 
     if (strlen(msg) > MAX_BUF_SIZE) {
-        marvel::err::errMsg(DATA_OVERSIZED);
+        marvel::err::errMsg(err::DATA_OVERSIZED);
         exit(1);
     } else {
         strcpy(message, msg);
@@ -41,13 +42,15 @@ void marvel::MarvelClient::start(const char* msg) {
     // init server's address
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = addr(host_); // not host
-    serv_addr.sin_port = htons(port_); // also not part
+    serv_addr.sin_addr.s_addr = host;
+    serv_addr.sin_port = htons(port);
 
     // check if connection successful
     if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-        marvel::err::errMsg(SOCKET_CONNECT_FAILED);
-        exit(1);
+        err::SocketException exp(err::SOCKET_CONNECT_FAILED, serv_addr);
+
+        // marvel::err::errMsg(SOCKET_CONNECT_FAILED);
+        // exit(1);
     } else {
         marvel::log::socket_connected(&serv_addr);
     }
