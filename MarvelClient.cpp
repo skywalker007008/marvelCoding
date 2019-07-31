@@ -11,7 +11,7 @@
 #include "MarvelClient.h"
 #include "MarvelConstant.h"
 
-marvel::MarvelClient(const std::string& host, uint16_t port)
+marvel::MarvelClient::MarvelClient(const std::string& host, uint16_t port)
         :host_(host), port_(port) {}
 
 void marvel::MarvelClient::start(const char* msg) {
@@ -41,8 +41,8 @@ void marvel::MarvelClient::start(const char* msg) {
     // init server's address
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = addr(host_);
-    serv_addr.sin_port = htons(port_);
+    serv_addr.sin_addr.s_addr = addr(host_); // not host
+    serv_addr.sin_port = htons(port_); // also not part
 
     // check if connection successful
     if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
