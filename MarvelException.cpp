@@ -5,5 +5,16 @@
  * 
  */
 
-#include <MarvelException.h>
+#include "MarvelException.h"
+#include "MarvelConstant.h"
+
+using namespace marvel;
+
+void err::errMsg(err::ErrorType type) {
+    switch (type) {
+        case SOCKET_CREATE_FAILED : {
+            err_file
+        }
+    }
+}
 

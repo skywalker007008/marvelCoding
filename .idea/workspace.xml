@@ -12,9 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73ef4f14-230c-49c0-8c96-3c1396313bba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarvelClient.cpp" afterPath="$PROJECT_DIR$/MarvelClient.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarvelServer.cpp" afterPath="$PROJECT_DIR$/MarvelServer.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarvelServer.h" afterPath="$PROJECT_DIR$/MarvelServer.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarvelConstant.h" afterPath="$PROJECT_DIR$/MarvelConstant.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarvelException.cpp" afterPath="$PROJECT_DIR$/MarvelException.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarvelException.h" afterPath="$PROJECT_DIR$/MarvelException.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,6 +70,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MarvelException.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarvelException.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarvelConstant.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MarvelConstant.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+              <folding>
+                <element signature="e#216#234#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MarvelServer.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MarvelServer.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,13 +104,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MarvelServer.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MarvelServer.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MarvelServer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="880">
-              <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="792">
+              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#139#162#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarvelException.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarvelException.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+              <folding>
+                <element signature="e#139#167#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,14 +137,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/MarvelClient.cpp.cpp" />
-        <option value="$PROJECT_DIR$/MarvelException.h" />
         <option value="$PROJECT_DIR$/MarvelConstant.cpp" />
-        <option value="$PROJECT_DIR$/MarvelException.cpp" />
-        <option value="$PROJECT_DIR$/MarvelConstant.h" />
         <option value="$PROJECT_DIR$/MarvelClient.h" />
         <option value="$PROJECT_DIR$/MarvelServer.h" />
         <option value="$PROJECT_DIR$/MarvelClient.cpp" />
         <option value="$PROJECT_DIR$/MarvelServer.cpp" />
+        <option value="$PROJECT_DIR$/MarvelException.h" />
+        <option value="$PROJECT_DIR$/MarvelException.cpp" />
+        <option value="$PROJECT_DIR$/MarvelConstant.h" />
       </list>
     </option>
   </component>
@@ -196,18 +230,18 @@
       <option name="presentableId" value="Default" />
       <updated>1564478656789</updated>
       <workItem from="1564478660140" duration="7640000" />
-      <workItem from="1564537317528" duration="2717000" />
+      <workItem from="1564537317528" duration="4792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10357000" />
+    <option name="totallyTimeSpent" value="12432000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1857" height="1092" extended-state="6" />
+    <frame x="67" y="25" width="1537" height="912" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11995578" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1457354" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -337,14 +371,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MarvelClient.cpp.cpp" />
-    <entry file="file://$PROJECT_DIR$/MarvelException.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MarvelConstant.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -353,26 +379,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarvelException.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/include/x86_64-linux-gnu/sys/socket.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarvelConstant.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -395,16 +405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarvelClient.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="e#266#289#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MarvelClient.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -417,10 +417,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MarvelServer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="880">
-          <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="792">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#139#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarvelException.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarvelException.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding>
+            <element signature="e#139#167#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarvelClient.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+          <folding>
+            <element signature="e#266#289#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarvelConstant.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding>
+            <element signature="e#216#234#0" expanded="true" />
           </folding>
         </state>
       </provider>
