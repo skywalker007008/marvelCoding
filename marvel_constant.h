@@ -12,6 +12,19 @@
 #include <fstream>
 #include <iostream>
 
+#define MARVEL marvel::
+#define MARVEL_LOG marvel::log::
+#define MARVEL_ERR marvel::err::
+#define MARVEL_API marvel::api::
+#define MARVEL_CLIENT marvel::MarvelClient
+#define MARVEL_SERVER marvel::MarvelServer
+
+#define STRING std::string
+#define OFSTREAM std::ofstream
+
+// #define TO_STRING(x) std::to_string(x)
+#define TO_STRING std::to_string
+
 constexpr int INIT_SERVER_ID = 1;
 
 

@@ -14,19 +14,17 @@
 #include "marvel_log.h"
 #include "marvel_socket.h"
 
-using namespace marvel;
-
 template <class APP>
 
-MarvelServer::MarvelServer(
+MARVEL_SERVER::MarvelServer(
         APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
 }
 
-MarvelServer::~MarvelServer() {
+MARVEL_SERVER::~MarvelServer() {
 }
 
-void MarvelServer::RecvProcess() { //
+void MARVEL_SERVER::RecvProcess() { //
     int serv_socket;
     int clnt_socket;
 
@@ -49,22 +47,22 @@ void MarvelServer::RecvProcess() { //
         BindSocket(app_ -> get_stream(), serv_socket, &serv_addr);
         // now listen
         ListenSocket(app_ -> get_stream(), serv_socket, &serv_addr);
-    } catch (err::MarvelException exp) {
+    } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
 
     // now accept and recv
     try {
         RecvMessage(serv_socket, &serv_addr);
-    } catch (err::SocketAcceptFailedException exp) {
+    } catch (MARVEL_ERR SocketAcceptFailedException exp) {
         throw exp; // ???
-    } catch (err::MessageRecvFailedException exp) {
+    } catch (MARVEL_ERR MessageRecvFailedException exp) {
         throw exp; // ???
     }
 
 }
 
-void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
+void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
     int id = INIT_SERVER_ID;
     int clnt_socket;
     socklen_t clnt_addr_size = ADDR_SIZE;
@@ -77,17 +75,17 @@ void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
         try {
             clnt_socket = AcceptSocket(app_ -> get_stream(), serv_socket,
                                        serv_addr, &clnt_addr, &clnt_addr_size);
-        } catch (err::SocketAcceptFailedException exp) {
+        } catch (MARVEL_ERR SocketAcceptFailedException exp) {
             throw exp;
         }
-        log::server::SocketAccepted(this, serv_addr, &clnt_addr);
+        MARVEL_LOG SocketAccepted(this, serv_addr, &clnt_addr);
 
         while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
             if (length < 0) {
                 // err::errMsg(err::RECV_FAILED);
             }
             recv_bytes += length;
-            log::server::RecvMessage(this, serv_addr, message, length, recv_bytes);
+            MARVEL_LOG RecvMessage(this, serv_addr, message, length, recv_bytes);
             memset(message, 0, PER_TRANS_SIZE);
         }
 
@@ -100,18 +98,18 @@ void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
     // shutdown(serv_socket, SHUT_RDWR);
 }
 
-std::ofstream MarvelServer::GetStream() {
+OFSTREAM MARVEL_SERVER::GetStream() {
     return app_ -> get_stream();
 }
 
-void MarvelServer::shutdown() {
+void MARVEL_SERVER::shutdown() {
 
 }
 
-void MarvelServer::start() {
+void MARVEL_SERVER::start() {
     try {
         RecvProcess();
-    } catch (err::MarvelException exp) {
+    } catch (MARVEL_ERR MarvelException exp) {
         app_ -> HandleException(exp);
     }
 }

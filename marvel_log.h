@@ -15,21 +15,23 @@
 
 extern clock_t base;
 
-namespace marvel::log {
-    namespace server {
-        void RecvMessage(MarvelServer *server, struct sockaddr_in* sockaddr,
-                         char *msg, int recv_bytes, int total_bytes);
-        void SocketAccepted(MarvelServer* server, struct sockaddr_in* sockaddr,
-                            struct sockaddr_in* clntaddr);
-    } // namespace server
-    namespace client {
-        void SendMessage(MarvelClient* client, struct sockaddr_in* sockaddr,
-                         char *msg, int send_bytes, int total_bytes);
-        void SocketConnected(MarvelClient* client, struct sockaddr_in* sockaddr);
-    } // namespace client
+namespace marvel {
+    namespace log {
+        void RecvMessage(MarvelServer *server, struct sockaddr_in *sockaddr,
+                             char *msg, int recv_bytes, int total_bytes);
 
-    void log(std::ofstream stream, const std::string& string);
-    inline clock_t pass_time();
-} // namespace marvel::log
+        void SocketAccepted(MarvelServer *server, struct sockaddr_in *sockaddr,
+                                struct sockaddr_in *clntaddr);
+
+        void SendMessage(MarvelClient *client, struct sockaddr_in *sockaddr,
+                             char *msg, int send_bytes, int total_bytes);
+
+        void SocketConnected(MarvelClient *client, struct sockaddr_in *sockaddr);
+
+        void log(std::ofstream stream, const std::string &string);
+
+        inline clock_t pass_time();
+    } // namespace log
+} // namespace marvel
 
 #endif //MARVELCODING_MARVELLOG_H

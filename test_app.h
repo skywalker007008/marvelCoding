@@ -12,8 +12,10 @@
 #include <string>
 #include <fstream>
 #include "marvel_exception.h"
+#include "marvel_client.h"
+#include "marvel_server.h"
 
-template <class Client, class Server> class App {
+class App {
 public:
     App(uint32_t host, const std::string& name);
     // ~App();
@@ -32,8 +34,8 @@ private:
     std::string name_;
     std::ofstream stream_;
     uint32_t host_;
-    Client client_;
-    Server server_;
+    marvel::MarvelClient client_;
+    marvel::MarvelServer server_;
     void log(std::string log_msg);
 };
 

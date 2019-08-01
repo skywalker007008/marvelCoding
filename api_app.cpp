@@ -10,42 +10,40 @@
 #include "api_app.h"
 #include "marvel_exception.h"
 
-using namespace marvel;
-
-template <typename APP> MarvelClient api::LogInClient(APP* app) {
-    MarvelClient<APP> client(app, app -> get_host(), app -> get_port());
+template <typename APP> MARVEL_CLIENT MARVEL_API LogInClient(APP* app) {
+    MARVEL_CLIENT<APP> client(app, app -> get_host(), app -> get_port());
     client.start();
     return client;
 }
 
-template <typename APP> MarvelServer api::LogInServer(APP* app) {
-    MarvelServer<APP> server(app, app -> get_host(), app -> get_port());
+template <typename APP> MARVEL_SERVER MARVEL_API LogInServer(APP* app) {
+    MARVEL_SERVER<APP> server(app, app -> get_host(), app -> get_port());
     std::thread t(server.start());
     return server;
 }
 
-void api::LogOut(marvel::MarvelClient* client) {
+void MARVEL_API LogOut(MARVEL_CLIENT* client) {
     client -> shutdown();
     memset(client, 0, CLIENT_SIZE);
 }
 
-void api::LogOut(marvel::MarvelServer* server) {
+void MARVEL_API LogOut(MARVEL_SERVER* server) {
     server -> shutdown();
     memset(server, 0, CLIENT_SIZE);
 }
 
-int api::SendMessageToServer(marvel::MarvelClient* client,
+int MARVEL_API SendMessageToServer(MARVEL_CLIENT* client,
                              uint32_t host, uint16_t port, const char* msg) {
     int send_bytes = 0;
     try {
         send_bytes = client -> SendProcess(host, port, msg);
-    } catch (err::MarvelException exp) {
+    } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
     return send_bytes;
 }
 
-void api::RecvMessageFromClient(marvel::MarvelClient* client,
+void MARVEL_API RecvMessageFromClient(MARVEL_CLIENT* client,
                                uint32_t host, uint16_t port, const char* msg) {
     // client -> app_ -> print();
 }

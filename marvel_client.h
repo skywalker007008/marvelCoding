@@ -8,9 +8,6 @@
 
 #ifndef MARVELCODING_MARVELCLIENT_H
 #define MARVELCODING_MARVELCLIENT_H
-
-
-
 #include <sys/socket.h>
 #include <cstdint> // useless
 #include <string>

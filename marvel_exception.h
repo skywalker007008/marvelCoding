@@ -15,90 +15,105 @@
 #include <netinet/in.h>
 #include <string>
 
-namespace marvel::err {
-    enum ErrorType {
-        // socket
-        SOCKET_CREATE_FAILED,
-        SOCKET_CONNECT_FAILED,
-        SOCKET_BIND_FAILED,
-        SOCKET_LISTEN_FAILED,
+namespace marvel {
+    namespace err {
+        enum ErrorType {
+            // socket
+                    SOCKET_CREATE_FAILED,
+            SOCKET_CONNECT_FAILED,
+            SOCKET_BIND_FAILED,
+            SOCKET_LISTEN_FAILED,
 
-        // send & recv
-        SEND_FAILED,
-        SEND_INCOMPLETE,
-        ACCEPT_FAILED,
-        RECV_FAILED,
+            // send & recv
+                    SEND_FAILED,
+            SEND_INCOMPLETE,
+            ACCEPT_FAILED,
+            RECV_FAILED,
 
-        // data
-        DATA_OVERSIZED,
-    };
-    // void errMsg(ErrorType type, void* data = nullptr);
+            // data
+                    DATA_OVERSIZED,
+        };
+        // void errMsg(ErrorType type, void* data = nullptr);
 
-    class MarvelException : public std::exception {
-    public:
-        virtual std::string print();
-    };
+        class MarvelException : public std::exception {
+        public:
+            virtual std::string print();
+        };
 
-    class SocketCreateFailedException : public MarvelException {
-    public:
-        SocketCreateFailedException();
-        std::string print();
-    };
+        class SocketCreateFailedException : public MarvelException {
+        public:
+            SocketCreateFailedException();
 
-    class SocketConnectFailedException : public MarvelException {
-    public:
-        SocketConnectFailedException(struct sockaddr_in sockaddr);
-        std::string print();
-        static uint32_t host_;
-        static uint16_t port_;
-    };
+            std::string print();
+        };
 
-    class SocketBindFailedException : public MarvelException {
-    public:
-        SocketBindFailedException(struct sockaddr_in sockaddr);
-        std::string print();
-        static uint32_t host_;
-        static uint16_t port_;
-    };
+        class SocketConnectFailedException : public MarvelException {
+        public:
+            SocketConnectFailedException(struct sockaddr_in sockaddr);
 
-    class SocketListenFailedException : public MarvelException {
-    public:
-        SocketListenFailedException(struct sockaddr_in sockaddr);
-        std::string print();
-        static uint32_t host_;
-        static uint16_t port_;
-    };
+            std::string print();
 
-    class SocketAcceptFailedException : public MarvelException {
-    public:
-        SocketAcceptFailedException(struct sockaddr_in sockaddr);
-        std::string print();
-        static uint32_t host_;
-        static uint16_t port_;
-    };
+            static uint32_t host_;
+            static uint16_t port_;
+        };
 
-    class MessageOversizedException : public MarvelException {
-    public:
-        MessageOversizedException();
-        std::string print();
-    };
+        class SocketBindFailedException : public MarvelException {
+        public:
+            SocketBindFailedException(struct sockaddr_in sockaddr);
 
-    class MessageSendFailedException : public MarvelException {
-    public:
-        MessageSendFailedException(int pos, int size);
-        std::string print();
-        static int pos_;
-        static int size_;
-    };
+            std::string print();
 
-    class MessageRecvFailedException : public MarvelException {
-    public:
-        MessageRecvFailedException(int pos, int size);
-        std::string print();
-        static int pos_;
-        static int size_;
-    };
+            static uint32_t host_;
+            static uint16_t port_;
+        };
 
-} // namespace marvel::err
+        class SocketListenFailedException : public MarvelException {
+        public:
+            SocketListenFailedException(struct sockaddr_in sockaddr);
+
+            std::string print();
+
+            static uint32_t host_;
+            static uint16_t port_;
+        };
+
+        class SocketAcceptFailedException : public MarvelException {
+        public:
+            SocketAcceptFailedException(struct sockaddr_in sockaddr);
+
+            std::string print();
+
+            static uint32_t host_;
+            static uint16_t port_;
+        };
+
+        class MessageOversizedException : public MarvelException {
+        public:
+            MessageOversizedException();
+
+            std::string print();
+        };
+
+        class MessageSendFailedException : public MarvelException {
+        public:
+            MessageSendFailedException(int pos, int size);
+
+            std::string print();
+
+            static int pos_;
+            static int size_;
+        };
+
+        class MessageRecvFailedException : public MarvelException {
+        public:
+            MessageRecvFailedException(int pos, int size);
+
+            std::string print();
+
+            static int pos_;
+            static int size_;
+        };
+    } // namespace err
+} // namespace marvel
 
 #endif //MARVELCODING_MARVELEXCEPTION_H

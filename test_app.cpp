@@ -9,14 +9,12 @@
 #include "api_app.h"
 #include "marvel_log.h"
 
-using namespace std;
-
-App::App(uint32_t host, const string &name)
-        : host_ (host), name_(name){
-    string file_name = name + ".txt";
-    stream_.open(file_name, ios::out);
-    client_ = marvel::api::LogInClient(this);
-    server_ = marvel::api::LogInServer(this);
+App::App(uint32_t host, const std::string &name)
+        : host_ (host), name_(name) {
+    std::string file_name = name + ".txt";
+    stream_.open(file_name, std::ios::out);
+    client_ = MARVEL_API LogInClient(this);
+    server_ = MARVEL_API LogInServer(this);
 }
 
 /* App::~App() {
@@ -33,20 +31,20 @@ template <class ERR> void App::HandleException(ERR err) {
 template <class ERR> void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
     int send_bytes;
     try {
-        send_bytes = marvel::api::SendMessageToServer(client_,dest_host, dest_port, msg);
+        send_bytes = MARVEL_API SendMessageToServer(client_,dest_host, dest_port, msg);
     } catch (ERR exp) {
         HandleException(exp);
     }
 
-    log("MessageSent!\t" + to_string(send_bytes) + "bytes");
+    log("MessageSent!\t" + TO_STRING(send_bytes) + "bytes");
 }
 
-void App::log(std::string log_msg) {
-    stream_ << "[" << marvel::log::pass_time() << "]\n";
-    stream_ << log_msg << endl;
+void App::log(STRING log_msg) {
+    stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
+    stream_ << log_msg << std::endl;
 }
 
-ofstream App::get_stream() {
+OFSTREAM App::get_stream() {
     return stream_;
 }
 
@@ -58,8 +56,8 @@ uint16_t App::get_port() {
 }
 
 void App::shutdown() {
-    marvel::api::LogOut(&client_);
-    marvel::api::LogOut(&server_);
+    MARVEL_API LogOut(&client_);
+    MARVEL_API LogOut(&server_);
     stream_.close();
 }
 

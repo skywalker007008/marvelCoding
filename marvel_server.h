@@ -14,7 +14,7 @@
 #include <fstream>
 #include "marvel_constant.h"
 
-constexpr int SERVER_SIZE = sizeof(marvel::MarvelServer);
+constexpr int SERVER_SIZE = sizeof(class marvel::MarvelServer);
 
 namespace marvel {
     template <class APP> class MarvelServer {
@@ -22,7 +22,7 @@ namespace marvel {
         MarvelServer(APP* app, uint32_t host, uint16_t port);
         ~MarvelServer();
         void start();
-        void RecvProcess()
+        void RecvProcess();
         std::ofstream GetStream();
         void shutdown();
 
@@ -31,7 +31,6 @@ namespace marvel {
         uint32_t host_;
         uint16_t port_;
         APP* app_;
-        std::ofstream stream_;
     };
 }
 

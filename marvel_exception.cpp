@@ -8,63 +8,61 @@
 #include "marvel_exception.h"
 #include "marvel_constant.h"
 
-using namespace marvel;
+MARVEL_ERR SocketCreateFailedException() {}
 
-err::SocketCreateFailedException() {}
-
-std::string err::SocketCreateFailedException::print() {
+STRING MARVEL_ERR SocketCreateFailedException::print() {
     return "Socket Create Failed!";
 }
 
-err::SocketConnectFailedException(struct sockaddr_in sockaddr)
+MARVEL_ERR SocketConnectFailedException(struct sockaddr_in sockaddr)
         : host_(sockaddr.sin_addr.s_addr), port_(sockaddr.sin_port) {}
 
-std::string err::SocketConnectFailedException::print() {
-    return ("Socket Connect Failed!\nHost: " + std::to_string(host_)
-            + "Port: " + std::to_string(port_));
+STRING MARVEL_ERR SocketConnectFailedException::print() {
+    return ("Socket Connect Failed!\nHost: " + TO_STRING(host_)
+            + "Port: " + TO_STRING(port_));
 }
 
-err::SocketBindFailedException(struct sockaddr_in sockaddr)
+MARVEL_ERR SocketBindFailedException(struct sockaddr_in sockaddr)
         : host_(sockaddr.sin_addr.s_addr), port_(sockaddr.sin_port) {
 }
 
-std::string err::SocketBindFailedException::print() {
-    return ("Socket Bind Failed!\nHost: " + std::to_string(host_)
-            + "Port: " + std::to_string(port_));
+STRING MARVEL_ERR SocketBindFailedException::print() {
+    return ("Socket Bind Failed!\nHost: " + TO_STRING(host_)
+            + "Port: " + TO_STRING(port_));
 }
 
-err::SocketAcceptFailedException(struct sockaddr_in sockaddr)
+MARVEL_ERR SocketAcceptFailedException(struct sockaddr_in sockaddr)
         : host_(sockaddr.sin_addr.s_addr), port_(sockaddr.sin_port) {
 }
 
-std::string err::SocketAcceptFailedException::print() {
-    return ("Socket Accept Failed!\nHost: " + std::to_string(host_)
-            + "Port: " + std::to_string(port_));
+STRING MARVEL_ERR SocketAcceptFailedException::print() {
+    return ("Socket Accept Failed!\nHost: " + TO_STRING(host_)
+            + "Port: " + TO_STRING(port_));
 }
 
-err::SocketListenFailedException(struct sockaddr_in sockaddr)
+MARVEL_ERR SocketListenFailedException(struct sockaddr_in sockaddr)
         : host_(sockaddr.sin_addr.s_addr), port_(sockaddr.sin_port) {
 }
 
-std::string err::SocketListenFailedException::print() {
-    return ("Socket Accept Failed!\nHost: " + std::to_string(host_)
-            + "Port: " + std::to_string(port_));
+STRING MARVEL_ERR SocketListenFailedException::print() {
+    return ("Socket Accept Failed!\nHost: " + TO_STRING(host_)
+            + "Port: " + TO_STRING(port_));
 }
 
-err::MessageSendFailedException(int pos, int size)
+MARVEL_ERR MessageSendFailedException(int pos, int size)
         : pos_(pos), size_(size) {}
 
-std::string err::MessageSendFailedException::print() {
-    return ("Message Send Failed!\nFailed Position: " + std::to_string(pos_)
-           + " Failed Size: " + std::to_string(size_));
+STRING MARVEL_ERR MessageSendFailedException::print() {
+    return ("Message Send Failed!\nFailed Position: " + TO_STRING(pos_)
+           + " Failed Size: " + TO_STRING(size_));
 }
 
-err::MessageRecvFailedException(int pos, int size)
+MARVEL_ERR MessageRecvFailedException(int pos, int size)
         : pos_(pos), size_(size) {}
 
-std::string err::MessageRecvFailedException::print() {
-    return ("Message Recv Failed!\nFailed Position: " + std::to_string(pos_)
-            + " Failed Size: " + std::to_string(size_));
+STRING MARVEL_ERR MessageRecvFailedException::print() {
+    return ("Message Recv Failed!\nFailed Position: " + TO_STRING(pos_)
+            + " Failed Size: " + TO_STRING(size_));
 }
 
 

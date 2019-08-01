@@ -11,11 +11,9 @@
 
 clock_t base;
 
-using namespace marvel;
-
-void log::client::SendMessage(MarvelClient* client, struct sockaddr_in* sockaddr,
+void MARVEL_LOG SendMessage(MARVEL_CLIENT* client, struct sockaddr_in* sockaddr,
                               char *msg, int send_bytes, int total_bytes) {
-    std::ofstream stream = client -> GetStream();
+    OFSTREAM stream = client -> GetStream();
     stream << "[" << pass_time() << "]\n";
     stream << "Socket Host: " << sockaddr -> sin_addr.s_addr
            << "\tPort: " << sockaddr -> sin_port << "\n";
@@ -23,17 +21,17 @@ void log::client::SendMessage(MarvelClient* client, struct sockaddr_in* sockaddr
     stream << "Sent Bytes: " << send_bytes << "\tTotal Bytes: " << total_bytes << "\n";
 }
 
-void log::client::SocketConnected(MarvelClient* client, struct sockaddr_in* sockaddr) {
-    std::ofstream stream = client -> GetStream();
+void MARVEL_LOG SocketConnected(MARVEL_CLIENT* client, struct sockaddr_in* sockaddr) {
+    OFSTREAM stream = client -> GetStream();
     stream << "[" << pass_time() << "]\n";
     stream << "Socket Host: " << sockaddr -> sin_addr.s_addr
            << "\tPort: " << sockaddr -> sin_port << "\n";
     stream << "Socket Connected" << "\n";
 }
 
-void log::server::RecvMessage(MarvelServer *server, struct sockaddr_in* sockaddr,
+void MARVEL_LOG RecvMessage(MARVEL_SERVER *server, struct sockaddr_in* sockaddr,
                               char *msg, int recv_bytes, int total_bytes) {
-    std::ofstream stream = server -> GetStream();
+    OFSTREAM stream = server -> GetStream();
     stream << "[" << pass_time() << "]\n";
     stream << "Socket Host: " << sockaddr -> sin_addr.s_addr
            << "\tPort: " << sockaddr -> sin_port << "\n";
@@ -41,9 +39,9 @@ void log::server::RecvMessage(MarvelServer *server, struct sockaddr_in* sockaddr
     stream << "Sent Bytes: " << recv_bytes << "\tTotal Bytes: " << total_bytes << "\n";
 }
 
-void log::server::SocketAccepted(MarvelServer* server, struct sockaddr_in* sockaddr,
+void MARVEL_LOG SocketAccepted(MARVEL_SERVER* server, struct sockaddr_in* sockaddr,
                                  struct sockaddr_in* clntaddr) {
-    std::ofstream stream = server -> GetStream();
+    OFSTREAM stream = server -> GetStream();
     stream << "[" << pass_time() << "]\n";
     stream << "Socket Host: " << sockaddr -> sin_addr.s_addr
            << "\tPort: " << sockaddr -> sin_port << "\n";
@@ -52,11 +50,11 @@ void log::server::SocketAccepted(MarvelServer* server, struct sockaddr_in* socka
            << "\tPort: " << clntaddr -> sin_port << "\n";
 }
 
-void log::log(std::ofstream stream, const std::string& msg) {
+void MARVEL_LOG log(std::ofstream stream, const std::string& msg) {
     stream << "[" << clock() - base << "]\n";
     stream << msg << "\n";
 }
 
-inline clock_t log::pass_time() {
+inline clock_t MARVEL_LOG pass_time() {
     return clock() - base;
 }
