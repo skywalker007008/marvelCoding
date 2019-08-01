@@ -9,7 +9,6 @@
 #include <cstring>
 #include <iostream>
 #include "marvel_server.h"
-#include "marvel_constant.h"
 #include "marvel_exception.h"
 #include <unistd.h>
 #include "marvel_log.h"
@@ -17,9 +16,11 @@
 
 using namespace marvel;
 
+template <typename APP>
+
 MarvelServer::MarvelServer(
-        uint32_t host, uint16_t port, const std::string& name)
-        :host_(host), port_(port), name_(name) {
+        APP* app, uint32_t host, uint16_t port)
+        :host_(host), port_(port), app_(app) {
     std::string file_name;
     if (stream_ != nullptr) {
         file_name = "server_" + name_ + ".txt";

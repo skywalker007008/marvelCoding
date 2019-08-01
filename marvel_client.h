@@ -15,22 +15,27 @@
 #include <cstdint> // useless
 #include <string>
 #include <fstream>
+#include "marvel_constant.h"
+
+constexpr int CLIENT_SIZE = sizeof(marvel::MarvelClient);
 
 namespace marvel {
-    class MarvelClient {
+    template <typename APP> class MarvelClient {
     public:
-        MarvelClient(const std::string& name, uint32_t host, uint16_t port);
+        MarvelClient(APP* app, uint32_t host, uint16_t port);
         ~MarvelClient();
         void sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
         void start(uint32_t host, uint16_t port, const char* msg);
         std::ofstream GetStream();
 
     private:
-        std::string name_;
+        APP* app_;
         uint32_t host_;
         uint16_t port_;
         std::ofstream stream_;
     };
+
+
 }
 
 #endif //MARVELCODING_MARVELCLIENT_H

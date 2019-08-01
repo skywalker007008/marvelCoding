@@ -9,13 +9,14 @@
 #include <netinet/in.h>
 #include <cstring>
 #include "marvel_client.h"
-#include "marvel_constant.h"
 #include "marvel_exception.h"
 #include "marvel_log.h"
 #include "marvel_socket.h"
 
-marvel::MarvelClient::MarvelClient(const std::string& name, uint32_t host, uint16_t port)
-        :host_(host), port_(port), name_(name) {
+template <typename APP>
+
+marvel::MarvelClient::MarvelClient(APP* app, uint32_t host, uint16_t port)
+        :host_(host), port_(port), app_(app) {
     std::string file_name = "client_" + name_ + ".txt";
     if (stream_ != nullptr) {
         stream_.open(file_name, std::ios::out);

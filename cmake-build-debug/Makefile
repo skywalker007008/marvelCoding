@@ -123,167 +123,32 @@ marvelCoding/fast:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/build
 .PHONY : marvelCoding/fast
 
-MarvelClient.o: MarvelClient.cpp.o
+api_app.o: api_app.cpp.o
 
-.PHONY : MarvelClient.o
-
-# target to build an object file
-MarvelClient.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o
-.PHONY : MarvelClient.cpp.o
-
-MarvelClient.i: MarvelClient.cpp.i
-
-.PHONY : MarvelClient.i
-
-# target to preprocess a source file
-MarvelClient.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelClient.cpp.i
-.PHONY : MarvelClient.cpp.i
-
-MarvelClient.s: MarvelClient.cpp.s
-
-.PHONY : MarvelClient.s
-
-# target to generate assembly for a file
-MarvelClient.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelClient.cpp.s
-.PHONY : MarvelClient.cpp.s
-
-MarvelConstant.o: MarvelConstant.cpp.o
-
-.PHONY : MarvelConstant.o
+.PHONY : api_app.o
 
 # target to build an object file
-MarvelConstant.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o
-.PHONY : MarvelConstant.cpp.o
+api_app.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.o
+.PHONY : api_app.cpp.o
 
-MarvelConstant.i: MarvelConstant.cpp.i
+api_app.i: api_app.cpp.i
 
-.PHONY : MarvelConstant.i
-
-# target to preprocess a source file
-MarvelConstant.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.i
-.PHONY : MarvelConstant.cpp.i
-
-MarvelConstant.s: MarvelConstant.cpp.s
-
-.PHONY : MarvelConstant.s
-
-# target to generate assembly for a file
-MarvelConstant.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.s
-.PHONY : MarvelConstant.cpp.s
-
-MarvelException.o: MarvelException.cpp.o
-
-.PHONY : MarvelException.o
-
-# target to build an object file
-MarvelException.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.o
-.PHONY : MarvelException.cpp.o
-
-MarvelException.i: MarvelException.cpp.i
-
-.PHONY : MarvelException.i
+.PHONY : api_app.i
 
 # target to preprocess a source file
-MarvelException.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.i
-.PHONY : MarvelException.cpp.i
+api_app.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.i
+.PHONY : api_app.cpp.i
 
-MarvelException.s: MarvelException.cpp.s
+api_app.s: api_app.cpp.s
 
-.PHONY : MarvelException.s
-
-# target to generate assembly for a file
-MarvelException.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.s
-.PHONY : MarvelException.cpp.s
-
-MarvelLog.o: MarvelLog.cpp.o
-
-.PHONY : MarvelLog.o
-
-# target to build an object file
-MarvelLog.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o
-.PHONY : MarvelLog.cpp.o
-
-MarvelLog.i: MarvelLog.cpp.i
-
-.PHONY : MarvelLog.i
-
-# target to preprocess a source file
-MarvelLog.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.i
-.PHONY : MarvelLog.cpp.i
-
-MarvelLog.s: MarvelLog.cpp.s
-
-.PHONY : MarvelLog.s
+.PHONY : api_app.s
 
 # target to generate assembly for a file
-MarvelLog.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.s
-.PHONY : MarvelLog.cpp.s
-
-MarvelServer.o: MarvelServer.cpp.o
-
-.PHONY : MarvelServer.o
-
-# target to build an object file
-MarvelServer.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o
-.PHONY : MarvelServer.cpp.o
-
-MarvelServer.i: MarvelServer.cpp.i
-
-.PHONY : MarvelServer.i
-
-# target to preprocess a source file
-MarvelServer.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.i
-.PHONY : MarvelServer.cpp.i
-
-MarvelServer.s: MarvelServer.cpp.s
-
-.PHONY : MarvelServer.s
-
-# target to generate assembly for a file
-MarvelServer.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.s
-.PHONY : MarvelServer.cpp.s
-
-MarvelSocket.o: MarvelSocket.cpp.o
-
-.PHONY : MarvelSocket.o
-
-# target to build an object file
-MarvelSocket.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o
-.PHONY : MarvelSocket.cpp.o
-
-MarvelSocket.i: MarvelSocket.cpp.i
-
-.PHONY : MarvelSocket.i
-
-# target to preprocess a source file
-MarvelSocket.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.i
-.PHONY : MarvelSocket.cpp.i
-
-MarvelSocket.s: MarvelSocket.cpp.s
-
-.PHONY : MarvelSocket.s
-
-# target to generate assembly for a file
-MarvelSocket.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.s
-.PHONY : MarvelSocket.cpp.s
+api_app.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.s
+.PHONY : api_app.cpp.s
 
 main.o: main.cpp.o
 
@@ -312,6 +177,168 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+marvel_client.o: marvel_client.cpp.o
+
+.PHONY : marvel_client.o
+
+# target to build an object file
+marvel_client.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.o
+.PHONY : marvel_client.cpp.o
+
+marvel_client.i: marvel_client.cpp.i
+
+.PHONY : marvel_client.i
+
+# target to preprocess a source file
+marvel_client.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.i
+.PHONY : marvel_client.cpp.i
+
+marvel_client.s: marvel_client.cpp.s
+
+.PHONY : marvel_client.s
+
+# target to generate assembly for a file
+marvel_client.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.s
+.PHONY : marvel_client.cpp.s
+
+marvel_constant.o: marvel_constant.cpp.o
+
+.PHONY : marvel_constant.o
+
+# target to build an object file
+marvel_constant.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o
+.PHONY : marvel_constant.cpp.o
+
+marvel_constant.i: marvel_constant.cpp.i
+
+.PHONY : marvel_constant.i
+
+# target to preprocess a source file
+marvel_constant.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.i
+.PHONY : marvel_constant.cpp.i
+
+marvel_constant.s: marvel_constant.cpp.s
+
+.PHONY : marvel_constant.s
+
+# target to generate assembly for a file
+marvel_constant.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.s
+.PHONY : marvel_constant.cpp.s
+
+marvel_exception.o: marvel_exception.cpp.o
+
+.PHONY : marvel_exception.o
+
+# target to build an object file
+marvel_exception.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o
+.PHONY : marvel_exception.cpp.o
+
+marvel_exception.i: marvel_exception.cpp.i
+
+.PHONY : marvel_exception.i
+
+# target to preprocess a source file
+marvel_exception.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.i
+.PHONY : marvel_exception.cpp.i
+
+marvel_exception.s: marvel_exception.cpp.s
+
+.PHONY : marvel_exception.s
+
+# target to generate assembly for a file
+marvel_exception.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.s
+.PHONY : marvel_exception.cpp.s
+
+marvel_log.o: marvel_log.cpp.o
+
+.PHONY : marvel_log.o
+
+# target to build an object file
+marvel_log.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.o
+.PHONY : marvel_log.cpp.o
+
+marvel_log.i: marvel_log.cpp.i
+
+.PHONY : marvel_log.i
+
+# target to preprocess a source file
+marvel_log.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.i
+.PHONY : marvel_log.cpp.i
+
+marvel_log.s: marvel_log.cpp.s
+
+.PHONY : marvel_log.s
+
+# target to generate assembly for a file
+marvel_log.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.s
+.PHONY : marvel_log.cpp.s
+
+marvel_server.o: marvel_server.cpp.o
+
+.PHONY : marvel_server.o
+
+# target to build an object file
+marvel_server.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.o
+.PHONY : marvel_server.cpp.o
+
+marvel_server.i: marvel_server.cpp.i
+
+.PHONY : marvel_server.i
+
+# target to preprocess a source file
+marvel_server.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.i
+.PHONY : marvel_server.cpp.i
+
+marvel_server.s: marvel_server.cpp.s
+
+.PHONY : marvel_server.s
+
+# target to generate assembly for a file
+marvel_server.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.s
+.PHONY : marvel_server.cpp.s
+
+marvel_socket.o: marvel_socket.cpp.o
+
+.PHONY : marvel_socket.o
+
+# target to build an object file
+marvel_socket.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o
+.PHONY : marvel_socket.cpp.o
+
+marvel_socket.i: marvel_socket.cpp.i
+
+.PHONY : marvel_socket.i
+
+# target to preprocess a source file
+marvel_socket.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.i
+.PHONY : marvel_socket.cpp.i
+
+marvel_socket.s: marvel_socket.cpp.s
+
+.PHONY : marvel_socket.s
+
+# target to generate assembly for a file
+marvel_socket.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s
+.PHONY : marvel_socket.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -321,27 +348,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... marvelCoding"
-	@echo "... MarvelClient.o"
-	@echo "... MarvelClient.i"
-	@echo "... MarvelClient.s"
-	@echo "... MarvelConstant.o"
-	@echo "... MarvelConstant.i"
-	@echo "... MarvelConstant.s"
-	@echo "... MarvelException.o"
-	@echo "... MarvelException.i"
-	@echo "... MarvelException.s"
-	@echo "... MarvelLog.o"
-	@echo "... MarvelLog.i"
-	@echo "... MarvelLog.s"
-	@echo "... MarvelServer.o"
-	@echo "... MarvelServer.i"
-	@echo "... MarvelServer.s"
-	@echo "... MarvelSocket.o"
-	@echo "... MarvelSocket.i"
-	@echo "... MarvelSocket.s"
+	@echo "... api_app.o"
+	@echo "... api_app.i"
+	@echo "... api_app.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... marvel_client.o"
+	@echo "... marvel_client.i"
+	@echo "... marvel_client.s"
+	@echo "... marvel_constant.o"
+	@echo "... marvel_constant.i"
+	@echo "... marvel_constant.s"
+	@echo "... marvel_exception.o"
+	@echo "... marvel_exception.i"
+	@echo "... marvel_exception.s"
+	@echo "... marvel_log.o"
+	@echo "... marvel_log.i"
+	@echo "... marvel_log.s"
+	@echo "... marvel_server.o"
+	@echo "... marvel_server.i"
+	@echo "... marvel_server.s"
+	@echo "... marvel_socket.o"
+	@echo "... marvel_socket.i"
+	@echo "... marvel_socket.s"
 .PHONY : help
 
 

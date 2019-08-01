@@ -81,173 +81,199 @@ CMakeFiles/marvelCoding.dir/main.cpp.o.provides: CMakeFiles/marvelCoding.dir/mai
 CMakeFiles/marvelCoding.dir/main.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/main.cpp.o
 
 
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o: ../MarvelClient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o -c /home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.o: ../marvel_client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/marvelCoding.dir/marvel_client.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/marvel_client.cpp.o -c /home/buaa/CLionProjects/marvelCoding/marvel_client.cpp
 
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/MarvelClient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp > CMakeFiles/marvelCoding.dir/MarvelClient.cpp.i
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/marvel_client.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/marvel_client.cpp > CMakeFiles/marvelCoding.dir/marvel_client.cpp.i
 
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/MarvelClient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp -o CMakeFiles/marvelCoding.dir/MarvelClient.cpp.s
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/marvel_client.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/marvel_client.cpp -o CMakeFiles/marvelCoding.dir/marvel_client.cpp.s
 
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.requires:
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.requires:
 
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.requires
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.requires
 
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.provides: CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.requires
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.provides.build
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.provides
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.provides: CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.provides
 
-CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o
-
-
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o: ../MarvelConstant.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o -c /home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp
-
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp > CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.i
-
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp -o CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.s
-
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.requires:
-
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.requires
-
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.provides: CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.requires
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.provides.build
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.provides
-
-CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o
+CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/marvel_client.cpp.o
 
 
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.o: ../MarvelException.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/marvelCoding.dir/MarvelException.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/MarvelException.cpp.o -c /home/buaa/CLionProjects/marvelCoding/MarvelException.cpp
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o: ../marvel_constant.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o -c /home/buaa/CLionProjects/marvelCoding/marvel_constant.cpp
 
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/MarvelException.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/MarvelException.cpp > CMakeFiles/marvelCoding.dir/MarvelException.cpp.i
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/marvel_constant.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/marvel_constant.cpp > CMakeFiles/marvelCoding.dir/marvel_constant.cpp.i
 
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/MarvelException.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/MarvelException.cpp -o CMakeFiles/marvelCoding.dir/MarvelException.cpp.s
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/marvel_constant.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/marvel_constant.cpp -o CMakeFiles/marvelCoding.dir/marvel_constant.cpp.s
 
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.requires:
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.requires:
 
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.requires
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.requires
 
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.provides: CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.requires
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.provides.build
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.provides
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.provides: CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.provides
 
-CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/MarvelException.cpp.o
-
-
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o: ../MarvelServer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o -c /home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp
-
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/MarvelServer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp > CMakeFiles/marvelCoding.dir/MarvelServer.cpp.i
-
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/MarvelServer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp -o CMakeFiles/marvelCoding.dir/MarvelServer.cpp.s
-
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.requires:
-
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.requires
-
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.provides: CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.requires
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.provides.build
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.provides
-
-CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o
+CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o
 
 
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o: ../MarvelLog.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o -c /home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o: ../marvel_exception.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o -c /home/buaa/CLionProjects/marvelCoding/marvel_exception.cpp
 
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/MarvelLog.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp > CMakeFiles/marvelCoding.dir/MarvelLog.cpp.i
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/marvel_exception.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/marvel_exception.cpp > CMakeFiles/marvelCoding.dir/marvel_exception.cpp.i
 
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/MarvelLog.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp -o CMakeFiles/marvelCoding.dir/MarvelLog.cpp.s
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/marvel_exception.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/marvel_exception.cpp -o CMakeFiles/marvelCoding.dir/marvel_exception.cpp.s
 
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.requires:
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.requires:
 
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.requires
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.requires
 
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.provides: CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.requires
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.provides.build
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.provides
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.provides: CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.provides
 
-CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o
+CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o
 
 
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o: ../MarvelSocket.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o -c /home/buaa/CLionProjects/marvelCoding/MarvelSocket.cpp
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.o: ../marvel_server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/marvelCoding.dir/marvel_server.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/marvel_server.cpp.o -c /home/buaa/CLionProjects/marvelCoding/marvel_server.cpp
 
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/MarvelSocket.cpp > CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.i
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/marvel_server.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/marvel_server.cpp > CMakeFiles/marvelCoding.dir/marvel_server.cpp.i
 
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/MarvelSocket.cpp -o CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.s
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/marvel_server.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/marvel_server.cpp -o CMakeFiles/marvelCoding.dir/marvel_server.cpp.s
 
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.requires:
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.requires:
 
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.requires
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.requires
 
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.provides: CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.requires
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.provides.build
-.PHONY : CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.provides
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.provides: CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.provides
 
-CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o
+CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/marvel_server.cpp.o
+
+
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.o: ../marvel_log.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/marvelCoding.dir/marvel_log.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/marvel_log.cpp.o -c /home/buaa/CLionProjects/marvelCoding/marvel_log.cpp
+
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/marvel_log.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/marvel_log.cpp > CMakeFiles/marvelCoding.dir/marvel_log.cpp.i
+
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/marvel_log.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/marvel_log.cpp -o CMakeFiles/marvelCoding.dir/marvel_log.cpp.s
+
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.requires:
+
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.requires
+
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.provides: CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.provides
+
+CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/marvel_log.cpp.o
+
+
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o: ../marvel_socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o -c /home/buaa/CLionProjects/marvelCoding/marvel_socket.cpp
+
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/marvel_socket.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/marvel_socket.cpp > CMakeFiles/marvelCoding.dir/marvel_socket.cpp.i
+
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/marvel_socket.cpp -o CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s
+
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.requires:
+
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.requires
+
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.provides: CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.provides
+
+CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o
+
+
+CMakeFiles/marvelCoding.dir/api_app.cpp.o: CMakeFiles/marvelCoding.dir/flags.make
+CMakeFiles/marvelCoding.dir/api_app.cpp.o: ../api_app.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/marvelCoding.dir/api_app.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/marvelCoding.dir/api_app.cpp.o -c /home/buaa/CLionProjects/marvelCoding/api_app.cpp
+
+CMakeFiles/marvelCoding.dir/api_app.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/marvelCoding.dir/api_app.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/buaa/CLionProjects/marvelCoding/api_app.cpp > CMakeFiles/marvelCoding.dir/api_app.cpp.i
+
+CMakeFiles/marvelCoding.dir/api_app.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/marvelCoding.dir/api_app.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/buaa/CLionProjects/marvelCoding/api_app.cpp -o CMakeFiles/marvelCoding.dir/api_app.cpp.s
+
+CMakeFiles/marvelCoding.dir/api_app.cpp.o.requires:
+
+.PHONY : CMakeFiles/marvelCoding.dir/api_app.cpp.o.requires
+
+CMakeFiles/marvelCoding.dir/api_app.cpp.o.provides: CMakeFiles/marvelCoding.dir/api_app.cpp.o.requires
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.o.provides.build
+.PHONY : CMakeFiles/marvelCoding.dir/api_app.cpp.o.provides
+
+CMakeFiles/marvelCoding.dir/api_app.cpp.o.provides.build: CMakeFiles/marvelCoding.dir/api_app.cpp.o
 
 
 # Object files for target marvelCoding
 marvelCoding_OBJECTS = \
 "CMakeFiles/marvelCoding.dir/main.cpp.o" \
-"CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o" \
-"CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o" \
-"CMakeFiles/marvelCoding.dir/MarvelException.cpp.o" \
-"CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o" \
-"CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o" \
-"CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o"
+"CMakeFiles/marvelCoding.dir/marvel_client.cpp.o" \
+"CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o" \
+"CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o" \
+"CMakeFiles/marvelCoding.dir/marvel_server.cpp.o" \
+"CMakeFiles/marvelCoding.dir/marvel_log.cpp.o" \
+"CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o" \
+"CMakeFiles/marvelCoding.dir/api_app.cpp.o"
 
 # External object files for target marvelCoding
 marvelCoding_EXTERNAL_OBJECTS =
 
 marvelCoding: CMakeFiles/marvelCoding.dir/main.cpp.o
-marvelCoding: CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o
-marvelCoding: CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o
-marvelCoding: CMakeFiles/marvelCoding.dir/MarvelException.cpp.o
-marvelCoding: CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o
-marvelCoding: CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o
-marvelCoding: CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/marvel_client.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/marvel_server.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/marvel_log.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o
+marvelCoding: CMakeFiles/marvelCoding.dir/api_app.cpp.o
 marvelCoding: CMakeFiles/marvelCoding.dir/build.make
 marvelCoding: CMakeFiles/marvelCoding.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable marvelCoding"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable marvelCoding"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/marvelCoding.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -256,12 +282,13 @@ CMakeFiles/marvelCoding.dir/build: marvelCoding
 .PHONY : CMakeFiles/marvelCoding.dir/build
 
 CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/main.cpp.o.requires
-CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o.requires
-CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o.requires
-CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/MarvelException.cpp.o.requires
-CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o.requires
-CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o.requires
-CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/marvel_client.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/marvel_server.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/marvel_log.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o.requires
+CMakeFiles/marvelCoding.dir/requires: CMakeFiles/marvelCoding.dir/api_app.cpp.o.requires
 
 .PHONY : CMakeFiles/marvelCoding.dir/requires
 

@@ -1,11 +1,12 @@
 file(REMOVE_RECURSE
   "CMakeFiles/marvelCoding.dir/main.cpp.o"
-  "CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o"
-  "CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o"
-  "CMakeFiles/marvelCoding.dir/MarvelException.cpp.o"
-  "CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o"
-  "CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o"
-  "CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o"
+  "CMakeFiles/marvelCoding.dir/marvel_client.cpp.o"
+  "CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o"
+  "CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o"
+  "CMakeFiles/marvelCoding.dir/marvel_server.cpp.o"
+  "CMakeFiles/marvelCoding.dir/marvel_log.cpp.o"
+  "CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o"
+  "CMakeFiles/marvelCoding.dir/api_app.cpp.o"
   "marvelCoding.pdb"
   "marvelCoding"
 )

@@ -84,43 +84,49 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp">
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/api_app.cpp">
 			<Option target="marvelCoding"/>
 		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelClient.h">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelConstant.h">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelException.cpp">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelException.h">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelLog.h">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelServer.h">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelSocket.cpp">
-			<Option target="marvelCoding"/>
-		</Unit>
-		<Unit filename="/home/buaa/CLionProjects/marvelCoding/MarvelSocket.h">
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/api_app.h">
 			<Option target="marvelCoding"/>
 		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/main.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_client.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_client.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_constant.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_constant.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_exception.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_exception.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_log.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_log.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_server.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_server.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_socket.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_socket.h">
 			<Option target="marvelCoding"/>
 		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/CMakeLists.txt">

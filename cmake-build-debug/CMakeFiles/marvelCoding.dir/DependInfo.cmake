@@ -4,13 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/buaa/CLionProjects/marvelCoding/MarvelClient.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelClient.cpp.o"
-  "/home/buaa/CLionProjects/marvelCoding/MarvelConstant.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelConstant.cpp.o"
-  "/home/buaa/CLionProjects/marvelCoding/MarvelException.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelException.cpp.o"
-  "/home/buaa/CLionProjects/marvelCoding/MarvelLog.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelLog.cpp.o"
-  "/home/buaa/CLionProjects/marvelCoding/MarvelServer.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelServer.cpp.o"
-  "/home/buaa/CLionProjects/marvelCoding/MarvelSocket.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/MarvelSocket.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/api_app.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/api_app.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/main.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/main.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/marvel_client.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_client.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/marvel_constant.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/marvel_exception.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/marvel_log.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_log.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/marvel_server.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_server.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/marvel_socket.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
