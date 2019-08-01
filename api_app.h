@@ -12,13 +12,17 @@
 #include "marvel_server.h"
 
 namespace marvel::api {
+    // Log app to client & server
     template <typename APP> marvel::MarvelClient LogInClient(APP* app);
     template <typename APP> marvel::MarvelServer LogInServer(APP* app);
+    // app to log out
     void LogOut(marvel::MarvelClient* client);
     void LogOut(marvel::MarvelServer* client);
+    // For a client App to send Message
     int SendMessageToServer(marvel::MarvelClient* client,
                             uint32_t host, uint16_t port, const char* msg);
-    int RecvMessageFromClient(marvel::MarvelClient* client,
+    // For a server to inform App of message received.
+    void RecvMessageFromClient(marvel::MarvelClient* client,
                               uint32_t host, uint16_t port, const char* msg);
 }
 

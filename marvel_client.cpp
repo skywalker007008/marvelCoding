@@ -17,19 +17,12 @@ template <typename APP>
 
 marvel::MarvelClient::MarvelClient(APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
-    std::string file_name = "client_" + name_ + ".txt";
-    if (stream_ != nullptr) {
-        stream_.open(file_name, std::ios::out);
-    }
 }
 
 marvel::MarvelClient::~MarvelClient() {
-    if (stream_ != nullptr) {
-        stream_.close();
-    }
 }
 
-void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) {
+void marvel::MarvelClient::SendProcess(uint32_t host, uint16_t port, const char* msg) {
     int sock;
     struct sockaddr_in serv_addr;
     char message[MAX_BUF_SIZE + 1];
@@ -46,7 +39,8 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
         // check if socket created successfully
         sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
         if (sock < 0) {
-            log::log(stream_, "Socket Create Failed. Retrying...");
+            app_ -> log("Socket Create Failed. Retrying...");
+            // log::log(stream_, "Socket Create Failed. Retrying...");
             // marvel::err::errMsg(err::SOCKET_CREATE_FAILED);
             if (i == MAX_RETRY_TIME) {
                 throw err::SocketCreateFailedException();
@@ -64,10 +58,7 @@ void marvel::MarvelClient::start(uint32_t host, uint16_t port, const char* msg) 
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if connection successful
         if (connect(sock, (struct sockaddr *) &serv_addr, ADDR_SIZE) < 0) {
-            log::log(stream_, "Socket Connect Failed. Retrying...");
-            // err::SocketException exp(err::SOCKET_CONNECT_FAILED, serv_addr);
-            // marvel::err::errMsg(SOCKET_CONNECT_FAILED);
-            // exit(1);
+            app_ -> log("Socket Connect Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
                 throw err::SocketConnectFailedException(serv_addr);
             }
@@ -128,7 +119,7 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
 }
 
 std::ofstream marvel::MarvelClient::GetStream() {
-    return stream_;
+    return app_ -> get_stream();
 }
 
 

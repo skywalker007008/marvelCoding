@@ -339,6 +339,33 @@ marvel_socket.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s
 .PHONY : marvel_socket.cpp.s
 
+test_app.o: test_app.cpp.o
+
+.PHONY : test_app.o
+
+# target to build an object file
+test_app.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.o
+.PHONY : test_app.cpp.o
+
+test_app.i: test_app.cpp.i
+
+.PHONY : test_app.i
+
+# target to preprocess a source file
+test_app.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.i
+.PHONY : test_app.cpp.i
+
+test_app.s: test_app.cpp.s
+
+.PHONY : test_app.s
+
+# target to generate assembly for a file
+test_app.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.s
+.PHONY : test_app.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -372,6 +399,9 @@ help:
 	@echo "... marvel_socket.o"
 	@echo "... marvel_socket.i"
 	@echo "... marvel_socket.s"
+	@echo "... test_app.o"
+	@echo "... test_app.i"
+	@echo "... test_app.s"
 .PHONY : help
 
 

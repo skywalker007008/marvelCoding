@@ -21,20 +21,12 @@ template <typename APP>
 MarvelServer::MarvelServer(
         APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
-    std::string file_name;
-    if (stream_ != nullptr) {
-        file_name = "server_" + name_ + ".txt";
-        stream_.open(file_name, std::ios::out);
-    }
 }
 
 MarvelServer::~MarvelServer() {
-    if (stream_ != nullptr) {
-        stream_.close();
-    }
 }
 
-void MarvelServer::start() { //
+void MarvelServer::RecvProcess() { //
     int serv_socket;
     int clnt_socket;
 
@@ -50,13 +42,13 @@ void MarvelServer::start() { //
 
     try {
         // create a socket
-        serv_socket = NewSocket(stream_);
+        serv_socket = NewSocket(app_ -> get_stream());
         // add details
         PackSockaddr(&serv_addr, AF_INET, host_, port_);
         // bind the socket
-        BindSocket(stream_, serv_socket, &serv_addr);
+        BindSocket(app_ -> get_stream(), serv_socket, &serv_addr);
         // now listen
-        ListenSocket(stream_, serv_socket, &serv_addr);
+        ListenSocket(app_ -> get_stream(), serv_socket, &serv_addr);
     } catch (err::MarvelException exp) {
         throw exp;
     }
@@ -83,10 +75,12 @@ void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
     for(int i = 0; i < MAX_CONNECT_NUM; i++) {
         recv_bytes = 0;
         try {
-            clnt_socket = AcceptSocket(stream_, serv_socket, serv_addr, &clnt_addr, &clnt_addr_size);
+            clnt_socket = AcceptSocket(app_ -> get_stream(), serv_socket,
+                                       serv_addr, &clnt_addr, &clnt_addr_size);
         } catch (err::SocketAcceptFailedException exp) {
             throw exp;
         }
+        log::server::SocketAccepted(this, serv_addr, &clnt_addr);
 
         while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
             if (length < 0) {
@@ -107,6 +101,6 @@ void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
 }
 
 std::ofstream MarvelServer::GetStream() {
-    return stream_;
+    return app_ -> get_stream();
 }
 

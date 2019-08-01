@@ -17,12 +17,12 @@
 constexpr int SERVER_SIZE = sizeof(marvel::MarvelServer);
 
 namespace marvel {
-    template <typename APP> class MarvelServer {
+    template <class APP> class MarvelServer {
     public:
         MarvelServer(APP* app, uint32_t host, uint16_t port);
         ~MarvelServer();
         void start();
-
+        void RecvProcess()
         std::ofstream GetStream();
 
     private:

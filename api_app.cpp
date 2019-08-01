@@ -40,7 +40,7 @@ int api::SendMessageToServer(marvel::MarvelClient* client,
     }
     return send_bytes;
 }
-int api::RecvMessageFromClient(marvel::MarvelClient* client,
+void api::RecvMessageFromClient(marvel::MarvelClient* client,
                                uint32_t host, uint16_t port, const char* msg) {
-
+    client -> app -> print();
 }

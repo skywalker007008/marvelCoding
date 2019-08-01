@@ -25,7 +25,7 @@ namespace marvel {
         MarvelClient(APP* app, uint32_t host, uint16_t port);
         ~MarvelClient();
         void sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
-        void start(uint32_t host, uint16_t port, const char* msg);
+        void SendProcess(uint32_t host, uint16_t port, const char* msg);
         std::ofstream GetStream();
 
     private:
@@ -34,8 +34,6 @@ namespace marvel {
         uint16_t port_;
         std::ofstream stream_;
     };
-
-
 }
 
 #endif //MARVELCODING_MARVELCLIENT_H
