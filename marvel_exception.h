@@ -13,6 +13,7 @@
 #include <exception>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <string>
 
 namespace marvel::err {
     enum ErrorType {
@@ -31,17 +32,17 @@ namespace marvel::err {
         // data
         DATA_OVERSIZED,
     };
-    void errMsg(ErrorType type, void* data = nullptr);
+    // void errMsg(ErrorType type, void* data = nullptr);
 
     class MarvelException : public std::exception {
     public:
-        virtual void print();
+        virtual std::string print();
     };
 
     class SocketCreateFailedException : public MarvelException {
     public:
         SocketCreateFailedException();
-        void print();
+        std::string print();
     };
 
     class MessageOversizedException : public MarvelException {

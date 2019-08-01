@@ -16,7 +16,7 @@
 
 using namespace marvel;
 
-template <typename APP>
+template <class APP>
 
 MarvelServer::MarvelServer(
         APP* app, uint32_t host, uint16_t port)
@@ -84,7 +84,7 @@ void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
 
         while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
             if (length < 0) {
-                err::errMsg(err::RECV_FAILED);
+                // err::errMsg(err::RECV_FAILED);
             }
             recv_bytes += length;
             log::server::RecvMessage(this, serv_addr, message, length, recv_bytes);
@@ -102,5 +102,17 @@ void MarvelServer::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) {
 
 std::ofstream MarvelServer::GetStream() {
     return app_ -> get_stream();
+}
+
+void MarvelServer::shutdown() {
+
+}
+
+void MarvelServer::start() {
+    try {
+        RecvProcess();
+    } catch (err::MarvelException exp) {
+        app_ -> HandleException(exp);
+    }
 }
 

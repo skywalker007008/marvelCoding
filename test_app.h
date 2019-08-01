@@ -24,6 +24,8 @@ public:
 
     //
     std::ofstream get_stream();
+    uint32_t get_host();
+    uint16_t get_port();
 
 private:
     std::string name_;

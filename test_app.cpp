@@ -30,13 +30,14 @@ template <class ERR> void App::HandleException(ERR err) {
 }
 
 template <class ERR> void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
+    int send_bytes;
     try {
-        client_.send(dest_host, dest_port, msg);
+        send_bytes = client_.sendProcess(dest_host, dest_port, msg);
     } catch (ERR exp) {
         HandleException(exp);
     }
 
-    log("MessageSent!");
+    log("MessageSent!\t" + to_string(send_bytes) + "bytes");
 }
 
 void App::log(std::string log_msg) {
@@ -46,5 +47,12 @@ void App::log(std::string log_msg) {
 
 ofstream App::get_stream() {
     return stream_;
+}
+
+uint32_t App::get_host() {
+    return host_;
+}
+uint16_t App::get_port() {
+    return 60;
 }
 

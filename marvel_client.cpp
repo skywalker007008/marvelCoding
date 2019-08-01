@@ -22,9 +22,10 @@ marvel::MarvelClient::MarvelClient(APP* app, uint32_t host, uint16_t port)
 marvel::MarvelClient::~MarvelClient() {
 }
 
-void marvel::MarvelClient::SendProcess(uint32_t host, uint16_t port, const char* msg) {
+int marvel::MarvelClient::SendProcess(uint32_t host, uint16_t port, const char* msg) {
     int sock;
     struct sockaddr_in serv_addr;
+    int send_bytes = 0;
     char message[MAX_BUF_SIZE + 1];
 
     // check if msg longer than maxmium length
@@ -70,16 +71,17 @@ void marvel::MarvelClient::SendProcess(uint32_t host, uint16_t port, const char*
 
     // start-to-send
     try {
-        sendMessage(sock, message, &serv_addr);
+        send_bytes = sendMessage(sock, message, &serv_addr);
     } catch (err::MarvelException exp) {
         throw exp;
     }
 
 }
 
-void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr) {
+int marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr) {
     int length = strlen(msg);
     int remain = length;
+    int totalBytes = 0;
     int sendBytes;
     while (remain > 0) {
         if (remain >= PER_TRANS_SIZE) {
@@ -99,6 +101,7 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
                 // exit(1); // actually no need
             }
             msg += PER_TRANS_SIZE;
+            totalBytes += sendBytes;
         } else {
             sendBytes = send(sock, msg, remain, 0);
             marvel::log::client::SendMessage(
@@ -113,13 +116,23 @@ void marvel::MarvelClient::sendMessage(int sock, char* msg, struct sockaddr_in* 
                 // marvel::err::errMsg(SEND_INCOMPLETE); // loss
                 // exit(1); // actually no need
             }
+            totalBytes += sendBytes;
             break;
         }
     }
+    return totalBytes;
 }
 
 std::ofstream marvel::MarvelClient::GetStream() {
     return app_ -> get_stream();
+}
+
+void marvel::MarvelClient::shutdown() {
+
+}
+
+void marvel::MarvelClient::start() {
+
 }
 
 

@@ -24,6 +24,7 @@ namespace marvel {
         void start();
         void RecvProcess()
         std::ofstream GetStream();
+        void shutdown();
 
     private:
         void RecvMessage(int serv_socket, struct sockaddr_in* serv_addr);

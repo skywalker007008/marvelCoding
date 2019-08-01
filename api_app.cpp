@@ -12,13 +12,13 @@
 using namespace marvel;
 
 template <typename APP> MarvelClient api::LogInClient(APP* app) {
-    MarvelClient<APP> client(app, app -> GetHost(), app -> GetPort());
+    MarvelClient<APP> client(app, app -> get_host(), app -> get_port());
     client.start();
     return client;
 }
 
 template <typename APP> MarvelServer api::LogInServer(APP* app) {
-    MarvelServer<APP> server(app, app -> GetHost(), app -> GetPort());
+    MarvelServer<APP> server(app, app -> get_host(), app -> get_port());
     server.start();
     return server;
 }
@@ -34,7 +34,7 @@ int api::SendMessageToServer(marvel::MarvelClient* client,
                              uint32_t host, uint16_t port, const char* msg) {
     int send_bytes = 0;
     try {
-        send_bytes = client -> start(host, port, msg);
+        send_bytes = client -> SendProcess(host, port, msg);
     } catch (err::MarvelException exp) {
         throw exp;
     }
@@ -42,5 +42,5 @@ int api::SendMessageToServer(marvel::MarvelClient* client,
 }
 void api::RecvMessageFromClient(marvel::MarvelClient* client,
                                uint32_t host, uint16_t port, const char* msg) {
-    client -> app -> print();
+    // client -> app_ -> print();
 }
