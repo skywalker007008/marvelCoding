@@ -45,42 +45,60 @@ namespace marvel::err {
         std::string print();
     };
 
-    class MessageOversizedException : public MarvelException {
-    public:
-        MessageOversizedException();
-    };
-
     class SocketConnectFailedException : public MarvelException {
     public:
         SocketConnectFailedException(struct sockaddr_in sockaddr);
-    };
-
-    class MessageSendFailedException : public MarvelException {
-    public:
-        MessageSendFailedException(int pos, int size);
-    };
-
-    class MessageRecvFailedException : public MarvelException {
-    public:
-        MessageRecvFailedException(int pos, int size);
+        std::string print();
+        static uint32_t host_;
+        static uint16_t port_;
     };
 
     class SocketBindFailedException : public MarvelException {
     public:
         SocketBindFailedException(struct sockaddr_in sockaddr);
+        std::string print();
+        static uint32_t host_;
+        static uint16_t port_;
     };
 
     class SocketListenFailedException : public MarvelException {
     public:
         SocketListenFailedException(struct sockaddr_in sockaddr);
+        std::string print();
+        static uint32_t host_;
+        static uint16_t port_;
     };
 
     class SocketAcceptFailedException : public MarvelException {
     public:
         SocketAcceptFailedException(struct sockaddr_in sockaddr);
+        std::string print();
+        static uint32_t host_;
+        static uint16_t port_;
     };
+
+    class MessageOversizedException : public MarvelException {
+    public:
+        MessageOversizedException();
+        std::string print();
+    };
+
+    class MessageSendFailedException : public MarvelException {
+    public:
+        MessageSendFailedException(int pos, int size);
+        std::string print();
+        static int pos_;
+        static int size_;
+    };
+
+    class MessageRecvFailedException : public MarvelException {
+    public:
+        MessageRecvFailedException(int pos, int size);
+        std::string print();
+        static int pos_;
+        static int size_;
+    };
+
 } // namespace marvel::err
-
-
 
 #endif //MARVELCODING_MARVELEXCEPTION_H
