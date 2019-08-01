@@ -19,11 +19,12 @@ App::App(uint32_t host, const string &name)
     server_ = marvel::api::LogInServer(this);
 }
 
-App::~App() {
+/* App::~App() {
     marvel::api::LogOut(&client_);
     marvel::api::LogOut(&server_);
     stream_.close();
 }
+ */
 
 template <class ERR> void App::HandleException(ERR err) {
     log(err.print());
@@ -32,7 +33,7 @@ template <class ERR> void App::HandleException(ERR err) {
 template <class ERR> void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
     int send_bytes;
     try {
-        send_bytes = client_.sendProcess(dest_host, dest_port, msg);
+        send_bytes = marvel::api::SendMessageToServer(client_,dest_host, dest_port, msg);
     } catch (ERR exp) {
         HandleException(exp);
     }
@@ -54,5 +55,11 @@ uint32_t App::get_host() {
 }
 uint16_t App::get_port() {
     return 60;
+}
+
+void App::shutdown() {
+    marvel::api::LogOut(&client_);
+    marvel::api::LogOut(&server_);
+    stream_.close();
 }
 

@@ -339,6 +339,33 @@ marvel_socket.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s
 .PHONY : marvel_socket.cpp.s
 
+sample.o: sample.cpp.o
+
+.PHONY : sample.o
+
+# target to build an object file
+sample.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/sample.cpp.o
+.PHONY : sample.cpp.o
+
+sample.i: sample.cpp.i
+
+.PHONY : sample.i
+
+# target to preprocess a source file
+sample.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/sample.cpp.i
+.PHONY : sample.cpp.i
+
+sample.s: sample.cpp.s
+
+.PHONY : sample.s
+
+# target to generate assembly for a file
+sample.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/sample.cpp.s
+.PHONY : sample.cpp.s
+
 test_app.o: test_app.cpp.o
 
 .PHONY : test_app.o
@@ -399,6 +426,9 @@ help:
 	@echo "... marvel_socket.o"
 	@echo "... marvel_socket.i"
 	@echo "... marvel_socket.s"
+	@echo "... sample.o"
+	@echo "... sample.i"
+	@echo "... sample.s"
 	@echo "... test_app.o"
 	@echo "... test_app.i"
 	@echo "... test_app.s"

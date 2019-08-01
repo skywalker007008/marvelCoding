@@ -129,6 +129,9 @@
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/marvel_socket.h">
 			<Option target="marvelCoding"/>
 		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/sample.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/test_app.cpp">
 			<Option target="marvelCoding"/>
 		</Unit>

@@ -16,12 +16,13 @@
 template <class Client, class Server> class App {
 public:
     App(uint32_t host, const std::string& name);
-    ~App();
+    // ~App();
     // Send message to a destination
     void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg);
     // Handle the message
     template <class ERR> void HandleException(ERR err);
-
+    // close this APP
+    void shutdown();
     //
     std::ofstream get_stream();
     uint32_t get_host();

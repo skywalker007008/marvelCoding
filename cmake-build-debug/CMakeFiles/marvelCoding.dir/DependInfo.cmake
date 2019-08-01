@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/buaa/CLionProjects/marvelCoding/marvel_log.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_log.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/marvel_server.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_server.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/marvel_socket.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/sample.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/sample.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/test_app.cpp" "/home/buaa/CLionProjects/marvelCoding/cmake-build-debug/CMakeFiles/marvelCoding.dir/test_app.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

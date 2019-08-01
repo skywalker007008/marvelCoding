@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o"
   "CMakeFiles/marvelCoding.dir/api_app.cpp.o"
   "CMakeFiles/marvelCoding.dir/test_app.cpp.o"
+  "CMakeFiles/marvelCoding.dir/sample.cpp.o"
   "marvelCoding.pdb"
   "marvelCoding"
 )
