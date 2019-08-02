@@ -9,12 +9,18 @@
 #include "api_app.h"
 #include "marvel_log.h"
 
-App::App(uint32_t host, const STRING &name)
-        : host_ (host), name_(name) {
-    STRING file_name = name + ".txt";
-    *stream_ = OFSTREAM(file_name, std::ios::out);
+App::App(uint32_t host, const STRING& name, OFSTREAM& stream)
+        : host_ (host), name_(name), stream_(stream) {
+    STRING file_name = "./src/" + name + ".txt";
     client_ = MARVEL_API LogInClient(this);
     server_ = MARVEL_API LogInServer(this);
+    // pool.commit(start);
+    pool.commit(MARVEL StartClient, client_);
+    pool.commit(MARVEL StartServer, server_);
+    // std::thread t1(MARVEL StartClient, client_);
+    // t1.join();
+    // std::thread t2(MARVEL StartServer, server_);
+    // t2.join();
 }
 
 /* App::~App() {
@@ -40,12 +46,12 @@ void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
 }
 
 void App::log(STRING log_msg) {
-    *stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
-    *stream_ << log_msg << std::endl;
+    stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
+    stream_ << log_msg << std::endl;
 }
 
 OFSTREAM& App::get_stream() {
-    return *stream_;
+    return stream_;
 }
 
 uint32_t App::get_host() {
@@ -58,6 +64,18 @@ uint16_t App::get_port() {
 void App::shutdown() {
     MARVEL_API LogOut(*client_);
     MARVEL_API LogOut(*server_);
-    (*stream_).close();
+    stream_.close();
+}
+
+void App::start() {
+
+}
+
+static void MARVEL StartClient(MARVEL_CLIENT* client) {
+    client->start();
+}
+
+static void MARVEL StartServer(MARVEL_SERVER* server) {
+    server->start();
 }
 

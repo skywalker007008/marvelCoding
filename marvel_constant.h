@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <fstream>
 #include <iostream>
+#include "threadpool.h"
 
 #define MARVEL marvel::
 #define MARVEL_LOG marvel::log::
@@ -24,6 +25,7 @@
 
 #define STRING std::string
 #define OFSTREAM std::ofstream
+#define POOL std::threadpool
 
 // #define TO_STRING(x) std::to_string(x)
 #define TO_STRING std::to_string
@@ -33,15 +35,20 @@ constexpr int INIT_SERVER_ID = 1;
 
 #define ADDRIN_SIZE sizeof(struct sockaddr_in)
 #define ADDR_SIZE sizeof(struct sockaddr)
+constexpr int MAX_POOL_NUM = 40;
 
-
+static POOL pool{MAX_POOL_NUM};
 
 namespace marvel {
     constexpr int MAX_BUF_SIZE = 1024;
     constexpr int PER_TRANS_SIZE = 32;
     constexpr int MAX_CONNECT_NUM = 2;
     constexpr int MAX_RETRY_TIME = 2;
+
+
 }
+
+
 
 #endif //MARVELCODING_MARVELCONSTANT_H
 

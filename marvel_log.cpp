@@ -51,6 +51,3 @@ void MARVEL_LOG log(OFSTREAM& stream, const STRING& msg) {
     stream << msg << "\n";
 }
 
-inline clock_t MARVEL_LOG pass_time() {
-    return clock() - base;
-}

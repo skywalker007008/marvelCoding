@@ -30,7 +30,9 @@ namespace marvel {
 
         void log(OFSTREAM& stream, const STRING &string);
 
-        inline clock_t pass_time();
+        static clock_t pass_time() {
+            return clock() - base;
+        }
     } // namespace log
 } // namespace marvel
 

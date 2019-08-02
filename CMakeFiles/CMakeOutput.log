@@ -623,3 +623,31 @@ make[1]: Leaving directory '/home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMa
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b0e53/fast"
+/usr/bin/make -f CMakeFiles/cmTC_b0e53.dir/build.make CMakeFiles/cmTC_b0e53.dir/build
+make[1]: Entering directory '/home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b0e53.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_b0e53.dir/CheckIncludeFile.c.o   -c /home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b0e53
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b0e53.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_b0e53.dir/CheckIncludeFile.c.o  -o cmTC_b0e53 
+make[1]: Leaving directory '/home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ab7e2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ab7e2.dir/build.make CMakeFiles/cmTC_ab7e2.dir/build
+make[1]: Entering directory '/home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ab7e2.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_ab7e2.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.8/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ab7e2
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ab7e2.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_ab7e2.dir/CheckFunctionExists.c.o  -o cmTC_ab7e2 -lpthread 
+make[1]: Leaving directory '/home/buaa/CLionProjects/marvelCoding/CMakeFiles/CMakeTmp'
+
+

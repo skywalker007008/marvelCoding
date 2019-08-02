@@ -13,7 +13,7 @@
 #include "marvel_log.h"
 #include "marvel_socket.h"
 
-MARVEL_CLIENT::MarvelClient(MARVEL_APP app, uint32_t host, uint16_t port)
+MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
 }
 
@@ -38,7 +38,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
         // check if socket created successfully
         sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
         if (sock < 0) {
-            app_.log("Socket Create Failed. Retrying...");
+            app_ -> log("Socket Create Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
                 throw MARVEL_ERR SocketCreateFailedException();
             }
@@ -55,7 +55,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if connection successful
         if (connect(sock, (struct sockaddr *) &serv_addr, ADDR_SIZE) < 0) {
-            app_.log("Socket Connect Failed. Retrying...");
+            app_ -> log("Socket Connect Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
                 throw MARVEL_ERR SocketConnectFailedException(serv_addr);
             }
@@ -112,7 +112,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
 }
 
 OFSTREAM& MARVEL_CLIENT::GetStream() {
-    return app_.get_stream();
+    return app_ -> get_stream();
 }
 
 void MARVEL_CLIENT::shutdown() {
@@ -122,5 +122,6 @@ void MARVEL_CLIENT::shutdown() {
 void MARVEL_CLIENT::start() {
 
 }
+
 
 

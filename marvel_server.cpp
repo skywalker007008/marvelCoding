@@ -15,7 +15,7 @@
 #include "marvel_socket.h"
 
 MARVEL_SERVER::MarvelServer(
-        MARVEL_APP app, uint32_t host, uint16_t port)
+        MARVEL_APP& app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
 }
 
@@ -111,4 +111,3 @@ void MARVEL_SERVER::start() {
         app_.HandleException(exp);
     }
 }
-

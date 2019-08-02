@@ -11,7 +11,7 @@ constexpr uint32_t kDefaultClientHost = 255;
 constexpr uint32_t kDefaultServerHost = 0;
 constexpr uint16_t kDefaultPort = 996;
 
-void sample() {
+/* void sample() {
     base = clock();
     App app_client(kDefaultClientHost, "client");
     App app_server(kDefaultServerHost, "server");
@@ -21,3 +21,4 @@ void sample() {
     app_server.shutdown();
     std::cout << "Finished Test" << std::endl;
 }
+ */

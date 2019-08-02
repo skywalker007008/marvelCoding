@@ -39,7 +39,7 @@ namespace marvel {
         class MarvelException {
         public:
             MarvelException();
-            virtual STRING print();
+            virtual STRING print() {}
         };
 
         class SocketCreateFailedException : public MarvelException {

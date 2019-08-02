@@ -22,7 +22,7 @@ namespace marvel {
     class MarvelApp;
     class MarvelServer {
     public:
-        MarvelServer(MarvelApp app, uint32_t host, uint16_t port);
+        MarvelServer(MarvelApp& app, uint32_t host, uint16_t port);
         ~MarvelServer();
         void start();
         void RecvProcess();
@@ -35,6 +35,8 @@ namespace marvel {
         uint16_t port_;
         MarvelApp& app_;
     };
+
+    static void StartServer(MarvelServer* server);
 }
 
 #endif //MARVELCODING_MARVELSERVER_H

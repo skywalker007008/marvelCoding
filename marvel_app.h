@@ -17,19 +17,18 @@
 namespace marvel {
      class MarvelApp {
      public:
-        MarvelApp();
+        // MarvelApp();
         // virtual ~MarvelApp();
-        virtual void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg);
+        virtual void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg) {}
         // Handle the message
-        virtual void HandleException(MARVEL_EXCEPTION err);
+        virtual void HandleException(MARVEL_EXCEPTION err) {}
         // close this APP
-        virtual void shutdown();
+        virtual void shutdown() {}
         //
-        virtual OFSTREAM& get_stream();
-        virtual uint32_t get_host();
-        virtual uint16_t get_port();
-         virtual void log(STRING log_msg);
-
+        virtual OFSTREAM& get_stream() {}
+        virtual uint32_t get_host() {}
+        virtual uint16_t get_port() {}
+         virtual void log(STRING log_msg) {}
     };
 }
 #endif //MARVELCODING_MARVEL_APP_H

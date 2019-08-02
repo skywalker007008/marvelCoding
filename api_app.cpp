@@ -8,18 +8,19 @@
 #include <cstring>
 #include <thread>
 #include "api_app.h"
+
 #include "marvel_exception.h"
 
 MARVEL_CLIENT* MARVEL_API LogInClient(MARVEL_APP* app) {
-    MARVEL_CLIENT client(*app, app -> get_host(), app -> get_port());
-    client.start();
-    return &client;
+    MARVEL_CLIENT* client = new MARVEL_CLIENT(app, app -> get_host(), app -> get_port());
+    // client.start();
+    return client;
 }
 
 MARVEL_SERVER* MARVEL_API LogInServer(MARVEL_APP* app) {
-    MARVEL_SERVER server(*app, app -> get_host(), app -> get_port());
-    std::thread t(&MARVEL_SERVER::start, server);
-    return &server;
+    MARVEL_SERVER* server = new MARVEL_SERVER(*app, app -> get_host(), app -> get_port());
+    // std::thread t(&MARVEL_SERVER::start, server);
+    return server;
 }
 
 void MARVEL_API LogOut(MARVEL_CLIENT client) {

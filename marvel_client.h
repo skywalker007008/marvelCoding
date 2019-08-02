@@ -21,7 +21,7 @@ namespace marvel {
     class MarvelApp;
     class MarvelClient {
     public:
-        MarvelClient(MarvelApp app, uint32_t host, uint16_t port);
+        MarvelClient(MarvelApp* app, uint32_t host, uint16_t port);
         ~MarvelClient();
         int sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
         int SendProcess(uint32_t host, uint16_t port, const char* msg);
@@ -30,10 +30,12 @@ namespace marvel {
         void start();
 
     private:
-        MarvelApp& app_;
+        MarvelApp* app_;
         uint32_t host_;
         uint16_t port_;
     };
+
+    static void StartClient(MarvelClient* client);
 }
 
 #endif //MARVELCODING_MARVELCLIENT_H

@@ -8,8 +8,12 @@ constexpr uint16_t kDefaultPort = 996;
 
 int main() {
     base = clock();
-    App app_client(kDefaultClientHost, "client");
-    App app_server(kDefaultServerHost, "server");
+    OFSTREAM stream1("./src/client.txt", std::ios::out);
+    OFSTREAM stream2("./src/server.txt", std::ios::out);
+    App app_client(kDefaultClientHost, "client", stream1);
+    App app_server(kDefaultServerHost, "server", stream2);
+    // app_client.start();
+    // app_server.start();
     app_client.SendMessage(kDefaultServerHost, kDefaultPort, "Greet to you you idiot!");
     app_client.SendMessage(kDefaultServerHost, kDefaultPort, "I am your father!");
     app_client.shutdown();
