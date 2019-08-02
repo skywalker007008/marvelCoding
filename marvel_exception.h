@@ -14,6 +14,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string>
+#include "marvel_constant.h"
 
 namespace marvel {
     namespace err {
@@ -37,21 +38,21 @@ namespace marvel {
 
         class MarvelException : public std::exception {
         public:
-            virtual std::string print();
+            virtual STRING print();
         };
 
         class SocketCreateFailedException : public MarvelException {
         public:
             SocketCreateFailedException();
 
-            std::string print();
+            STRING print();
         };
 
         class SocketConnectFailedException : public MarvelException {
         public:
             SocketConnectFailedException(struct sockaddr_in sockaddr);
 
-            std::string print();
+            STRING print();
 
             static uint32_t host_;
             static uint16_t port_;
@@ -61,7 +62,7 @@ namespace marvel {
         public:
             SocketBindFailedException(struct sockaddr_in sockaddr);
 
-            std::string print();
+            STRING print();
 
             static uint32_t host_;
             static uint16_t port_;
@@ -71,7 +72,7 @@ namespace marvel {
         public:
             SocketListenFailedException(struct sockaddr_in sockaddr);
 
-            std::string print();
+            STRING print();
 
             static uint32_t host_;
             static uint16_t port_;
@@ -81,7 +82,7 @@ namespace marvel {
         public:
             SocketAcceptFailedException(struct sockaddr_in sockaddr);
 
-            std::string print();
+            STRING print();
 
             static uint32_t host_;
             static uint16_t port_;
@@ -91,14 +92,14 @@ namespace marvel {
         public:
             MessageOversizedException();
 
-            std::string print();
+            STRING print();
         };
 
         class MessageSendFailedException : public MarvelException {
         public:
             MessageSendFailedException(int pos, int size);
 
-            std::string print();
+            STRING print();
 
             static int pos_;
             static int size_;
@@ -108,7 +109,7 @@ namespace marvel {
         public:
             MessageRecvFailedException(int pos, int size);
 
-            std::string print();
+            STRING print();
 
             static int pos_;
             static int size_;

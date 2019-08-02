@@ -14,29 +14,31 @@
 #include "marvel_exception.h"
 #include "marvel_client.h"
 #include "marvel_server.h"
+#include "marvel_app.h"
 
-class App {
+class App : public MARVEL_APP {
 public:
-    App(uint32_t host, const std::string& name);
+    // inherit from MarvelApp
+    App(uint32_t host, const STRING& name);
     // ~App();
     // Send message to a destination
-    void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg);
+    void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg) override;
     // Handle the message
-    template <class ERR> void HandleException(ERR err);
+    void HandleException(MARVEL_EXCEPTION err) override;
     // close this APP
-    void shutdown();
+    void shutdown() override;
     //
-    std::ofstream get_stream();
-    uint32_t get_host();
-    uint16_t get_port();
+    OFSTREAM get_stream() override ;
+    uint32_t get_host() override;
+    uint16_t get_port() override;
+    void log(STRING log_msg);
 
 private:
-    std::string name_;
-    std::ofstream stream_;
+    STRING name_;
+    OFSTREAM stream_;
     uint32_t host_;
-    marvel::MarvelClient client_;
-    marvel::MarvelServer server_;
-    void log(std::string log_msg);
+    MARVEL_CLIENT client_;
+    MARVEL_SERVER server_;
 };
 
 #endif //MARVELCODING_TEST_APP_H

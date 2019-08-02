@@ -10,13 +10,14 @@
 
 #include <cstdint>
 #include <fstream>
+#include "marvel_constant.h"
 
 namespace marvel {
-    void PackSockaddr(struct sockaddr_in *sockaddr, int family, uint32_t host, uint16_t port);
-    int NewSocket(std::ofstream stream);
-    void BindSocket(std::ofstream stream, int sock, struct sockaddr_in* sock_addr);
-    void ListenSocket(std::ofstream stream, int sock, struct sockaddr_in* sock_addr);
-    int AcceptSocket(std::ofstream stream, int sock, struct sockaddr_in* sock_addr,
+    void PackSockaddr(struct sockaddr_in *sockaddr, sa_family_t family, uint32_t host, uint16_t port);
+    int NewSocket(OFSTREAM stream);
+    void BindSocket(OFSTREAM stream, int sock, struct sockaddr_in* sock_addr);
+    void ListenSocket(OFSTREAM stream, int sock, struct sockaddr_in* sock_addr);
+    int AcceptSocket(OFSTREAM stream, int sock, struct sockaddr_in* sock_addr,
                      struct sockaddr_in* clnt_addr, socklen_t* clnt_addr_size);
 }
 

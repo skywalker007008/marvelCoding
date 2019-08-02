@@ -1,0 +1,3 @@
+/home/buaa/CLionProjects/marvelCoding/CMakeFiles/rebuild_cache.dir
+/home/buaa/CLionProjects/marvelCoding/CMakeFiles/edit_cache.dir
+/home/buaa/CLionProjects/marvelCoding/CMakeFiles/marvelCoding.dir

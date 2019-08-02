@@ -13,24 +13,27 @@
 #include <sys/socket.h>
 #include <fstream>
 #include "marvel_constant.h"
+#include "marvel_app.h"
 
-constexpr int SERVER_SIZE = sizeof(class marvel::MarvelServer);
+// constexpr int SERVER_SIZE = sizeof(class marvel::MarvelServer);
+
 
 namespace marvel {
-    template <class APP> class MarvelServer {
+    class MarvelApp;
+    class MarvelServer {
     public:
-        MarvelServer(APP* app, uint32_t host, uint16_t port);
+        MarvelServer(MarvelApp app, uint32_t host, uint16_t port);
         ~MarvelServer();
         void start();
         void RecvProcess();
-        std::ofstream GetStream();
+        OFSTREAM GetStream();
         void shutdown();
 
     private:
         void RecvMessage(int serv_socket, struct sockaddr_in* serv_addr);
         uint32_t host_;
         uint16_t port_;
-        APP* app_;
+        MarvelApp app_;
     };
 }
 

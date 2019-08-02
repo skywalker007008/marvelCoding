@@ -28,7 +28,7 @@ int MARVEL NewSocket(OFSTREAM stream) {
     return serv_socket;
 }
 
-void MARVEL PackSockaddr(struct sockaddr_in *sockaddr, int family, uint32_t host, uint16_t port) {
+void MARVEL PackSockaddr(struct sockaddr_in *sockaddr, sa_family_t family, uint32_t host, uint16_t port) {
     memset(sockaddr, 0, ADDRIN_SIZE);
     sockaddr->sin_family = family;
     sockaddr->sin_addr.s_addr = host;

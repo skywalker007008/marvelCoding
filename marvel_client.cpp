@@ -13,9 +13,7 @@
 #include "marvel_log.h"
 #include "marvel_socket.h"
 
-template <class APP>
-
-MARVEL_CLIENT::MarvelClient(APP* app, uint32_t host, uint16_t port)
+MARVEL_CLIENT::MarvelClient(MARVEL_APP app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
 }
 
@@ -40,7 +38,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
         // check if socket created successfully
         sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
         if (sock < 0) {
-            app_ -> log("Socket Create Failed. Retrying...");
+            app_.log("Socket Create Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
                 throw MARVEL_ERR SocketCreateFailedException();
             }
@@ -57,12 +55,12 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if connection successful
         if (connect(sock, (struct sockaddr *) &serv_addr, ADDR_SIZE) < 0) {
-            app_ -> log("Socket Connect Failed. Retrying...");
+            app_.log("Socket Connect Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
                 throw MARVEL_ERR SocketConnectFailedException(serv_addr);
             }
         } else {
-            MARVEL_LOG SocketConnected(this, &serv_addr);
+            MARVEL_LOG SocketConnected(GetStream(), &serv_addr);
             break;
         }
     }
@@ -86,7 +84,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
             sendBytes = send(sock, msg, PER_TRANS_SIZE, 0);
             remain -= PER_TRANS_SIZE;
             MARVEL_LOG SendMessage(
-                    this, serv_addr, msg, sendBytes, length - remain);
+                    GetStream(), serv_addr, msg, sendBytes, length - remain);
             if (sendBytes < 0) { // no Retry, only stop here
                 throw MARVEL_ERR MessageSendFailedException(
                         length - remain - PER_TRANS_SIZE, PER_TRANS_SIZE);
@@ -99,7 +97,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
         } else {
             sendBytes = send(sock, msg, remain, 0);
             MARVEL_LOG SendMessage(
-                    this, serv_addr, msg, sendBytes, length - remain);
+                    GetStream(), serv_addr, msg, sendBytes, length - remain);
             if (sendBytes < 0) {
                 throw MARVEL_ERR MessageSendFailedException(length - remain, remain);
             } else if (sendBytes < remain) {
@@ -114,7 +112,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
 }
 
 OFSTREAM MARVEL_CLIENT::GetStream() {
-    return app_ -> get_stream();
+    return app_.get_stream();
 }
 
 void MARVEL_CLIENT::shutdown() {

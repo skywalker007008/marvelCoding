@@ -16,8 +16,11 @@
 #define MARVEL_LOG marvel::log::
 #define MARVEL_ERR marvel::err::
 #define MARVEL_API marvel::api::
+
 #define MARVEL_CLIENT marvel::MarvelClient
 #define MARVEL_SERVER marvel::MarvelServer
+#define MARVEL_APP marvel::MarvelApp
+#define MARVEL_EXCEPTION marvel::err::MarvelException
 
 #define STRING std::string
 #define OFSTREAM std::ofstream

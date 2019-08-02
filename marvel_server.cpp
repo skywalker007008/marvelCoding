@@ -14,10 +14,8 @@
 #include "marvel_log.h"
 #include "marvel_socket.h"
 
-template <class APP>
-
 MARVEL_SERVER::MarvelServer(
-        APP* app, uint32_t host, uint16_t port)
+        MARVEL_APP app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
 }
 
@@ -40,13 +38,13 @@ void MARVEL_SERVER::RecvProcess() { //
 
     try {
         // create a socket
-        serv_socket = NewSocket(app_ -> get_stream());
+        serv_socket = NewSocket(app_.get_stream());
         // add details
         PackSockaddr(&serv_addr, AF_INET, host_, port_);
         // bind the socket
-        BindSocket(app_ -> get_stream(), serv_socket, &serv_addr);
+        BindSocket(app_.get_stream(), serv_socket, &serv_addr);
         // now listen
-        ListenSocket(app_ -> get_stream(), serv_socket, &serv_addr);
+        ListenSocket(app_.get_stream(), serv_socket, &serv_addr);
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
@@ -73,19 +71,19 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
     for(int i = 0; i < MAX_CONNECT_NUM; i++) {
         recv_bytes = 0;
         try {
-            clnt_socket = AcceptSocket(app_ -> get_stream(), serv_socket,
+            clnt_socket = AcceptSocket(GetStream(), serv_socket,
                                        serv_addr, &clnt_addr, &clnt_addr_size);
         } catch (MARVEL_ERR SocketAcceptFailedException exp) {
             throw exp;
         }
-        MARVEL_LOG SocketAccepted(this, serv_addr, &clnt_addr);
+        MARVEL_LOG SocketAccepted(GetStream(), serv_addr, &clnt_addr);
 
         while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
             if (length < 0) {
                 // err::errMsg(err::RECV_FAILED);
             }
             recv_bytes += length;
-            MARVEL_LOG RecvMessage(this, serv_addr, message, length, recv_bytes);
+            MARVEL_LOG RecvMessage(GetStream(), serv_addr, message, length, recv_bytes);
             memset(message, 0, PER_TRANS_SIZE);
         }
 
@@ -99,7 +97,7 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
 }
 
 OFSTREAM MARVEL_SERVER::GetStream() {
-    return app_ -> get_stream();
+    return app_.get_stream();
 }
 
 void MARVEL_SERVER::shutdown() {
@@ -110,7 +108,7 @@ void MARVEL_SERVER::start() {
     try {
         RecvProcess();
     } catch (MARVEL_ERR MarvelException exp) {
-        app_ -> HandleException(exp);
+        app_.HandleException(exp);
     }
 }
 

@@ -24,15 +24,15 @@ App::App(uint32_t host, const std::string &name)
 }
  */
 
-template <class ERR> void App::HandleException(ERR err) {
+void App::HandleException(MARVEL_EXCEPTION err) {
     log(err.print());
 }
 
-template <class ERR> void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
+void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
     int send_bytes;
     try {
         send_bytes = MARVEL_API SendMessageToServer(client_,dest_host, dest_port, msg);
-    } catch (ERR exp) {
+    } catch (MARVEL_EXCEPTION exp) {
         HandleException(exp);
     }
 
@@ -56,8 +56,8 @@ uint16_t App::get_port() {
 }
 
 void App::shutdown() {
-    MARVEL_API LogOut(&client_);
-    MARVEL_API LogOut(&server_);
+    MARVEL_API LogOut(client_);
+    MARVEL_API LogOut(server_);
     stream_.close();
 }
 
