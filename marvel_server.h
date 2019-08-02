@@ -22,18 +22,18 @@ namespace marvel {
     class MarvelApp;
     class MarvelServer {
     public:
-        MarvelServer(MarvelApp& app, uint32_t host, uint16_t port);
+        MarvelServer(MarvelApp* app, uint32_t host, uint16_t port);
         ~MarvelServer();
         void start();
         void RecvProcess();
-        OFSTREAM& GetStream();
+        OFSTREAM* GetStream();
         void shutdown();
 
     private:
         void RecvMessage(int serv_socket, struct sockaddr_in* serv_addr);
         uint32_t host_;
         uint16_t port_;
-        MarvelApp& app_;
+        MarvelApp* app_;
     };
 
     static void StartServer(MarvelServer* server);

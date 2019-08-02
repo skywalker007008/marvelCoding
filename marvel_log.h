@@ -17,18 +17,18 @@ extern clock_t base;
 
 namespace marvel {
     namespace log {
-        void RecvMessage(OFSTREAM& stream, struct sockaddr_in *sockaddr,
+        void RecvMessage(OFSTREAM* stream, struct sockaddr_in *sockaddr,
                              char *msg, int recv_bytes, int total_bytes);
 
-        void SocketAccepted(OFSTREAM& stream, struct sockaddr_in *sockaddr,
+        void SocketAccepted(OFSTREAM* stream, struct sockaddr_in *sockaddr,
                                 struct sockaddr_in *clntaddr);
 
-        void SendMessage(OFSTREAM& stream, struct sockaddr_in *sockaddr,
+        void SendMessage(OFSTREAM* stream, struct sockaddr_in *sockaddr,
                              char *msg, int send_bytes, int total_bytes);
 
-        void SocketConnected(OFSTREAM& stream, struct sockaddr_in *sockaddr);
+        void SocketConnected(OFSTREAM* stream, struct sockaddr_in *sockaddr);
 
-        void log(OFSTREAM& stream, const STRING &string);
+        void log(OFSTREAM* stream, const STRING &string);
 
         static clock_t pass_time() {
             return clock() - base;

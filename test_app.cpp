@@ -9,7 +9,7 @@
 #include "api_app.h"
 #include "marvel_log.h"
 
-App::App(uint32_t host, const STRING& name, OFSTREAM& stream)
+App::App(uint32_t host, const STRING& name, OFSTREAM* stream)
         : host_ (host), name_(name), stream_(stream) {
     STRING file_name = "./src/" + name + ".txt";
     client_ = MARVEL_API LogInClient(this);
@@ -46,11 +46,11 @@ void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
 }
 
 void App::log(STRING log_msg) {
-    stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
-    stream_ << log_msg << std::endl;
+    *stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
+    *stream_ << log_msg << std::endl;
 }
 
-OFSTREAM& App::get_stream() {
+OFSTREAM* App::get_stream() {
     return stream_;
 }
 
@@ -58,13 +58,13 @@ uint32_t App::get_host() {
     return host_;
 }
 uint16_t App::get_port() {
-    return 60;
+    return 58371;
 }
 
 void App::shutdown() {
     MARVEL_API LogOut(*client_);
     MARVEL_API LogOut(*server_);
-    stream_.close();
+    stream_ -> close();
 }
 
 void App::start() {

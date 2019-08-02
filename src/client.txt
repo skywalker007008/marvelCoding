@@ -1,0 +1,33 @@
+client.txt created
+[412]
+Socket Bind Failed. Retrying...
+[423]
+Socket Bind Failed. Retrying...
+[428]
+Socket Listen Failed. Retrying...
+[449]
+Socket Listen Failed. Retrying...
+[475]
+Socket Host: 255	Port: 996
+Socket Accepted
+Socket Host: 0	Port: 0
+[540]
+
+[814]
+Socket Host: 0	Port: 996
+Socket Connected
+[834]
+Socket Host: 0	Port: 996
+Message Sent:	Greet to you you idiot!
+Sent Bytes: 23	Total Bytes: 0
+[852]
+MessageSent!	23bytes
+[891]
+Socket Host: 0	Port: 996
+Socket Connected
+[921]
+Socket Host: 0	Port: 996
+Message Sent:	I am your father!
+Sent Bytes: 17	Total Bytes: 0
+[940]
+MessageSent!	17bytes

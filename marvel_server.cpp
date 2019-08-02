@@ -15,7 +15,7 @@
 #include "marvel_socket.h"
 
 MARVEL_SERVER::MarvelServer(
-        MARVEL_APP& app, uint32_t host, uint16_t port)
+        MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
 }
 
@@ -38,13 +38,17 @@ void MARVEL_SERVER::RecvProcess() { //
 
     try {
         // create a socket
-        serv_socket = NewSocket(app_.get_stream());
+        serv_socket = NewSocket(app_->get_stream());
+        std::cout << "new socket\n";
         // add details
         PackSockaddr(&serv_addr, AF_INET, host_, port_);
+        std::cout << "pack socket\n";
         // bind the socket
-        BindSocket(app_.get_stream(), serv_socket, &serv_addr);
+        BindSocket(app_->get_stream(), serv_socket, &serv_addr);
+        std::cout << "bind socket\n";
         // now listen
-        ListenSocket(app_.get_stream(), serv_socket, &serv_addr);
+        ListenSocket(app_->get_stream(), serv_socket, &serv_addr);
+        std::cout << "listen socket\n";
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
@@ -80,7 +84,7 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
 
         while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
             if (length < 0) {
-                // err::errMsg(err::RECV_FAILED);
+                throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
             }
             recv_bytes += length;
             MARVEL_LOG RecvMessage(GetStream(), serv_addr, message, length, recv_bytes);
@@ -96,8 +100,8 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
     // shutdown(serv_socket, SHUT_RDWR);
 }
 
-OFSTREAM& MARVEL_SERVER::GetStream() {
-    return app_.get_stream();
+OFSTREAM* MARVEL_SERVER::GetStream() {
+    return app_->get_stream();
 }
 
 void MARVEL_SERVER::shutdown() {
@@ -108,6 +112,6 @@ void MARVEL_SERVER::start() {
     try {
         RecvProcess();
     } catch (MARVEL_ERR MarvelException exp) {
-        app_.HandleException(exp);
+        app_->HandleException(exp);
     }
 }

@@ -25,7 +25,7 @@ namespace marvel {
         ~MarvelClient();
         int sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
         int SendProcess(uint32_t host, uint16_t port, const char* msg);
-        OFSTREAM& GetStream();
+        OFSTREAM* GetStream();
         void shutdown();
         void start();
 

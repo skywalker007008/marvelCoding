@@ -71,6 +71,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
+    return send_bytes;
 
 }
 
@@ -111,7 +112,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
     return totalBytes;
 }
 
-OFSTREAM& MARVEL_CLIENT::GetStream() {
+OFSTREAM* MARVEL_CLIENT::GetStream() {
     return app_ -> get_stream();
 }
 

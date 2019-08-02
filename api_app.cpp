@@ -18,7 +18,7 @@ MARVEL_CLIENT* MARVEL_API LogInClient(MARVEL_APP* app) {
 }
 
 MARVEL_SERVER* MARVEL_API LogInServer(MARVEL_APP* app) {
-    MARVEL_SERVER* server = new MARVEL_SERVER(*app, app -> get_host(), app -> get_port());
+    MARVEL_SERVER* server = new MARVEL_SERVER(app, app -> get_host(), app -> get_port());
     // std::thread t(&MARVEL_SERVER::start, server);
     return server;
 }
