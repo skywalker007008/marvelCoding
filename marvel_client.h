@@ -18,21 +18,21 @@
 // constexpr int CLIENT_SIZE = sizeof(marvel::MarvelClient);
 
 namespace marvel {
+    class MarvelApp;
     class MarvelClient {
     public:
-        MarvelClient(MARVEL_APP app, uint32_t host, uint16_t port);
+        MarvelClient(MarvelApp app, uint32_t host, uint16_t port);
         ~MarvelClient();
         int sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
         int SendProcess(uint32_t host, uint16_t port, const char* msg);
-        OFSTREAM GetStream();
+        OFSTREAM& GetStream();
         void shutdown();
         void start();
 
     private:
-        MARVEL_APP app_;
+        MarvelApp& app_;
         uint32_t host_;
         uint16_t port_;
-        OFSTREAM stream_;
     };
 }
 

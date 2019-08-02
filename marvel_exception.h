@@ -10,7 +10,7 @@
 #define MARVELCODING_MARVELEXCEPTION_H
 
 #include <cstdint>
-#include <exception>
+// #include <exception>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string>
@@ -36,8 +36,9 @@ namespace marvel {
         };
         // void errMsg(ErrorType type, void* data = nullptr);
 
-        class MarvelException : public std::exception {
+        class MarvelException {
         public:
+            MarvelException();
             virtual STRING print();
         };
 
@@ -54,8 +55,8 @@ namespace marvel {
 
             STRING print();
 
-            static uint32_t host_;
-            static uint16_t port_;
+            uint32_t host_;
+            uint16_t port_;
         };
 
         class SocketBindFailedException : public MarvelException {
@@ -64,8 +65,8 @@ namespace marvel {
 
             STRING print();
 
-            static uint32_t host_;
-            static uint16_t port_;
+            uint32_t host_;
+            uint16_t port_;
         };
 
         class SocketListenFailedException : public MarvelException {
@@ -74,8 +75,8 @@ namespace marvel {
 
             STRING print();
 
-            static uint32_t host_;
-            static uint16_t port_;
+            uint32_t host_;
+            uint16_t port_;
         };
 
         class SocketAcceptFailedException : public MarvelException {
@@ -84,8 +85,8 @@ namespace marvel {
 
             STRING print();
 
-            static uint32_t host_;
-            static uint16_t port_;
+            uint32_t host_;
+            uint16_t port_;
         };
 
         class MessageOversizedException : public MarvelException {
@@ -101,8 +102,8 @@ namespace marvel {
 
             STRING print();
 
-            static int pos_;
-            static int size_;
+            int pos_;
+            int size_;
         };
 
         class MessageRecvFailedException : public MarvelException {
@@ -111,8 +112,8 @@ namespace marvel {
 
             STRING print();
 
-            static int pos_;
-            static int size_;
+            int pos_;
+            int size_;
         };
     } // namespace err
 } // namespace marvel

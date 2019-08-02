@@ -28,17 +28,17 @@ public:
     // close this APP
     void shutdown() override;
     //
-    OFSTREAM get_stream() override ;
+    OFSTREAM& get_stream() override ;
     uint32_t get_host() override;
     uint16_t get_port() override;
     void log(STRING log_msg);
 
 private:
     STRING name_;
-    OFSTREAM stream_;
+    OFSTREAM* stream_;
     uint32_t host_;
-    MARVEL_CLIENT client_;
-    MARVEL_SERVER server_;
+    MARVEL_CLIENT* client_;
+    MARVEL_SERVER* server_;
 };
 
 #endif //MARVELCODING_TEST_APP_H

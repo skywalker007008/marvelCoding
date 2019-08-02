@@ -89,7 +89,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
                 throw MARVEL_ERR MessageSendFailedException(
                         length - remain - PER_TRANS_SIZE, PER_TRANS_SIZE);
             } else if (sendBytes < PER_TRANS_SIZE) {
-                MARVEL_LOG log(stream_, "Message Sent Loss. Lost size: "
+                MARVEL_LOG log(GetStream(), "Message Sent Loss. Lost size: "
                                   + TO_STRING(PER_TRANS_SIZE - sendBytes));
             }
             msg += PER_TRANS_SIZE;
@@ -101,7 +101,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
             if (sendBytes < 0) {
                 throw MARVEL_ERR MessageSendFailedException(length - remain, remain);
             } else if (sendBytes < remain) {
-                MARVEL_LOG log(stream_, "Message Sent Loss. Lost size: "
+                MARVEL_LOG log(GetStream(), "Message Sent Loss. Lost size: "
                                   + TO_STRING(remain - sendBytes));
             }
             totalBytes += sendBytes;
@@ -111,7 +111,7 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
     return totalBytes;
 }
 
-OFSTREAM MARVEL_CLIENT::GetStream() {
+OFSTREAM& MARVEL_CLIENT::GetStream() {
     return app_.get_stream();
 }
 

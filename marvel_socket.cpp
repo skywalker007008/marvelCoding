@@ -10,9 +10,9 @@
 #include "marvel_socket.h"
 #include "marvel_constant.h"
 #include "marvel_exception.h"
-#include "marvel_log.h";
+#include "marvel_log.h"
 
-int MARVEL NewSocket(OFSTREAM stream) {
+int MARVEL NewSocket(OFSTREAM& stream) {
     int serv_socket;
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         serv_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -35,7 +35,7 @@ void MARVEL PackSockaddr(struct sockaddr_in *sockaddr, sa_family_t family, uint3
     sockaddr->sin_port = htons(port);
 }
 
-void MARVEL BindSocket(OFSTREAM stream, int sock, struct sockaddr_in *sockaddr) {
+void MARVEL BindSocket(OFSTREAM& stream, int sock, struct sockaddr_in *sockaddr) {
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         if (bind(sock, (struct sockaddr*)sockaddr, ADDRIN_SIZE) < 0) {
             MARVEL_LOG log(stream, "Socket Bind Failed. Retrying...");
@@ -49,7 +49,7 @@ void MARVEL BindSocket(OFSTREAM stream, int sock, struct sockaddr_in *sockaddr) 
     }
 }
 
-void MARVEL ListenSocket(OFSTREAM stream, int sock, struct sockaddr_in* sock_addr) {
+void MARVEL ListenSocket(OFSTREAM& stream, int sock, struct sockaddr_in* sock_addr) {
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         if (listen(sock, MAX_CONNECT_NUM) < 0) {
             MARVEL_LOG log(stream, "Socket Listen Failed. Retrying...");
@@ -62,7 +62,7 @@ void MARVEL ListenSocket(OFSTREAM stream, int sock, struct sockaddr_in* sock_add
     }
 }
 
-int MARVEL AcceptSocket(OFSTREAM stream, int sock, struct sockaddr_in* sockaddr,
+int MARVEL AcceptSocket(OFSTREAM& stream, int sock, struct sockaddr_in* sockaddr,
                          struct sockaddr_in* clnt_addr, socklen_t* clnt_addr_size) {
     int clnt_socket = 0;
     for (int i = 0; i < MAX_RETRY_TIME; i++) {

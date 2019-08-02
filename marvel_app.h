@@ -25,7 +25,7 @@ namespace marvel {
         // close this APP
         virtual void shutdown();
         //
-        virtual OFSTREAM get_stream();
+        virtual OFSTREAM& get_stream();
         virtual uint32_t get_host();
         virtual uint16_t get_port();
          virtual void log(STRING log_msg);

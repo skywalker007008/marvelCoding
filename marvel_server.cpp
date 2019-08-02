@@ -96,7 +96,7 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
     // shutdown(serv_socket, SHUT_RDWR);
 }
 
-OFSTREAM MARVEL_SERVER::GetStream() {
+OFSTREAM& MARVEL_SERVER::GetStream() {
     return app_.get_stream();
 }
 

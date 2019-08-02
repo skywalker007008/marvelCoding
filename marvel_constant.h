@@ -31,8 +31,8 @@
 constexpr int INIT_SERVER_ID = 1;
 
 
-constexpr int ADDRIN_SIZE = sizeof(struct sockaddr_in);
-constexpr int ADDR_SIZE = sizeof(struct sockaddr);
+#define ADDRIN_SIZE sizeof(struct sockaddr_in)
+#define ADDR_SIZE sizeof(struct sockaddr)
 
 
 

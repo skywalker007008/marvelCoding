@@ -14,9 +14,9 @@
 namespace marvel {
     namespace api {
         // Log app to client & server
-        MARVEL_CLIENT LogInClient(MARVEL_APP *app);
+        MARVEL_CLIENT* LogInClient(MARVEL_APP *app);
 
-        MARVEL_SERVER LogInServer(MARVEL_APP *app);
+        MARVEL_SERVER* LogInServer(MARVEL_APP *app);
 
         // app to log out
         void LogOut(MARVEL_CLIENT client);
