@@ -47,7 +47,7 @@ void CODEC_LIB::set_matrix(SqMat<Type, M> &square_matrix) {
 template <typename Type, size_t M>
 int CODEC_LIB::encode(char* msg_out) {
     SqMat mat;
-    mat.set(CODEC GetSquareMatrix<Type, M>(), M, M);
+    mat.set(CODEC GetSquareMatrix<Type, M>(), 0, 0);
     _square_matrix *= mat;
     CODEC mul(_square_matrix, _uncode_msg, _mat_size, _vec_size, _iter_time, msg_out);
     return _mat_size;
@@ -58,5 +58,25 @@ int CODEC_LIB::decode(char* msg_out) {
     // CODEC GetDivMatrix(mat, _iter_time);
     CODEC div(_square_matrix, _uncode_msg, _mat_size, _vec_size, _iter_time, msg_out);
     return _mat_size;
+}
+
+Vec CODEC msg2vec(char* msg) {
+    int size = ROUND(strlen(msg), sizeof(uint64_t));
+    int num = size / sizeof(uint64_t);
+    uint64_t* ptr = (uint64_t*)msg;
+
+    Vec<uint64_t, num> vec(ptr);
+    return vec;
+}
+
+char* CODEC vec2msg(Vec& vec, int size) {
+    uint64_t* msg_64 = vec2u64(vec, size);
+    return (char*)msg_64;
+}
+
+uint64_t* CODEC vec2u64(Vec& vec, int size) {
+    uint64_t data[size];
+    vec.copyTo(data);
+    return data;
 }
 

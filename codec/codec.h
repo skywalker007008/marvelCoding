@@ -81,6 +81,29 @@ namespace codec {
         /*! the cache of the encoded_msg */
         char* _encode_msg;
     };
+
+    /*!
+     * Turn a message into the format of the Vector
+     * @param msg unchanged message
+     * @return the vector format of the msg
+     */
+    Vec msg2vec(char* msg);
+
+    /*!
+     * Turn the message vector to the original format of char*
+     * @param vec the unchanged message vector
+     * @param size the size of the vector
+     * @return the char* format of the msg
+     */
+    char* vec2msg(Vec& vec, int size);
+
+    /*!
+     * Turn the message vector to the format of uint64_t*
+     * @param vec the unchanged message vector
+     * @param size the size of the vector
+     * @return the uint64_t* format of the msg
+     */
+    uint64_t* vec2u64(Vec& vec, int size);
 }
 
 #endif //MARVELCODING_CODEC_H

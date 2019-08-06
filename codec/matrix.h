@@ -19,6 +19,9 @@
 
 #define SqMat matrix::SquareMatrix
 #define Mat matrix::Matrix
+#define Vec matrix::Vector
+
+// typedef matrix::SquareMatrix Sqmat;
 
 namespace codec {
 
@@ -39,8 +42,8 @@ namespace codec {
      * @param msg_out Ptr to receive calculated msg
      */
     template <typename Type, size_t M>
-    void mul(SqMat<Type, M>& mat, char* msg, int mat_size, int vec_size,
-             uint16_t iter_time, char* msg_out);
+    void mul(SqMat<Type, M>& mat, Vec<Type, M>& msg, int mat_size, int vec_size,
+             uint16_t iter_time, Vec<Type, M>& msg_out);
 
     /*!
      *
@@ -52,8 +55,8 @@ namespace codec {
      * @param msg_out Ptr to receive calculated msg
      */
     template <typename Type, size_t M>
-    void div(SqMat<Type, M>& mat, char* msg, int mat_size, int vec_size,
-             uint16_t iter_time, char* msg_out);
+    void div(SqMat<Type, M>& mat, Vec<Type, M>& msg, int mat_size, int vec_size,
+             uint16_t iter_time, Vec<Type, M>& msg_out);
 }
 
 #endif //MARVELCODING_MATRIX_H
