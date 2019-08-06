@@ -96,6 +96,12 @@
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/codec/codec.h">
 			<Option target="marvelCoding"/>
 		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/codec/matrix.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/codec/matrix.h">
+			<Option target="marvelCoding"/>
+		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/main.cpp">
 			<Option target="marvelCoding"/>
 		</Unit>

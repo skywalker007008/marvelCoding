@@ -39,16 +39,24 @@ void CODEC_LIB::set_time(uint16_t time) {
     _iter_time = time;
 }
 
+template<typename Type, size_t M>
+void CODEC_LIB::set_matrix(SqMat<Type, M> &square_matrix) {
+    _square_matrix.set(square_matrix, M, M);
+}
+
+template <typename Type, size_t M>
 int CODEC_LIB::encode(char* msg_out) {
-    Matrix* mat;
-    CODEC GetMatrix(mat);
-    CODEC mul(mat, _uncode_msg, _mat_size, _vec_size, _iter_time, msg_out);
+    SqMat mat;
+    mat.set(CODEC GetSquareMatrix<Type, M>(), M, M);
+    _square_matrix *= mat;
+    CODEC mul(_square_matrix, _uncode_msg, _mat_size, _vec_size, _iter_time, msg_out);
     return _mat_size;
 }
 
 int CODEC_LIB::decode(char* msg_out) {
-    Matrix* mat;
-    CODEC GetDivMatrix(mat);
-    CODEC div(mat, _uncode_msg, _mat_size, _vec_size, _iter_time, msg_out);
+    // SqMat* mat;
+    // CODEC GetDivMatrix(mat, _iter_time);
+    CODEC div(_square_matrix, _uncode_msg, _mat_size, _vec_size, _iter_time, msg_out);
+    return _mat_size;
 }
 
