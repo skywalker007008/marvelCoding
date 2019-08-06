@@ -20,7 +20,7 @@
 class App : public MARVEL_APP {
 public:
     // inherit from MarvelApp
-    App(uint32_t host, const STRING& name, OFSTREAM* stream);
+    App(uint32_t host, const STRING& name);
     // ~App();
     // Send message to a destination
     void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg) override;

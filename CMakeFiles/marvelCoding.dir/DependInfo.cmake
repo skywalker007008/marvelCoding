@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/buaa/CLionProjects/marvelCoding/api_app.cpp" "/home/buaa/CLionProjects/marvelCoding/CMakeFiles/marvelCoding.dir/api_app.cpp.o"
+  "/home/buaa/CLionProjects/marvelCoding/codec/codec.cpp" "/home/buaa/CLionProjects/marvelCoding/CMakeFiles/marvelCoding.dir/codec/codec.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/main.cpp" "/home/buaa/CLionProjects/marvelCoding/CMakeFiles/marvelCoding.dir/main.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/marvel_app.cpp" "/home/buaa/CLionProjects/marvelCoding/CMakeFiles/marvelCoding.dir/marvel_app.cpp.o"
   "/home/buaa/CLionProjects/marvelCoding/marvel_client.cpp" "/home/buaa/CLionProjects/marvelCoding/CMakeFiles/marvelCoding.dir/marvel_client.cpp.o"

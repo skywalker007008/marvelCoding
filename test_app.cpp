@@ -9,13 +9,14 @@
 #include "api_app.h"
 #include "marvel_log.h"
 
-App::App(uint32_t host, const STRING& name, OFSTREAM* stream)
-        : host_ (host), name_(name), stream_(stream) {
+App::App(uint32_t host, const STRING& name)
+        : host_ (host), name_(name) {
     STRING file_name = "./src/" + name + ".txt";
+    stream_ = new OFSTREAM(file_name, std::ios::out);
     client_ = MARVEL_API LogInClient(this);
     server_ = MARVEL_API LogInServer(this);
     // pool.commit(start);
-    pool.commit(MARVEL StartClient, client_);
+    // pool.commit(MARVEL StartClient, client_);
     pool.commit(MARVEL StartServer, server_);
     // std::thread t1(MARVEL StartClient, client_);
     // t1.join();

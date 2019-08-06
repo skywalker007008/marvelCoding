@@ -1,33 +1,18 @@
-client.txt created
-[412]
-Socket Bind Failed. Retrying...
-[423]
-Socket Bind Failed. Retrying...
-[428]
-Socket Listen Failed. Retrying...
-[449]
-Socket Listen Failed. Retrying...
-[475]
-Socket Host: 255	Port: 996
-Socket Accepted
-Socket Host: 0	Port: 0
-[540]
-
-[814]
+[315]
 Socket Host: 0	Port: 996
 Socket Connected
-[834]
+[399]
 Socket Host: 0	Port: 996
 Message Sent:	Greet to you you idiot!
 Sent Bytes: 23	Total Bytes: 0
-[852]
+[434]
 MessageSent!	23bytes
-[891]
+[544]
 Socket Host: 0	Port: 996
 Socket Connected
-[921]
+[570]
 Socket Host: 0	Port: 996
 Message Sent:	I am your father!
 Sent Bytes: 17	Total Bytes: 0
-[940]
+[579]
 MessageSent!	17bytes

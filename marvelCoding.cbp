@@ -17,21 +17,21 @@
 					<DistClean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/buaa/CLionProjects/marvelCoding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="/home/buaa/CLionProjects/marvelCoding"/>
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/buaa/CLionProjects/marvelCoding"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 edit_cache"/>
 					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j2 -f &quot;/home/buaa/CLionProjects/marvelCoding/Makefile&quot;  VERBOSE=1 clean"/>
@@ -88,6 +88,12 @@
 			<Option target="marvelCoding"/>
 		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/api_app.h">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/codec/codec.cpp">
+			<Option target="marvelCoding"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/marvelCoding/codec/codec.h">
 			<Option target="marvelCoding"/>
 		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/marvelCoding/main.cpp">
