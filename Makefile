@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/buaa/clion-2017.2.3/bin/cmake/bin/cmake
+CMAKE_COMMAND = /usr/local/bin/cmake
 
 # The command to remove a file.
-RM = /home/buaa/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
+RM = /usr/local/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -56,27 +56,27 @@ CMAKE_BINARY_DIR = /home/buaa/CLionProjects/marvelCoding
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/buaa/clion-2017.2.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/buaa/clion-2017.2.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,44 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named marvelCoding
+# Target rules for targets named test_codec
 
 # Build rule for target.
-marvelCoding: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 marvelCoding
-.PHONY : marvelCoding
+test_codec: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_codec
+.PHONY : test_codec
 
 # fast build rule for target.
-marvelCoding/fast:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/build
-.PHONY : marvelCoding/fast
-
-api_app.o: api_app.cpp.o
-
-.PHONY : api_app.o
-
-# target to build an object file
-api_app.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.o
-.PHONY : api_app.cpp.o
-
-api_app.i: api_app.cpp.i
-
-.PHONY : api_app.i
-
-# target to preprocess a source file
-api_app.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.i
-.PHONY : api_app.cpp.i
-
-api_app.s: api_app.cpp.s
-
-.PHONY : api_app.s
-
-# target to generate assembly for a file
-api_app.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.s
-.PHONY : api_app.cpp.s
+test_codec/fast:
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/build
+.PHONY : test_codec/fast
 
 codec/codec.o: codec/codec.cpp.o
 
@@ -156,7 +129,7 @@ codec/codec.o: codec/codec.cpp.o
 
 # target to build an object file
 codec/codec.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/codec.cpp.o
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/codec.cpp.o
 .PHONY : codec/codec.cpp.o
 
 codec/codec.i: codec/codec.cpp.i
@@ -165,7 +138,7 @@ codec/codec.i: codec/codec.cpp.i
 
 # target to preprocess a source file
 codec/codec.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/codec.cpp.i
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/codec.cpp.i
 .PHONY : codec/codec.cpp.i
 
 codec/codec.s: codec/codec.cpp.s
@@ -174,7 +147,7 @@ codec/codec.s: codec/codec.cpp.s
 
 # target to generate assembly for a file
 codec/codec.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/codec.cpp.s
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/codec.cpp.s
 .PHONY : codec/codec.cpp.s
 
 codec/matrix.o: codec/matrix.cpp.o
@@ -183,7 +156,7 @@ codec/matrix.o: codec/matrix.cpp.o
 
 # target to build an object file
 codec/matrix.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/matrix.cpp.o
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/matrix.cpp.o
 .PHONY : codec/matrix.cpp.o
 
 codec/matrix.i: codec/matrix.cpp.i
@@ -192,7 +165,7 @@ codec/matrix.i: codec/matrix.cpp.i
 
 # target to preprocess a source file
 codec/matrix.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/matrix.cpp.i
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/matrix.cpp.i
 .PHONY : codec/matrix.cpp.i
 
 codec/matrix.s: codec/matrix.cpp.s
@@ -201,7 +174,7 @@ codec/matrix.s: codec/matrix.cpp.s
 
 # target to generate assembly for a file
 codec/matrix.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/matrix.cpp.s
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/matrix.cpp.s
 .PHONY : codec/matrix.cpp.s
 
 codec/test_codec.o: codec/test_codec.cpp.o
@@ -210,7 +183,7 @@ codec/test_codec.o: codec/test_codec.cpp.o
 
 # target to build an object file
 codec/test_codec.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.o
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/test_codec.cpp.o
 .PHONY : codec/test_codec.cpp.o
 
 codec/test_codec.i: codec/test_codec.cpp.i
@@ -219,7 +192,7 @@ codec/test_codec.i: codec/test_codec.cpp.i
 
 # target to preprocess a source file
 codec/test_codec.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.i
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/test_codec.cpp.i
 .PHONY : codec/test_codec.cpp.i
 
 codec/test_codec.s: codec/test_codec.cpp.s
@@ -228,7 +201,7 @@ codec/test_codec.s: codec/test_codec.cpp.s
 
 # target to generate assembly for a file
 codec/test_codec.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.s
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/codec/test_codec.cpp.s
 .PHONY : codec/test_codec.cpp.s
 
 main.o: main.cpp.o
@@ -237,7 +210,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -246,7 +219,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -255,251 +228,8 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/test_codec.dir/build.make CMakeFiles/test_codec.dir/main.cpp.s
 .PHONY : main.cpp.s
-
-marvel_app.o: marvel_app.cpp.o
-
-.PHONY : marvel_app.o
-
-# target to build an object file
-marvel_app.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_app.cpp.o
-.PHONY : marvel_app.cpp.o
-
-marvel_app.i: marvel_app.cpp.i
-
-.PHONY : marvel_app.i
-
-# target to preprocess a source file
-marvel_app.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_app.cpp.i
-.PHONY : marvel_app.cpp.i
-
-marvel_app.s: marvel_app.cpp.s
-
-.PHONY : marvel_app.s
-
-# target to generate assembly for a file
-marvel_app.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_app.cpp.s
-.PHONY : marvel_app.cpp.s
-
-marvel_client.o: marvel_client.cpp.o
-
-.PHONY : marvel_client.o
-
-# target to build an object file
-marvel_client.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.o
-.PHONY : marvel_client.cpp.o
-
-marvel_client.i: marvel_client.cpp.i
-
-.PHONY : marvel_client.i
-
-# target to preprocess a source file
-marvel_client.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.i
-.PHONY : marvel_client.cpp.i
-
-marvel_client.s: marvel_client.cpp.s
-
-.PHONY : marvel_client.s
-
-# target to generate assembly for a file
-marvel_client.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_client.cpp.s
-.PHONY : marvel_client.cpp.s
-
-marvel_constant.o: marvel_constant.cpp.o
-
-.PHONY : marvel_constant.o
-
-# target to build an object file
-marvel_constant.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.o
-.PHONY : marvel_constant.cpp.o
-
-marvel_constant.i: marvel_constant.cpp.i
-
-.PHONY : marvel_constant.i
-
-# target to preprocess a source file
-marvel_constant.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.i
-.PHONY : marvel_constant.cpp.i
-
-marvel_constant.s: marvel_constant.cpp.s
-
-.PHONY : marvel_constant.s
-
-# target to generate assembly for a file
-marvel_constant.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_constant.cpp.s
-.PHONY : marvel_constant.cpp.s
-
-marvel_exception.o: marvel_exception.cpp.o
-
-.PHONY : marvel_exception.o
-
-# target to build an object file
-marvel_exception.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.o
-.PHONY : marvel_exception.cpp.o
-
-marvel_exception.i: marvel_exception.cpp.i
-
-.PHONY : marvel_exception.i
-
-# target to preprocess a source file
-marvel_exception.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.i
-.PHONY : marvel_exception.cpp.i
-
-marvel_exception.s: marvel_exception.cpp.s
-
-.PHONY : marvel_exception.s
-
-# target to generate assembly for a file
-marvel_exception.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_exception.cpp.s
-.PHONY : marvel_exception.cpp.s
-
-marvel_log.o: marvel_log.cpp.o
-
-.PHONY : marvel_log.o
-
-# target to build an object file
-marvel_log.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.o
-.PHONY : marvel_log.cpp.o
-
-marvel_log.i: marvel_log.cpp.i
-
-.PHONY : marvel_log.i
-
-# target to preprocess a source file
-marvel_log.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.i
-.PHONY : marvel_log.cpp.i
-
-marvel_log.s: marvel_log.cpp.s
-
-.PHONY : marvel_log.s
-
-# target to generate assembly for a file
-marvel_log.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_log.cpp.s
-.PHONY : marvel_log.cpp.s
-
-marvel_server.o: marvel_server.cpp.o
-
-.PHONY : marvel_server.o
-
-# target to build an object file
-marvel_server.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.o
-.PHONY : marvel_server.cpp.o
-
-marvel_server.i: marvel_server.cpp.i
-
-.PHONY : marvel_server.i
-
-# target to preprocess a source file
-marvel_server.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.i
-.PHONY : marvel_server.cpp.i
-
-marvel_server.s: marvel_server.cpp.s
-
-.PHONY : marvel_server.s
-
-# target to generate assembly for a file
-marvel_server.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_server.cpp.s
-.PHONY : marvel_server.cpp.s
-
-marvel_socket.o: marvel_socket.cpp.o
-
-.PHONY : marvel_socket.o
-
-# target to build an object file
-marvel_socket.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.o
-.PHONY : marvel_socket.cpp.o
-
-marvel_socket.i: marvel_socket.cpp.i
-
-.PHONY : marvel_socket.i
-
-# target to preprocess a source file
-marvel_socket.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.i
-.PHONY : marvel_socket.cpp.i
-
-marvel_socket.s: marvel_socket.cpp.s
-
-.PHONY : marvel_socket.s
-
-# target to generate assembly for a file
-marvel_socket.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/marvel_socket.cpp.s
-.PHONY : marvel_socket.cpp.s
-
-sample.o: sample.cpp.o
-
-.PHONY : sample.o
-
-# target to build an object file
-sample.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/sample.cpp.o
-.PHONY : sample.cpp.o
-
-sample.i: sample.cpp.i
-
-.PHONY : sample.i
-
-# target to preprocess a source file
-sample.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/sample.cpp.i
-.PHONY : sample.cpp.i
-
-sample.s: sample.cpp.s
-
-.PHONY : sample.s
-
-# target to generate assembly for a file
-sample.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/sample.cpp.s
-.PHONY : sample.cpp.s
-
-test_app.o: test_app.cpp.o
-
-.PHONY : test_app.o
-
-# target to build an object file
-test_app.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.o
-.PHONY : test_app.cpp.o
-
-test_app.i: test_app.cpp.i
-
-.PHONY : test_app.i
-
-# target to preprocess a source file
-test_app.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.i
-.PHONY : test_app.cpp.i
-
-test_app.s: test_app.cpp.s
-
-.PHONY : test_app.s
-
-# target to generate assembly for a file
-test_app.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.s
-.PHONY : test_app.cpp.s
 
 # Help Target
 help:
@@ -507,12 +237,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... marvelCoding"
-	@echo "... api_app.o"
-	@echo "... api_app.i"
-	@echo "... api_app.s"
+	@echo "... rebuild_cache"
+	@echo "... test_codec"
 	@echo "... codec/codec.o"
 	@echo "... codec/codec.i"
 	@echo "... codec/codec.s"
@@ -525,33 +252,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... marvel_app.o"
-	@echo "... marvel_app.i"
-	@echo "... marvel_app.s"
-	@echo "... marvel_client.o"
-	@echo "... marvel_client.i"
-	@echo "... marvel_client.s"
-	@echo "... marvel_constant.o"
-	@echo "... marvel_constant.i"
-	@echo "... marvel_constant.s"
-	@echo "... marvel_exception.o"
-	@echo "... marvel_exception.i"
-	@echo "... marvel_exception.s"
-	@echo "... marvel_log.o"
-	@echo "... marvel_log.i"
-	@echo "... marvel_log.s"
-	@echo "... marvel_server.o"
-	@echo "... marvel_server.i"
-	@echo "... marvel_server.s"
-	@echo "... marvel_socket.o"
-	@echo "... marvel_socket.i"
-	@echo "... marvel_socket.s"
-	@echo "... sample.o"
-	@echo "... sample.i"
-	@echo "... sample.s"
-	@echo "... test_app.o"
-	@echo "... test_app.i"
-	@echo "... test_app.s"
 .PHONY : help
 
 

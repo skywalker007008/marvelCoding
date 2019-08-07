@@ -10,8 +10,8 @@
 static SqMat<uint8_t, MAX_PART_NUM> init_mat;
 
 void CODEC init() {
-    for (int i = 0; i < MAX_PART_NUM, i++) {
-        for (int j = 0; j < MAX_PART_NUM, j++) {
+    for (int i = 0; i < MAX_PART_NUM; i++) {
+        for (int j = 0; j < MAX_PART_NUM; j++) {
             if (i <= j) {
                 init_mat(i, j) = 1;
             } else {
@@ -22,7 +22,7 @@ void CODEC init() {
 }
 
 template <typename Type, size_t M>
-SqMat<Type, M> CODEC GetMatrix(u_int8_t M, u_int8_t iter_time, bool is_inv) {
+SqMat<Type, M> CODEC GetMatrix(u_int8_t iter_time, bool is_inv) {
     SqMat<Type, M> mat = init_mat.slice(0, 0);
     SqMat<Type, M> temp_mat(mat);
     for (int i = 0; i < iter_time; i++) {

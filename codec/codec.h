@@ -22,7 +22,7 @@ namespace codec {
      * @brief The lib of the codec
      */
     template <typename Type>
-    class Codec<Type>  {
+    class Codec {
     public:
         Codec();
         ~Codec();
@@ -39,7 +39,7 @@ namespace codec {
          * @param msg_size sizeof the msg
          */
         template<size_t M>
-        void set_msg(char* msg, int msg_size);
+        void set_uncode_msg(char* msg, int msg_size);
 
         /*!
          * Set the encoding-iterate time
@@ -52,28 +52,26 @@ namespace codec {
          * Set the matrix in the codec
          * @param matrix matrix to be set
          */
-        template<size_t M>
-        void set_matrix(SqMat<Type, M>* square_matrix);
+        /*template<size_t M>
+        void set_matrix(SqMat<Type, M>* square_matrix);*/
 
         /*!
          * Encode a msg
          * @param msg_out buffer to receive the encoded msg
          * @return sizeof the matrix
          */
-        template<size_t M>
-        int encode(char* msg_out);
+        template<typename msgType, size_t M>
+        Vec<msgType, M> encode();
 
         /*!
          * Decode a msg
          * @param msg_out buffer to receive the encoded msg
          * @return sizeof the matrix
          */
-        template<size_t M>
-        int decode(char* msg_out);
+        template<typename msgType, size_t M>
+        Vec<msgType, M> decode();
         //
     private:
-        /*! the init matrix */
-        SqMat* _square_matrix;
         /*! the total iterate time */
         uint8_t _iter_time;
         /*! the size of the matrix */
@@ -81,9 +79,9 @@ namespace codec {
         /*! size of the vector of message */
         int _vec_size;
         /*! the uncoded message */
-        Vec _uncode_msg;
+        char* _uncode_msg;
         /*! the cache of the encoded_msg */
-        Vec _encode_msg;
+        char* _encode_msg;
     };
 
     /*!
@@ -91,7 +89,8 @@ namespace codec {
      * @param msg unchanged message
      * @return the vector format of the msg
      */
-    Vec msg2vec(char* msg);
+    template <typename Type, size_t M>
+    Vec<Type, M> msg2vec(char* msg);
 
     /*!
      * Turn the message vector to the original format of char*
@@ -99,7 +98,8 @@ namespace codec {
      * @param size the size of the vector
      * @return the char* format of the msg
      */
-    char* vec2msg(Vec& vec, int size);
+    template <typename Type, size_t M>
+    char* vec2msg(Vec<Type, M>& vec);
 
     /*!
      * Turn the message vector to the format of uint64_t*
@@ -107,7 +107,8 @@ namespace codec {
      * @param size the size of the vector
      * @return the uint64_t* format of the msg
      */
-    uint64_t* vec2u64(Vec& vec, int size);
+    template <typename Type, size_t M>
+    Type* vec2type(Vec<Type, M>& vec);
 }
 
 #endif //MARVELCODING_CODEC_H

@@ -17,14 +17,14 @@ void test_codec() {
 
     std::cout << "Original Message\n";
     print(message);
-    codec.set_msg(message, 8);
-    SqMat<int8_t, 8> mat = CODEC GetMatrix(8, 1, false);
-    codec.set_matrix(&mat);
+    codec.set_uncode_msg(message, 8);
+    // SqMat<int8_t, 8> mat = CODEC GetMatrix(8, 1, false);
+    // codec.set_matrix(&mat);
     codec.set_time(1);
-    codec.encode(message_out);
+    message_out = CODEC vec2msg<uint64_t, 8>(codec.encode<u_int64_t, 8>());
     std::cout << "Encode Message\n";
     print(message_out);
-    codec.decode(message_out);
+    message_out = CODEC vec2msg<uint64_t, 8>(codec.decode());
     std::cout << "Decode Message\n";
     print(message_out);
 

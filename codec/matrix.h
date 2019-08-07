@@ -41,7 +41,7 @@ namespace codec {
      * @return the matrix required
      */
     template <typename Type, size_t M>
-    SqMat<Type, M> GetMatrix(u_int8_t M, u_int8_t iter_time, bool is_inv);
+    SqMat<Type, M> GetMatrix(u_int8_t iter_time, bool is_inv);
 
     /*!
      *
@@ -77,8 +77,6 @@ namespace codec {
     template <typename Type, size_t M>
     Vec<Type, M> div(SqMat<Type, M>& mat, Vec<Type, M>& msg, int mat_size, int vec_size,
              uint16_t iter_time);
-
-
 }
 
 #endif //MARVELCODING_MATRIX_H
