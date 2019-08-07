@@ -12,6 +12,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/marvelCoding.dir/marvel_app.cpp.o"
   "CMakeFiles/marvelCoding.dir/codec/codec.cpp.o"
   "CMakeFiles/marvelCoding.dir/codec/matrix.cpp.o"
+  "CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.o"
   "marvelCoding.pdb"
   "marvelCoding"
 )

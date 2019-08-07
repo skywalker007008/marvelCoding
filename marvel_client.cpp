@@ -25,7 +25,7 @@ void MARVEL_CLIENT::BuildCodec() {
     _codec = new CODEC_LIB();
 }
 
-int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
+int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, const char* msg) {
     int sock;
     struct sockaddr_in serv_addr;
     int send_bytes = 0;

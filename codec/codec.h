@@ -21,8 +21,8 @@ namespace codec {
     /*!
      * @brief The lib of the codec
      */
-    template <typename Type, size_t M>
-    class Codec<Type, M>  {
+    template <typename Type>
+    class Codec<Type>  {
     public:
         Codec();
         ~Codec();
@@ -38,6 +38,7 @@ namespace codec {
          * @param msg msg to be set
          * @param msg_size sizeof the msg
          */
+        template<size_t M>
         void set_msg(char* msg, int msg_size);
 
         /*!
@@ -45,19 +46,21 @@ namespace codec {
          * @param time the total iterate-time of the encoding (default < 16)
          *
          */
-        void set_time(uint16_t time);
+        void set_time(uint8_t time);
 
         /*!
          * Set the matrix in the codec
          * @param matrix matrix to be set
          */
-        void set_matrix(SqMat<Type, M> &square_matrix);
+        template<size_t M>
+        void set_matrix(SqMat<Type, M>* square_matrix);
 
         /*!
          * Encode a msg
          * @param msg_out buffer to receive the encoded msg
          * @return sizeof the matrix
          */
+        template<size_t M>
         int encode(char* msg_out);
 
         /*!
@@ -65,21 +68,22 @@ namespace codec {
          * @param msg_out buffer to receive the encoded msg
          * @return sizeof the matrix
          */
+        template<size_t M>
         int decode(char* msg_out);
         //
     private:
         /*! the init matrix */
-        SqMat<Type, M> _square_matrix;
+        SqMat* _square_matrix;
         /*! the total iterate time */
-        uint16_t _iter_time;
+        uint8_t _iter_time;
         /*! the size of the matrix */
         int _mat_size;
         /*! size of the vector of message */
         int _vec_size;
         /*! the uncoded message */
-        char* _uncode_msg;
+        Vec _uncode_msg;
         /*! the cache of the encoded_msg */
-        char* _encode_msg;
+        Vec _encode_msg;
     };
 
     /*!

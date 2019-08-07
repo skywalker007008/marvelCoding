@@ -204,6 +204,33 @@ codec/matrix.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/matrix.cpp.s
 .PHONY : codec/matrix.cpp.s
 
+codec/test_codec.o: codec/test_codec.cpp.o
+
+.PHONY : codec/test_codec.o
+
+# target to build an object file
+codec/test_codec.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.o
+.PHONY : codec/test_codec.cpp.o
+
+codec/test_codec.i: codec/test_codec.cpp.i
+
+.PHONY : codec/test_codec.i
+
+# target to preprocess a source file
+codec/test_codec.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.i
+.PHONY : codec/test_codec.cpp.i
+
+codec/test_codec.s: codec/test_codec.cpp.s
+
+.PHONY : codec/test_codec.s
+
+# target to generate assembly for a file
+codec/test_codec.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/test_codec.cpp.s
+.PHONY : codec/test_codec.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -492,6 +519,9 @@ help:
 	@echo "... codec/matrix.o"
 	@echo "... codec/matrix.i"
 	@echo "... codec/matrix.s"
+	@echo "... codec/test_codec.o"
+	@echo "... codec/test_codec.i"
+	@echo "... codec/test_codec.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

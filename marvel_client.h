@@ -22,19 +22,68 @@ namespace marvel {
     class MarvelApp;
     class MarvelClient {
     public:
+
+        /*!
+         * Constructor default
+         * @param app link to which app
+         * @param host the host of this client
+         * @param port the port of this client
+         */
         MarvelClient(MarvelApp* app, uint32_t host, uint16_t port);
+
+        /*!
+         * Default deconstrutor
+         */
         ~MarvelClient();
+
+        /*!
+         * Send a message through certain sock
+         * @param sock sock to send message
+         * @param msg char* format
+         * @param serv_addr where to send
+         * @return Total send bytes
+         */
         int sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
-        int SendProcess(uint32_t host, uint16_t port, const char* msg);
+
+        /*!
+         * API function for APP to send message
+         * @param host which host to send
+         * @param port which port to send
+         * @param num the No. of the message
+         * @param msg char* format
+         * @return Total send bytes
+         */
+        int SendProcess(uint32_t host, uint16_t port, uint8_t num, const char* msg);
+
+        /*!
+         * Init a default codec library
+         */
         void BuildCodec();
+
+        /*!
+         * Get the output stream ptr
+         * @return stream ptr
+         */
         OFSTREAM* GetStream();
+
+        /*!
+         * Shutdown this client
+         */
         void shutdown();
+
+        /*!
+         * Start the client
+         */
         void start();
 
     private:
+        /*! ptr of the codec_lib */
         CODEC_LIB* _codec;
+        /*! app linked to */
         MarvelApp* app_;
+        /*! host of this client */
         uint32_t host_;
+        /*! port of this client */
         uint16_t port_;
     };
 
