@@ -12,10 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73ef4f14-230c-49c0-8c96-3c1396313bba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codec/codec.cpp" afterPath="$PROJECT_DIR$/codec/codec.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codec/codec.h" afterPath="$PROJECT_DIR$/codec/codec.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codec/matrix.cpp" afterPath="$PROJECT_DIR$/codec/matrix.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codec/matrix.h" afterPath="$PROJECT_DIR$/codec/matrix.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marvel_client.cpp" afterPath="$PROJECT_DIR$/marvel_client.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marvel_client.h" afterPath="$PROJECT_DIR$/marvel_client.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -28,33 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="marvel_client.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/marvel_client.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="45" column="14" lean-forward="false" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="codec.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/codec/codec.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="102" column="41" lean-forward="true" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
-              <folding>
-                <element signature="e#389#414#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="codec.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codec/codec.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="72" column="41" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+            <state relative-caret-position="576">
+              <caret line="39" column="1" lean-forward="true" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
               <folding>
                 <element signature="e#139#158#0" expanded="true" />
                 <element signature="e#971#996#0" expanded="true" />
@@ -64,11 +41,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="matrix.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="codec.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codec/codec.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="87" column="43" lean-forward="true" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
+              <folding>
+                <element signature="e#389#414#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="marvel_client.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/marvel_client.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="marvel_client.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/marvel_client.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="matrix.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codec/matrix.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+            <state relative-caret-position="301">
+              <caret line="54" column="51" lean-forward="true" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
               <folding>
                 <element signature="e#200#218#0" expanded="true" />
                 <element signature="e#587#612#0" expanded="true" />
@@ -82,12 +91,12 @@
       <file leaf-file-name="matrix.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codec/matrix.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="23" column="51" lean-forward="true" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+            <state relative-caret-position="456">
+              <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="44" />
               <folding>
                 <element signature="e#169#194#0" expanded="true" />
                 <element signature="e#296#321#0" expanded="true" />
-                <element signature="e#534#559#0" expanded="true" />
+                <element signature="e#568#593#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -137,26 +146,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SquareMatrix</find>
       <find>Matrix</find>
+      <find>SquareMatrix</find>
     </findStrings>
     <replaceStrings>
-      <replace>SqMat</replace>
       <replace>Mat</replace>
+      <replace>SqMat</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -187,22 +186,22 @@
         <option value="$PROJECT_DIR$/sample.cpp" />
         <option value="$PROJECT_DIR$/api_app.h" />
         <option value="$PROJECT_DIR$/marvel_app.h" />
-        <option value="$PROJECT_DIR$/marvel_client.h" />
         <option value="$PROJECT_DIR$/marvel_socket.cpp" />
         <option value="$PROJECT_DIR$/marvel_socket.h" />
         <option value="$PROJECT_DIR$/marvel_log.cpp" />
         <option value="$PROJECT_DIR$/marvel_log.h" />
         <option value="$PROJECT_DIR$/marvel_server.h" />
         <option value="$PROJECT_DIR$/api_app.cpp" />
-        <option value="$PROJECT_DIR$/marvel_client.cpp" />
         <option value="$PROJECT_DIR$/marvel_server.cpp" />
         <option value="$PROJECT_DIR$/test_app.h" />
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/test_app.cpp" />
         <option value="$PROJECT_DIR$/codec/codec.h" />
         <option value="$PROJECT_DIR$/codec/codec.cpp" />
-        <option value="$PROJECT_DIR$/codec/matrix.cpp" />
         <option value="$PROJECT_DIR$/codec/matrix.h" />
+        <option value="$PROJECT_DIR$/codec/matrix.cpp" />
+        <option value="$PROJECT_DIR$/marvel_client.h" />
+        <option value="$PROJECT_DIR$/marvel_client.cpp" />
       </list>
     </option>
   </component>
@@ -298,12 +297,12 @@
       <workItem from="1564537317528" duration="26158000" />
       <workItem from="1564624361759" duration="24390000" />
       <workItem from="1564709440560" duration="11543000" />
-      <workItem from="1564723162351" duration="41231000" />
+      <workItem from="1564723162351" duration="44098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110962000" />
+    <option name="totallyTimeSpent" value="113829000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -614,16 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/marvel_client.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding>
-            <element signature="e#263#286#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/marvel_log.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
@@ -710,14 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/marvel_client.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="45" column="14" lean-forward="false" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/include/x86_64-linux-gnu/bits/types.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -758,10 +739,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/codec/matrix.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="54" column="51" lean-forward="true" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
+          <folding>
+            <element signature="e#200#218#0" expanded="true" />
+            <element signature="e#587#612#0" expanded="true" />
+            <element signature="e#935#960#0" expanded="true" />
+            <element signature="e#1383#1408#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codec/matrix.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="44" />
+          <folding>
+            <element signature="e#169#194#0" expanded="true" />
+            <element signature="e#296#321#0" expanded="true" />
+            <element signature="e#568#593#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codec/codec.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="72" column="41" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+        <state relative-caret-position="576">
+          <caret line="39" column="1" lean-forward="true" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
           <folding>
             <element signature="e#139#158#0" expanded="true" />
             <element signature="e#971#996#0" expanded="true" />
@@ -770,38 +776,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/marvel_client.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codec/codec.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="102" column="41" lean-forward="true" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
+        <state relative-caret-position="268">
+          <caret line="87" column="43" lean-forward="true" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
           <folding>
             <element signature="e#389#414#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/codec/matrix.cpp">
+    <entry file="file://$PROJECT_DIR$/marvel_client.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="23" column="51" lean-forward="true" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
-          <folding>
-            <element signature="e#169#194#0" expanded="true" />
-            <element signature="e#296#321#0" expanded="true" />
-            <element signature="e#534#559#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/codec/matrix.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
-          <folding>
-            <element signature="e#200#218#0" expanded="true" />
-            <element signature="e#587#612#0" expanded="true" />
-            <element signature="e#935#960#0" expanded="true" />
-            <element signature="e#1383#1408#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="349">
+          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>

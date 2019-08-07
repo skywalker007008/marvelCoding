@@ -16,6 +16,7 @@ template <typename Type, size_t M>
 void CODEC mul(SqMat<Type, M>& mat, Vec<Type, M>& msg, int mat_size, int vec_size,
                     uint16_t iter_time, Vec<Type, M>& msg_out) {
     // TODO: Multiply the Matrix and the vector msg
+    msg_out.set(mat * msg, 0, 0);
 }
 
 template <typename Type, size_t M>

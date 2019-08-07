@@ -15,9 +15,14 @@
 
 MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
+    BuildCodec();
 }
 
 MARVEL_CLIENT::~MarvelClient() {
+}
+
+void MARVEL_CLIENT::BuildCodec() {
+    _codec = new CODEC_LIB();
 }
 
 int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, const char* msg) {
