@@ -1,114 +1,131 @@
 /*
  * Copyright G410 Studio
  * Author: Skywalker007008, Liu Zihao
- * Github Link: https://github.com/skywalker007008/marvelCoding
+ * Github Link: https://github.com/skywalker007008/rlnc-lib
  * 
  */
 
-#ifndef MARVELCODING_CODEC_H
-#define MARVELCODING_CODEC_H
+#ifndef RLNC_CODEC_H
+#define RLNC_CODEC_H
 
-#include "matrix.h"
+#include <malloc.h>
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+#include "gf.h"
 
+#define RLNC rlnc::
+#define CODEC rlnc::Codec
 
-#define CODEC_LIB codec::Codec
+extern GFType** std_coef;
 
-
-static int matrix_coef[MAX_PART_NUM][MAX_PART_NUM];
-
-
-namespace codec {
+namespace rlnc {
     /*!
-     * @brief The lib of the codec
+     * The coding library
      */
-    template <typename Type>
     class Codec {
     public:
-        Codec();
+        /*!
+         * Init the codec according to the vector size and packet size
+         * @param vec_size the size of the coding number of message unit
+         * @param packet_size the size of the message unit
+         */
+        Codec(int vec_size, int packet_size);
+
+        /*!
+         * Default deconstructor: free space
+         */
         ~Codec();
 
         /*!
-         *
-         * @return if this codec is available
+         * If the cache is full(should be never)
+         * @return _is_full
          */
-        bool is_init();
+        bool is_full();
 
         /*!
-         * Add msg into uncode_msg with each part with a sizeof msg_size;
-         * @param msg msg to be set
-         * @param msg_size sizeof the msg
+         * If the cache is enough
+         * @return _is_enough
          */
-        template<size_t M>
-        void set_uncode_msg(char* msg, int msg_size);
+        bool is_enough();
 
         /*!
-         * Set the encoding-iterate time
-         * @param time the total iterate-time of the encoding (default < 16)
-         *
+         * Recv the message unit and the encoding coef on it
+         * Put them into the cache_buf
+         * @param msg the message_ptr
+         * @param coef the encoding coef of this message
          */
-        void set_time(uint8_t time);
+        void RecvMessage(char* msg, GFType* coef);
 
         /*!
-         * Set the matrix in the codec
-         * @param matrix matrix to be set
+         * Reform the msg and the coef
+         * In order to make the trace bigger or equal
+         * @return if the trace is full
          */
-        /*template<size_t M>
-        void set_matrix(SqMat<Type, M>* square_matrix);*/
+        bool LinkMsg();
 
         /*!
-         * Encode a msg
-         * @param msg_out buffer to receive the encoded msg
-         * @return sizeof the matrix
+         * Encode the cached msg
+         * @return the final encoded msg
          */
-        template<typename msgType, size_t M>
-        Vec<msgType, M> encode();
+
+        GFType** encode();
 
         /*!
-         * Decode a msg
-         * @param msg_out buffer to receive the encoded msg
-         * @return sizeof the matrix
+         * Decode the cached msg
+         * @requires the cached coef should be full-trace(_is_enough = true)
          */
-        template<typename msgType, size_t M>
-        Vec<msgType, M> decode();
-        //
+        void decode();
+
+        /*!
+         * Get the encoded message
+         * @param buf ptr to receive the encoded_message
+         */
+        void get_encode_message(char* buf);
+
+        /*!
+         * Get the decoded message
+         * @param buf ptr to receive the decoded_message
+         */
+        void get_decode_message(char* buf);
+
     private:
-        /*! the total iterate time */
-        uint8_t _iter_time;
-        /*! the size of the matrix */
-        int _mat_size;
-        /*! size of the vector of message */
+        /*! The size of the message-unit */
+        int _packet_size;
+        /*! Symbol whether the cache is full */
+        bool _is_full;
+        /*! Symbol whether the cache_coef is enough to decode(full-trace) */
+        bool _is_enough;
+        // int _msg_num;
+        /*! Number of the valid msg received */
+        int _recv_num;
+        /*! Size of the coding number of the msg */
         int _vec_size;
-        /*! the uncoded message */
-        char* _uncode_msg;
-        /*! the cache of the encoded_msg */
+        /*! Ptr where msg is ready to encode or decode */
+        char* _raw_msg;
+        /*! Ptr that stores the encoded_msg */
         char* _encode_msg;
+        /*! Ptr that stores the decoded_msg */
+        char* _decode_msg;
+        /*! Ptr that stores the cached_msg */
+        char* _cache_msg;
+        /*! Ptr that stores the used_coef */
+        GFType** _coef_mat;
+        /*! Ptr that stores the cached_coef */
+        GFType** _cache_coef_mat;
     };
 
-    /*!
-     * Turn a message into the format of the Vector
-     * @param msg unchanged message
-     * @return the vector format of the msg
-     */
-    template <typename Type, size_t M>
-    Vec<Type, M> msg2vec(char* msg);
+    /*! The max size of the buf */
+    constexpr int kMaxBufSize = 20;
+    /*! The max number of the msg unit */
+    constexpr int kMaxPartNum = 16;
 
     /*!
-     * Turn the message vector to the original format of char*
-     * @param vec the unchanged message vector
-     * @param size the size of the vector
-     * @return the char* format of the msg
+     * Init the std_coef
      */
-    template <typename Type, size_t M>
-    char* vec2msg(Vec<Type, M>& vec);
+    void coef_init();
 
-    /*!
-     * Turn the message vector to the format of uint64_t*
-     * @param vec the unchanged message vector
-     * @param size the size of the vector
-     * @return the uint64_t* format of the msg
-     */
-    template <typename Type, size_t M>
-    Type* vec2type(Vec<Type, M>& vec);
+    void init(unsigned int m);
 }
 
-#endif //MARVELCODING_CODEC_H
+#endif //RLNC_CODEC_H

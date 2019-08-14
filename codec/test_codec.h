@@ -1,24 +1,29 @@
 /*
  * Copyright G410 Studio
  * Author: Skywalker007008, Liu Zihao
- * Github Link: https://github.com/skywalker007008/marvelCoding
+ * Github Link: https://github.com/skywalker007008/rlnc-lib
  * 
  */
 
-#ifndef MARVELCODING_TEST_CODEC_H
-#define MARVELCODING_TEST_CODEC_H
+#ifndef RLNC_TEST_CODEC_H
+#define RLNC_TEST_CODEC_H
 
 #include "codec.h"
 
-/*!
- * Test the codec process.
- */
-void test_codec();
+namespace rlnc {
+    /*!
+     * test_print
+     * @param msg msg to print
+     */
+    void print(char* msg);
 
-/*!
- * Print the msg by u64
- * @param msg msg to print
- */
-void print(char* msg);
+    void print_mul();
 
-#endif //MARVELCODING_TEST_CODEC_H
+    void print_mat(GFType** mat, int vec_size);
+
+    void test_encode_decode();
+
+    void test_link();
+}
+
+#endif //RLNC_TEST_CODEC_H
