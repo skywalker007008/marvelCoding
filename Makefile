@@ -150,6 +150,33 @@ api_app.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.s
 .PHONY : api_app.cpp.s
 
+app_ebr.o: app_ebr.cpp.o
+
+.PHONY : app_ebr.o
+
+# target to build an object file
+app_ebr.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/app_ebr.cpp.o
+.PHONY : app_ebr.cpp.o
+
+app_ebr.i: app_ebr.cpp.i
+
+.PHONY : app_ebr.i
+
+# target to preprocess a source file
+app_ebr.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/app_ebr.cpp.i
+.PHONY : app_ebr.cpp.i
+
+app_ebr.s: app_ebr.cpp.s
+
+.PHONY : app_ebr.s
+
+# target to generate assembly for a file
+app_ebr.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/app_ebr.cpp.s
+.PHONY : app_ebr.cpp.s
+
 codec/codec.o: codec/codec.cpp.o
 
 .PHONY : codec/codec.o
@@ -203,6 +230,33 @@ codec/gf.s: codec/gf.cpp.s
 codec/gf.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/gf.cpp.s
 .PHONY : codec/gf.cpp.s
+
+codec/header.o: codec/header.cpp.o
+
+.PHONY : codec/header.o
+
+# target to build an object file
+codec/header.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/header.cpp.o
+.PHONY : codec/header.cpp.o
+
+codec/header.i: codec/header.cpp.i
+
+.PHONY : codec/header.i
+
+# target to preprocess a source file
+codec/header.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/header.cpp.i
+.PHONY : codec/header.cpp.i
+
+codec/header.s: codec/header.cpp.s
+
+.PHONY : codec/header.s
+
+# target to generate assembly for a file
+codec/header.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/codec/header.cpp.s
+.PHONY : codec/header.cpp.s
 
 codec/test_codec.o: codec/test_codec.cpp.o
 
@@ -513,12 +567,18 @@ help:
 	@echo "... api_app.o"
 	@echo "... api_app.i"
 	@echo "... api_app.s"
+	@echo "... app_ebr.o"
+	@echo "... app_ebr.i"
+	@echo "... app_ebr.s"
 	@echo "... codec/codec.o"
 	@echo "... codec/codec.i"
 	@echo "... codec/codec.s"
 	@echo "... codec/gf.o"
 	@echo "... codec/gf.i"
 	@echo "... codec/gf.s"
+	@echo "... codec/header.o"
+	@echo "... codec/header.i"
+	@echo "... codec/header.s"
 	@echo "... codec/test_codec.o"
 	@echo "... codec/test_codec.i"
 	@echo "... codec/test_codec.s"

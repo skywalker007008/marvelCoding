@@ -54,53 +54,6 @@ static int strnum=0;
 static int streamcodenum[10]={0};
 EbrHeader store[10][maxcodenum+1][splitnum+1];
 
-void print(char* msg) {
-    int len = strlen(msg);
-    for (int i = 0; i < len; i++) {
-        printf("%c",(uint8_t)msg[i]);      
-    }
-	std::cout << "\n";
-}
-
-void printx(char* msg) {
-    int len = strlen(msg);
-    for (int i = 0; i < len / 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            printf("%x ", (uint8_t)msg[i * 8 + j]);
-        }
-        std::cout << "\n";
-    }
-}
-
-void print_mul() {
-    for (int i = 0; i < gFieldSize; i++) {
-        for (int j = 0; j < gFieldSize; j++) {
-            printf("%x ", table_mul[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    for (int i = 0; i < gFieldSize; i++) {
-        for (int j = 0; j < gFieldSize; j++) {
-            printf("%x ", table_div[i][j]);
-        }
-        printf("\n");
-    }
-
-    printf("%x", gf_mul(3,0xE));
-
-}
-
-void print_mat(GFType** mat, int vec_size) {
-    printf("matrix::\n");
-    for (int i = 0; i < vec_size; i++) {
-        for (int j = 0; j < vec_size; j++) {
-            printf("%x ", mat[i][j]);
-        }
-        printf("\n");
-    }
-}
 // /**
 // FUNCTION   :: AppLayerEbrInitTrace
 // LAYER      :: APPLCATION
@@ -1366,16 +1319,16 @@ AppLayerEbrServer(Node *node, Message *msg)
             /* New connection, so create new ebr server to handle client. */
             if (serverPtr == NULL)
             {		
-					//»Øµ½ÁËÆðµã£¬¿Õ²Ù×÷·µ»Ø
+					//ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½Õ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if(NetworkIpGetInterfaceAddress(node,0)==data.sourceaddr.interfaceAddr.ipv4){
 					if(data.type=='r'){
-						//ÖØ´«
+						//ï¿½Ø´ï¿½
 						Resend(data.strnum);
 					}
 					return;
 				}
 				if(NetworkIpGetInterfaceAddress(node,0)!=data.destaddr.interfaceAddr.ipv4){
-					//²»½ÓÊÕ½ÓÊÕ¹ýµÄºÍÏÂÒ»´úµÄ
+					//ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½Õ¹ï¿½ï¿½Äºï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 					if(!record[node->nodeId][data.strnum].isfirst){
 						if(record[node->nodeId][data.strnum].codenumber != data.codenumber ||
 							(record[node->nodeId][data.strnum].pacnum > data.pacnum)){
@@ -1388,7 +1341,7 @@ AppLayerEbrServer(Node *node, Message *msg)
 						record[node->nodeId][data.strnum].isfirst = false;
 						record[node->nodeId][data.strnum].codenumber = data.codenumber;
 					}
-					//ÉèÖÃnodeÖÐ¼ÇÂ¼µÄÐÅÏ¢
+					//ï¿½ï¿½ï¿½ï¿½nodeï¿½Ð¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ï¢
 						record[node->nodeId][data.strnum].pacnum = data.pacnum;
 				}
 					
@@ -1613,7 +1566,7 @@ AppLayerEbrServer(Node *node, Message *msg)
 						}else{
 							printf("stream %d have codenum %d spiltnum %d\n",store[data.strnum][data.codenumber][1].strnum,store[data.strnum][data.codenumber][1].codenumber,store[data.strnum][data.codenumber][1].pacnum);
 						}
-						//Èç¹û²»ÂúÖÈ£¬·¢»ØÔ´½Úµã±¨ÎÄ£¬±ê×¢Á÷ÐÅÏ¢£¬ÖØÐÂ·¢ËÍÖ¸¶¨Á÷
+						//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Úµã±¨ï¿½Ä£ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½
 						if(data.pacnum!=data.pacsum){
 							SendToSource(data.strnum,node,data);
 						}else{

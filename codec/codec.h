@@ -17,6 +17,7 @@
 #define RLNC rlnc::
 #define CODEC rlnc::Codec
 
+
 extern GFType** std_coef;
 
 namespace rlnc {

@@ -15,6 +15,7 @@
 #include "marvel_constant.h"
 #include "marvel_app.h"
 #include "codec/codec.h"
+#include "codec/header.h"
 
 // constexpr int CLIENT_SIZE = sizeof(marvel::MarvelClient);
 
@@ -43,7 +44,7 @@ namespace marvel {
          * @param serv_addr where to send
          * @return Total send bytes
          */
-        int sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr);
+        int sendMessage(int sock, EbrHeader* header);
 
         /*!
          * API function for APP to send message
@@ -53,7 +54,7 @@ namespace marvel {
          * @param msg char* format
          * @return Total send bytes
          */
-        int SendProcess(uint32_t host, uint16_t port, uint8_t num, const char* msg);
+        int SendProcess(uint32_t host, uint16_t port, uint8_t num, char* msg, int vec_size, int packet_size);
 
         /*!
          * Init a default codec library
@@ -78,11 +79,12 @@ namespace marvel {
 
     private:
         /*! ptr of the codec_lib */
-        CODEC_LIB* _codec;
+        CODEC* codec_;
         /*! app linked to */
         MarvelApp* app_;
         /*! host of this client */
         uint32_t host_;
+        Address addr_;
         /*! port of this client */
         uint16_t port_;
     };

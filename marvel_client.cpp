@@ -12,9 +12,12 @@
 #include "marvel_exception.h"
 #include "marvel_log.h"
 #include "marvel_socket.h"
+#include "codec/header.h"
+
 
 MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
+    addr_.host = host;
     BuildCodec();
 }
 
@@ -22,20 +25,29 @@ MARVEL_CLIENT::~MarvelClient() {
 }
 
 void MARVEL_CLIENT::BuildCodec() {
-    _codec = new CODEC_LIB();
+    // _codec = new CODEC_LIB();
 }
 
-int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, const char* msg) {
+int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* msg, int vec_size, int packet_size) {
     int sock;
     struct sockaddr_in serv_addr;
     int send_bytes = 0;
-    char message[MAX_BUF_SIZE + 1];
+    size_t len = ROUND(strlen(msg), packet_size);
+    int packet_sum = len / packet_size;
+    char* message = (char*)malloc(len * sizeof(char));
+    GFType** coef;
 
     // check if msg longer than maxmium length
     if (strlen(msg) > MAX_BUF_SIZE) {
         throw MARVEL_ERR MessageOversizedException();
     } else {
-        strcpy(message, msg);
+        // add encode
+        CODEC codec(vec_size, packet_size);
+        for (int i = 0; i < len / packet_size; i++) {
+            codec.RecvMessage(msg + i * packet_size, std_coef[i]);
+        }
+        coef = codec.encode();
+        codec.get_encode_message(message);
     }
 
     // create a socket
@@ -53,26 +65,37 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, const 
         }
     }
 
+    // Server get init address
     // init server's address
-    PackSockaddr(&serv_addr, AF_INET, host, port);
+    // PackSockaddr(&serv_addr, AF_INET, host, port);
+    Address dest_addr;
+    dest_addr.host = host;
 
     // connect
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if connection successful
-        if (connect(sock, (struct sockaddr *) &serv_addr, ADDR_SIZE) < 0) {
+        if (connect(sock, (struct sockaddr*)&broadcast_addr, ADDR_SIZE) < 0) {
             app_ -> log("Socket Connect Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
                 throw MARVEL_ERR SocketConnectFailedException(serv_addr);
             }
         } else {
-            MARVEL_LOG SocketConnected(GetStream(), &serv_addr);
+            // MARVEL_LOG SocketConnected(GetStream(), &serv_addr);
             break;
         }
     }
 
+
+
     // start-to-send
     try {
-        send_bytes = sendMessage(sock, message, &serv_addr);
+        for (int i = 0; i < packet_sum; i++) {
+            EbrHeader* header = NewEbrHeader(0, 0, 0, 0,
+                                             packet_sum, packet_size, i,
+                                             addr_, dest_addr, port_, port,
+                                             packet_size, nullptr, message + i * packet_size, coef[i]);
+            send_bytes = sendMessage(sock, header);
+        }
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
@@ -80,12 +103,13 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, const 
 
 }
 
-int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_addr) {
-    int length = strlen(msg);
+int MARVEL_CLIENT::sendMessage(int sock, EbrHeader* header) {
+    /*int length = strlen(msg);
     int remain = length;
     int totalBytes = 0;
-    int sendBytes;
-    while (remain > 0) {
+    int sendBytes;*/
+    send(sock, header, sizeof(EbrHeader), 0);
+    /*while (remain > 0) {
         if (remain >= PER_TRANS_SIZE) {
             sendBytes = send(sock, msg, PER_TRANS_SIZE, 0);
             remain -= PER_TRANS_SIZE;
@@ -113,8 +137,8 @@ int MARVEL_CLIENT::sendMessage(int sock, char* msg, struct sockaddr_in* serv_add
             totalBytes += sendBytes;
             break;
         }
-    }
-    return totalBytes;
+    }*/
+    return header -> length;
 }
 
 OFSTREAM* MARVEL_CLIENT::GetStream() {

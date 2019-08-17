@@ -35,6 +35,7 @@ constexpr int INIT_SERVER_ID = 1;
 
 #define ADDRIN_SIZE sizeof(struct sockaddr_in)
 #define ADDR_SIZE sizeof(struct sockaddr)
+#define ROUND(a,b) (((a) / (b)) + (b))
 constexpr int MAX_POOL_NUM = 40;
 
 static POOL pool{MAX_POOL_NUM};

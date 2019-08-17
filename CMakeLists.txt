@@ -31,7 +31,7 @@ set(CODEC codec/codec.h
           codec/gf.h
           codec/gf.cpp
           codec/test_codec.h
-          codec/test_codec.cpp)
+          codec/test_codec.cpp codec/header.cpp)
 
 set(MATRIX matrix/Matrix.hpp
            matrix/SquareMatrix.hpp
@@ -39,8 +39,8 @@ set(MATRIX matrix/Matrix.hpp
            matrix/Vector2.hpp
            matrix/Vector3.hpp)
 
-set(APP api_app.cpp
-        api_app.h)
+set(APP app_ebr.cpp
+        app_ebr.h codec/header.h)
 
 
 add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} main.cpp)
