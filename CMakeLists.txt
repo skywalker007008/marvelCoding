@@ -28,8 +28,8 @@ set(SOURCE_FILES main.cpp
 
 set(CODEC codec/codec.h
           codec/codec.cpp
-          codec/matrix.h
-          codec/matrix.cpp
+          codec/gf.h
+          codec/gf.cpp
           codec/test_codec.h
           codec/test_codec.cpp)
 
@@ -39,8 +39,11 @@ set(MATRIX matrix/Matrix.hpp
            matrix/Vector2.hpp
            matrix/Vector3.hpp)
 
+set(APP api_app.cpp
+        api_app.h)
 
-# add_executable(marvelCoding ${SOURCE_FILES})
-add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
+
+add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} main.cpp)
+# add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
 
 # target_link_libraries(marvelCoding ${CMAKE_THREAD_LIBS_INIT})

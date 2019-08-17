@@ -135,6 +135,7 @@ void CODEC::get_decode_message(char* buf) {
 GFType** CODEC::encode() {
     GFType** rand_list = (GFType**)malloc(_vec_size * sizeof(GFType*));
     GFType rand;
+    memset(_encode_msg, 0, _recv_num * _packet_size * sizeof(char));
     memcpy(_raw_msg, _cache_msg, _recv_num * _packet_size * sizeof(char));
     for (int i = 0; i < _recv_num; i++) {
         rand_list[i] = (GFType*)malloc(_recv_num * sizeof(GFType));
@@ -152,8 +153,9 @@ GFType** CODEC::encode() {
 }
 
 void CODEC::decode() {
-    GFType** inv_mat = gauss_inv(_coef_mat, 2);
+    GFType** inv_mat = gauss_inv(_coef_mat, _vec_size);
     GFType rand;
+    memset(_decode_msg, 0, _vec_size * _packet_size * sizeof(char));
     for (int i = 0; i < _vec_size; i++) {
         for (int t = 0; t < _vec_size; t++) {
             rand = inv_mat[i][t];

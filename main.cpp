@@ -27,5 +27,5 @@ constexpr uint16_t kDefaultPort = 58371;
  */
 
 int main() {
-    test_codec();
+    RLNC test_encode_decode();
 }
