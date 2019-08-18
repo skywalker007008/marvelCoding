@@ -68,6 +68,14 @@ void App::shutdown() {
     stream_ -> close();
 }
 
+void App::RecvMessage(char* msg, EbrHeader* header) {
+    *stream_ << "Recv Message:\t" << header -> pacsum * header -> strnum << "bytes\n";
+    *stream_ << "Source addr:\t" << header -> sourceaddr.host << "\n";
+    *stream_ << "Source port:\t" << header -> sourceport << "\n";
+    *stream_ << "Message:\n";
+    *stream_ << msg;
+}
+
 void App::start() {
 
 }

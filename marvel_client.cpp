@@ -43,7 +43,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* 
     } else {
         // add encode
         CODEC codec(vec_size, packet_size);
-        for (int i = 0; i < len / packet_size; i++) {
+        for (int i = 0; i < packet_sum; i++) {
             codec.RecvMessage(msg + i * packet_size, std_coef[i]);
         }
         coef = codec.encode();
@@ -90,7 +90,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* 
     // start-to-send
     try {
         for (int i = 0; i < packet_sum; i++) {
-            EbrHeader* header = NewEbrHeader(0, 0, 0, 0,
+            EbrHeader* header = NewEbrHeader(0, num, 0, 0,
                                              packet_sum, packet_size, i,
                                              addr_, dest_addr, port_, port,
                                              packet_size, nullptr, message + i * packet_size, coef[i]);

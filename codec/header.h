@@ -19,6 +19,14 @@ typedef struct {
     uint32_t host;
 }Address;
 
+typedef struct {
+    uint8_t codenumber;
+    Address sourceaddr;
+    Address destaddr;
+    short sourceport;
+    short destport;
+}HeaderSymbol;
+
 typedef
 struct struct_app_ebr_header_data
 {
@@ -128,5 +136,7 @@ EbrHeader* NewEbrHeader(char type, char range, char code_type, char code_number,
                         int length, char* check, char* payload, GFType* coef);
 
 void init_broadcast_addr();
+
+EbrHeader* CopyEbrHeader(EbrHeader* header);
 
 #endif //MARVELCODING_HEADER_H

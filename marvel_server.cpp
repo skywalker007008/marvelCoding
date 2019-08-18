@@ -13,10 +13,17 @@
 #include <unistd.h>
 #include "marvel_log.h"
 #include "marvel_socket.h"
+#include "codec/header.h"
 
 MARVEL_SERVER::MarvelServer(
         MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
+    codec_num_ = 0;
+    codec_ = (CODEC**)malloc(256 * sizeof(CODEC*));
+    map_header_ = (HeaderSymbol**)malloc(256 * sizeof(HeaderSymbol*));
+    for (int i = 0; i < 256; i++) {
+        map_codec_[i] = -1;
+    }
 }
 
 MARVEL_SERVER::~MarvelServer() {
@@ -24,17 +31,9 @@ MARVEL_SERVER::~MarvelServer() {
 
 void MARVEL_SERVER::RecvProcess() { //
     int serv_socket;
-    int clnt_socket;
-
-
-
     struct sockaddr_in serv_addr;
     struct sockaddr_in clnt_addr;
     socklen_t clnt_addr_size;
-
-    char message[PER_TRANS_SIZE + 1]; // One Time Buffer
-    int length;
-    int recv_bytes = 0;
 
     try {
         // create a socket
@@ -72,6 +71,7 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
     char message[PER_TRANS_SIZE + 1]; // One Time Buffer
     int length;
     int recv_bytes = 0;
+    EbrHeader* header;
     for(int i = 0; i < MAX_CONNECT_NUM; i++) {
         recv_bytes = 0;
         try {
@@ -82,21 +82,25 @@ void MARVEL_SERVER::RecvMessage(int serv_socket, struct sockaddr_in* serv_addr) 
         }
         MARVEL_LOG SocketAccepted(GetStream(), serv_addr, &clnt_addr);
 
-        while ((length = recv(clnt_socket, message, PER_TRANS_SIZE, 0)) != 0) {
+        while ((length = recv(clnt_socket, header, PER_TRANS_SIZE, 0)) != 0) {
             if (length < 0) {
                 throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
             }
-            recv_bytes += length;
-            MARVEL_LOG RecvMessage(GetStream(), serv_addr, message, length, recv_bytes);
-            memset(message, 0, PER_TRANS_SIZE);
+            if (header -> type == 0) {
+                if (MatchAddr(header)) {
+                    LoadHeader(header);
+                } else {
+                    TransferMessage(header);
+                }
+            }
         }
 
         id++;
-        close(clnt_socket);
+        // close(clnt_socket);
         // shutdown(clnt_socket, SHUT_RDWR);
 
     }
-    close(serv_socket);
+    // close(serv_socket);
     // shutdown(serv_socket, SHUT_RDWR);
 }
 
@@ -114,4 +118,103 @@ void MARVEL_SERVER::start() {
     } catch (MARVEL_ERR MarvelException exp) {
         app_->HandleException(exp);
     }
+}
+
+bool MARVEL_SERVER::MatchAddr(EbrHeader* header) {
+    if ((header -> destaddr).host == host_ && header -> destport == port_) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void MARVEL_SERVER::LoadHeader(EbrHeader* header) {
+    // TODO: Find the codec for the header
+    CODEC* codec = FindCodec(header);
+    // TODO: Insert msg and coef into codec
+    codec -> RecvMessage(header -> payload, header -> coef);
+    if (codec -> is_enough()) {
+        return;
+    }
+    if (codec -> LinkMsg()) {
+        codec -> decode();
+        char* msg = (char*)malloc(codec -> _vec_size * codec -> _packet_size * sizeof(char));
+        codec->get_decode_message(msg);
+        // TODO: Send Message to App
+        app_ -> RecvMessage(msg, header);
+        // TODO: whether free this codec
+    }
+}
+
+CODEC* MARVEL_SERVER::FindCodec(EbrHeader* header) {
+    uint8_t num = (uint8_t)(header -> codenumber);
+    int pl = map_codec_[num];
+    if (pl == -1 || !IsMatchHeader(header, pl)) {
+        // TODO: Init a codec
+        map_codec_[num] = codec_num_;
+        CODEC* codec = codec_[codec_num_];
+        codec = new CODEC(header -> pacsum, header -> strnum);
+        HeaderSymbol* header_symbol = map_header_[codec_num_];
+        header_symbol = (HeaderSymbol*) malloc(sizeof(HeaderSymbol));
+        header_symbol -> codenumber = num;
+        header_symbol -> destport = header -> destport;
+        header_symbol -> destaddr = header -> destaddr;
+        header_symbol -> sourceport = header -> sourceport;
+        header_symbol -> sourceaddr = header -> sourceaddr;
+        codec_num_++;
+        return codec;
+    } else {
+        // TODO: Return the codec;
+        return codec_[pl];
+    }
+}
+
+bool MARVEL_SERVER::IsMatchHeader(EbrHeader* header, int pl) {
+    HeaderSymbol* header_symbol = map_header_[pl];
+    if (header_symbol -> destaddr.host == header -> destaddr.host
+        && header_symbol -> sourceaddr.host == header -> sourceaddr.host
+        && header_symbol -> destport == header -> destport
+        && header_symbol -> sourceport == header_symbol -> sourceport
+        && header_symbol -> codenumber == (uint8_t)(header -> codenumber)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void MARVEL_SERVER::TransferMessage(EbrHeader* header) {
+    CODEC* codec = FindCodec(header);
+    codec -> RecvMessage(header -> payload, header -> coef);
+    uint8_t num;
+    // TODO: Signal to encode message.
+
+    // TODO: Transfer the message.
+    GFType** coef = codec -> encode();
+    num = codec -> get_recv_num();
+    char* msg;
+    // EbrHeader* header_new = CopyEbrHeader(header);
+    // memset(header_new -> payload, 0, header_new -> strnum);
+    codec -> get_encode_message(msg);
+    int sock = NewSocket(app_ -> get_stream());
+    if (connect(sock, (struct sockaddr*)&broadcast_addr, ADDR_SIZE) < 0) {
+        app_ -> log("Socket Connect Failed.");
+    }
+    int pack_size = header -> strnum;
+
+    try {
+        for (uint8_t i = 0; i < num; i++) {
+            EbrHeader* header_new = CopyEbrHeader(header);
+            header_new -> pacsum = num;
+            header_new -> pacnum = i;
+            memcpy(header_new -> payload, msg + i * pack_size, pack_size);
+            memcpy(header_new -> coef, coef[i], header_new -> pacsum * sizeof(GFType));
+            send(sock, header_new, sizeof(header_new), 0);
+            //send_bytes = sendMessage(sock, header);
+        }
+    } catch (MARVEL_ERR MarvelException exp) {
+        throw exp;
+    }
+
+
+
 }

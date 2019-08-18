@@ -28,12 +28,21 @@ namespace marvel {
         void RecvProcess();
         OFSTREAM* GetStream();
         void shutdown();
+        bool MatchAddr(EbrHeader* header);
+        void LoadHeader(EbrHeader* header);
+        CODEC* FindCodec(EbrHeader* header);
+        bool IsMatchHeader(EbrHeader* header, int pl);
+        void TransferMessage(EbrHeader* header);
 
     private:
         void RecvMessage(int serv_socket, struct sockaddr_in* serv_addr);
         uint32_t host_;
         uint16_t port_;
         MarvelApp* app_;
+        CODEC** codec_;
+        int map_codec_[256];
+        HeaderSymbol** map_header_;
+        int codec_num_;
     };
 
     static void StartServer(MarvelServer* server);

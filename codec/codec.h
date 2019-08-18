@@ -90,6 +90,8 @@ namespace rlnc {
          */
         void get_decode_message(char* buf);
 
+        uint8_t get_recv_num();
+
     private:
         /*! The size of the message-unit */
         int _packet_size;
@@ -99,7 +101,7 @@ namespace rlnc {
         bool _is_enough;
         // int _msg_num;
         /*! Number of the valid msg received */
-        int _recv_num;
+        uint8_t _recv_num;
         /*! Size of the coding number of the msg */
         int _vec_size;
         /*! Ptr where msg is ready to encode or decode */

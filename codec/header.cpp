@@ -42,3 +42,23 @@ void init_broadcast_addr() {
     broadcast_addr.sin_family = AF_INET;
     broadcast_addr.sin_addr.s_addr = inet_addr("255.255.255.255");
 }
+
+EbrHeader* CopyEbrHeader(EbrHeader* header) {
+    EbrHeader* header_new = (EbrHeader*)malloc(sizeof(EbrHeader));
+    header_new -> type = header -> type;
+    header_new -> range = header -> range;
+    header_new -> codetype = header -> codetype;
+    header_new -> codenumber = header -> codenumber;
+    header_new -> pacsum = header -> pacsum;
+    header_new -> strnum = header -> strnum;
+    header_new -> pacnum = header -> pacnum;
+    header_new -> sourceaddr = header -> sourceaddr;
+    header_new -> destaddr = header -> destaddr;
+    header_new -> sourceport = header -> sourceport;
+    header_new -> destport = header -> destport;
+    header_new -> length = header -> length;
+    header_new -> check = header -> check;
+    header -> payload = (char*)malloc(header_new -> length * sizeof(char));
+    header -> coef = (GFType*)malloc(header_new -> pacsum * sizeof(GFType));
+    return header_new;
+}

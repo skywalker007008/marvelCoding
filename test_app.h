@@ -32,6 +32,7 @@ public:
     OFSTREAM* get_stream() override ;
     uint32_t get_host() override;
     uint16_t get_port() override;
+    void RecvMessage(char* msg, EbrHeader* header) override ;
     void start();
     void log(STRING log_msg);
 
