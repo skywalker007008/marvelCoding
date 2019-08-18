@@ -171,6 +171,14 @@ uint8_t CODEC::get_recv_num() {
     return _recv_num;
 }
 
+int CODEC::get_vec_size() {
+    return _vec_size;
+}
+
+int CODEC::get_packet_size() {
+    return _packet_size;
+}
+
 void RLNC coef_init() {
     std_coef = (GFType**)malloc(kMaxPartNum * sizeof(GFType*));
     for (int i = 0; i < kMaxPartNum; i++) {

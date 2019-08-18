@@ -138,7 +138,7 @@ void MARVEL_SERVER::LoadHeader(EbrHeader* header) {
     }
     if (codec -> LinkMsg()) {
         codec -> decode();
-        char* msg = (char*)malloc(codec -> _vec_size * codec -> _packet_size * sizeof(char));
+        char* msg = (char*)malloc(codec -> get_vec_size() * codec -> get_packet_size() * sizeof(char));
         codec->get_decode_message(msg);
         // TODO: Send Message to App
         app_ -> RecvMessage(msg, header);
@@ -152,15 +152,16 @@ CODEC* MARVEL_SERVER::FindCodec(EbrHeader* header) {
     if (pl == -1 || !IsMatchHeader(header, pl)) {
         // TODO: Init a codec
         map_codec_[num] = codec_num_;
-        CODEC* codec = codec_[codec_num_];
-        codec = new CODEC(header -> pacsum, header -> strnum);
-        HeaderSymbol* header_symbol = map_header_[codec_num_];
+        CODEC* codec = new CODEC(header -> pacsum, header -> strnum);
+        codec_[codec_num_] = codec;
+        HeaderSymbol* header_symbol;
         header_symbol = (HeaderSymbol*) malloc(sizeof(HeaderSymbol));
         header_symbol -> codenumber = num;
         header_symbol -> destport = header -> destport;
         header_symbol -> destaddr = header -> destaddr;
         header_symbol -> sourceport = header -> sourceport;
         header_symbol -> sourceaddr = header -> sourceaddr;
+        map_header_[codec_num_] = header_symbol;
         codec_num_++;
         return codec;
     } else {

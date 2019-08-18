@@ -34,10 +34,10 @@ void MARVEL_API LogOut(MARVEL_SERVER server) {
 }
 
 int MARVEL_API SendMessageToServer(MARVEL_CLIENT client,
-                             uint32_t host, uint16_t port, const char* msg) {
+                             uint32_t host, uint16_t port, char* msg) {
     int send_bytes = 0;
     try {
-        send_bytes = client.SendProcess(host, port, msg);
+        send_bytes = client.SendProcess(host, port, msg, kDefaultPacketSize);
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }

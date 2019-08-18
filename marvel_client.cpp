@@ -19,6 +19,7 @@ MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {
     addr_.host = host;
     BuildCodec();
+    id_ = 0;
 }
 
 MARVEL_CLIENT::~MarvelClient() {
@@ -28,7 +29,7 @@ void MARVEL_CLIENT::BuildCodec() {
     // _codec = new CODEC_LIB();
 }
 
-int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* msg, int vec_size, int packet_size) {
+int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size) {
     int sock;
     struct sockaddr_in serv_addr;
     int send_bytes = 0;
@@ -42,7 +43,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* 
         throw MARVEL_ERR MessageOversizedException();
     } else {
         // add encode
-        CODEC codec(vec_size, packet_size);
+        CODEC codec(packet_sum, packet_size);
         for (int i = 0; i < packet_sum; i++) {
             codec.RecvMessage(msg + i * packet_size, std_coef[i]);
         }
@@ -90,7 +91,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* 
     // start-to-send
     try {
         for (int i = 0; i < packet_sum; i++) {
-            EbrHeader* header = NewEbrHeader(0, num, 0, 0,
+            EbrHeader* header = NewEbrHeader(0, id_, 0, 0,
                                              packet_sum, packet_size, i,
                                              addr_, dest_addr, port_, port,
                                              packet_size, nullptr, message + i * packet_size, coef[i]);
@@ -99,6 +100,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, uint8_t num, char* 
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
+    id_++;
     return send_bytes;
 
 }

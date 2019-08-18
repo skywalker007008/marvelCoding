@@ -91,6 +91,8 @@ namespace rlnc {
         void get_decode_message(char* buf);
 
         uint8_t get_recv_num();
+        int get_vec_size();
+        int get_packet_size();
 
     private:
         /*! The size of the message-unit */

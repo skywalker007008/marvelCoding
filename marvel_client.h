@@ -54,7 +54,7 @@ namespace marvel {
          * @param msg char* format
          * @return Total send bytes
          */
-        int SendProcess(uint32_t host, uint16_t port, uint8_t num, char* msg, int vec_size, int packet_size);
+        int SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size);
 
         /*!
          * Init a default codec library
@@ -87,6 +87,7 @@ namespace marvel {
         Address addr_;
         /*! port of this client */
         uint16_t port_;
+        uint8_t id_;
     };
 
     static void StartClient(MarvelClient* client);

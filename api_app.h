@@ -25,7 +25,7 @@ namespace marvel {
 
         // For a client App to send Message
         int SendMessageToServer(MARVEL_CLIENT client,
-                                uint32_t host, uint16_t port, const char *msg);
+                                uint32_t host, uint16_t port, char *msg);
 
         // For a server to inform App of message received.
         void RecvMessageFromClient(MARVEL_CLIENT client,
