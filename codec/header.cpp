@@ -13,11 +13,11 @@
 
 static struct sockaddr_in broadcast_addr;
 
-EbrHeader* NewEbrHeader(char type, char range, char code_type, char code_number,
+EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
                         Address source_addr, Address dest_addr, short source_port, short dest_port,
                         int length, char* check, char* payload, GFType* coef) {
-    EbrHeader* header = (EbrHeader*)malloc(sizeof(EbrHeader));
+    EbrHeader* header = (EbrHeader*)malloc(HEADER_SIZE);
     header -> type = type;
     header -> range = range;
     header -> codetype = code_type;
@@ -30,11 +30,14 @@ EbrHeader* NewEbrHeader(char type, char range, char code_type, char code_number,
     header -> sourceport = source_port;
     header -> destport = dest_port;
     header -> length = length;
-    header -> check = check;
-    header -> payload = (char*)malloc(length * sizeof(char));
-    memcpy(header -> payload, payload, length);
-    header -> coef = coef;
-    return header;
+    if (check == nullptr) {
+        memset(header -> check, 0, 4);
+    }
+    EbrHeaderMsg* header_msg = (EbrHeaderMsg*)malloc(HEADER_MSG_SIZE);
+    header_msg -> header = *header;
+    memcpy(header_msg -> payload, payload, MSG_SIZE);
+    memcpy(header_msg -> coef, coef, COEF_SIZE);
+    return header_msg;
 }
 
 void init_broadcast_addr() {
@@ -43,22 +46,23 @@ void init_broadcast_addr() {
     broadcast_addr.sin_addr.s_addr = inet_addr("255.255.255.255");
 }
 
-EbrHeader* CopyEbrHeader(EbrHeader* header) {
-    EbrHeader* header_new = (EbrHeader*)malloc(sizeof(EbrHeader));
-    header_new -> type = header -> type;
-    header_new -> range = header -> range;
-    header_new -> codetype = header -> codetype;
-    header_new -> codenumber = header -> codenumber;
-    header_new -> pacsum = header -> pacsum;
-    header_new -> strnum = header -> strnum;
-    header_new -> pacnum = header -> pacnum;
-    header_new -> sourceaddr = header -> sourceaddr;
-    header_new -> destaddr = header -> destaddr;
-    header_new -> sourceport = header -> sourceport;
-    header_new -> destport = header -> destport;
-    header_new -> length = header -> length;
-    header_new -> check = header -> check;
-    header -> payload = (char*)malloc(header_new -> length * sizeof(char));
-    header -> coef = (GFType*)malloc(header_new -> pacsum * sizeof(GFType));
-    return header_new;
+EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header_msg) {
+    EbrHeaderMsg* header_msg_new = (EbrHeaderMsg*)malloc(HEADER_MSG_SIZE);
+    (header_msg_new -> header).type = (header_msg -> header).type;
+    (header_msg_new -> header).range = (header_msg -> header).range;
+    (header_msg_new -> header).codetype = (header_msg -> header).codetype;
+    (header_msg_new -> header).codenumber = (header_msg -> header).codenumber;
+    (header_msg_new -> header).pacsum = (header_msg -> header).pacsum;
+    (header_msg_new -> header).strnum = (header_msg -> header).strnum;
+    (header_msg_new -> header).pacnum = (header_msg -> header).pacnum;
+    (header_msg_new -> header).sourceaddr = (header_msg -> header).sourceaddr;
+    (header_msg_new -> header).destaddr = (header_msg -> header).destaddr;
+    (header_msg_new -> header).sourceport = (header_msg -> header).sourceport;
+    (header_msg_new -> header).destport = (header_msg -> header).destport;
+    (header_msg_new -> header).length = (header_msg -> header).length;
+    // (header_msg_new -> header).check = header -> check;
+    memcpy((header_msg_new -> header).check, (header_msg -> header).check, 4);
+    memcpy(header_msg_new -> payload, header_msg -> payload, MSG_SIZE);
+    memcpy(header_msg_new -> coef, header_msg -> coef, COEF_SIZE);
+    return header_msg_new;
 }

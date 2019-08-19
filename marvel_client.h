@@ -44,7 +44,7 @@ namespace marvel {
          * @param serv_addr where to send
          * @return Total send bytes
          */
-        int sendMessage(int sock, EbrHeader* header);
+        int sendMessage(int sock, EbrHeaderMsg* header_msg);
 
         /*!
          * API function for APP to send message

@@ -35,7 +35,7 @@ void App::HandleException(MARVEL_EXCEPTION err) {
     log(err.print());
 }
 
-void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
+void App::SendMessage(uint32_t dest_host, uint16_t dest_port, char *msg) {
     int send_bytes;
     try {
         send_bytes = MARVEL_API SendMessageToServer(*client_,dest_host, dest_port, msg);
@@ -46,6 +46,13 @@ void App::SendMessage(uint32_t dest_host, uint16_t dest_port, const char *msg) {
     log("MessageSent!\t" + TO_STRING(send_bytes) + "bytes");
 }
 
+void App::RecvMessage(char* msg, EbrHeaderMsg* header_msg) {
+    *stream_ << "Recv Message:\t" << (header_msg -> header).pacsum * (header_msg -> header).length << "bytes\n";
+    *stream_ << "Source addr:\t" << (header_msg -> header).sourceaddr.host << "\n";
+    *stream_ << "Source port:\t" << (header_msg -> header).sourceport << "\n";
+    *stream_ << "Message:\n";
+    *stream_ << msg;
+}
 void App::log(STRING log_msg) {
     *stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
     *stream_ << log_msg << std::endl;
@@ -66,14 +73,6 @@ void App::shutdown() {
     MARVEL_API LogOut(*client_);
     MARVEL_API LogOut(*server_);
     stream_ -> close();
-}
-
-void App::RecvMessage(char* msg, EbrHeader* header) {
-    *stream_ << "Recv Message:\t" << header -> pacsum * header -> strnum << "bytes\n";
-    *stream_ << "Source addr:\t" << header -> sourceaddr.host << "\n";
-    *stream_ << "Source port:\t" << header -> sourceport << "\n";
-    *stream_ << "Message:\n";
-    *stream_ << msg;
 }
 
 void App::start() {

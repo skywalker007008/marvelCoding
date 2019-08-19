@@ -14,13 +14,14 @@
 #include "marvel_client.h"
 #include "marvel_server.h"
 #include "app_ebr.h"
+#include "codec/header.h"
 
 namespace marvel {
      class MarvelApp {
      public:
         // MarvelApp();
         // virtual ~MarvelApp();
-        virtual void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg) {}
+        virtual void SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) {}
         // Handle the message
         virtual void HandleException(MARVEL_EXCEPTION err) {}
         // close this APP
@@ -30,7 +31,7 @@ namespace marvel {
         virtual uint32_t get_host() {}
         virtual uint16_t get_port() {}
          virtual void log(STRING log_msg) {}
-         virtual void RecvMessage(char* msg, EbrHeader* header) {}
+         virtual void RecvMessage(char* msg, EbrHeaderMsg* header_msg) {}
     };
 }
 #endif //MARVELCODING_MARVEL_APP_H

@@ -23,7 +23,7 @@ public:
     App(uint32_t host, const STRING& name);
     // ~App();
     // Send message to a destination
-    void SendMessage(uint32_t dest_host, uint16_t dest_port, const char* msg) override;
+    void SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) override;
     // Handle the message
     void HandleException(MARVEL_EXCEPTION err) override;
     // close this APP
@@ -32,7 +32,7 @@ public:
     OFSTREAM* get_stream() override ;
     uint32_t get_host() override;
     uint16_t get_port() override;
-    void RecvMessage(char* msg, EbrHeader* header) override ;
+    void RecvMessage(char* msg, EbrHeaderMsg* header_msg) override ;
     void start();
     void log(STRING log_msg);
 

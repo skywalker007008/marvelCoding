@@ -28,11 +28,11 @@ namespace marvel {
         void RecvProcess();
         OFSTREAM* GetStream();
         void shutdown();
-        bool MatchAddr(EbrHeader* header);
-        void LoadHeader(EbrHeader* header);
-        CODEC* FindCodec(EbrHeader* header);
-        bool IsMatchHeader(EbrHeader* header, int pl);
-        void TransferMessage(EbrHeader* header);
+        bool MatchAddr(EbrHeaderMsg* header_msg);
+        void LoadHeader(EbrHeaderMsg* header_msg);
+        CODEC* FindCodec(EbrHeaderMsg* header_msg);
+        bool IsMatchHeader(EbrHeaderMsg* header_msg, int pl);
+        void TransferMessage(EbrHeaderMsg* header_msg);
 
     private:
         void RecvMessage(int serv_socket, struct sockaddr_in* serv_addr);

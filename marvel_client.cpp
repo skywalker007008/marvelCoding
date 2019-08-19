@@ -91,11 +91,11 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int pack
     // start-to-send
     try {
         for (int i = 0; i < packet_sum; i++) {
-            EbrHeader* header = NewEbrHeader(0, id_, 0, 0,
-                                             packet_sum, packet_size, i,
+            EbrHeaderMsg* header_msg = NewEbrHeaderMsg(MSG_TYPE, 0, 0, 0,
+                                             packet_sum, id_, i,
                                              addr_, dest_addr, port_, port,
                                              packet_size, nullptr, message + i * packet_size, coef[i]);
-            send_bytes = sendMessage(sock, header);
+            send_bytes = sendMessage(sock, header_msg);
         }
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
@@ -105,12 +105,12 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int pack
 
 }
 
-int MARVEL_CLIENT::sendMessage(int sock, EbrHeader* header) {
+int MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     /*int length = strlen(msg);
     int remain = length;
     int totalBytes = 0;
     int sendBytes;*/
-    send(sock, header, sizeof(EbrHeader), 0);
+    send(sock, header_msg, HEADER_MSG_SIZE, 0);
     /*while (remain > 0) {
         if (remain >= PER_TRANS_SIZE) {
             sendBytes = send(sock, msg, PER_TRANS_SIZE, 0);
@@ -140,7 +140,7 @@ int MARVEL_CLIENT::sendMessage(int sock, EbrHeader* header) {
             break;
         }
     }*/
-    return header -> length;
+    return (header_msg -> header).length;
 }
 
 OFSTREAM* MARVEL_CLIENT::GetStream() {

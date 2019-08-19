@@ -46,6 +46,7 @@ namespace marvel {
     constexpr int PER_TRANS_SIZE = 32;
     constexpr int MAX_CONNECT_NUM = 2;
     constexpr int MAX_RETRY_TIME = 2;
+    constexpr int kMaxPacketLength = 256;
 
 
 }

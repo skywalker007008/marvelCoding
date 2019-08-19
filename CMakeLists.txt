@@ -39,7 +39,7 @@ set(MATRIX matrix/Matrix.hpp
            matrix/Vector2.hpp
            matrix/Vector3.hpp)
 
-set(APP app_ebr.cpp
+set(APP
         app_ebr.h codec/header.h)
 
 

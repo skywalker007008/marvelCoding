@@ -8,8 +8,15 @@
 #ifndef MARVELCODING_HEADER_H
 #define MARVELCODING_HEADER_H
 
-#include "gf.h"
+#include "codec.h"
 #include "../marvel_constant.h"
+
+#define MSG_TYPE 0
+
+#define HEADER_SIZE (sizeof(EbrHeader))
+#define MSG_SIZE ((MARVEL kMaxPacketLength) * sizeof(char))
+#define COEF_SIZE ((RLNC kMaxPartNum) * sizeof(GFType))
+#define HEADER_MSG_SIZE (HEADER_SIZE + MSG_SIZE + COEF_SIZE)
 
 extern struct sockaddr_in broadcast_addr;
 
@@ -20,7 +27,7 @@ typedef struct {
 }Address;
 
 typedef struct {
-    uint8_t codenumber;
+    uint16_t strnum;
     Address sourceaddr;
     Address destaddr;
     short sourceport;
@@ -30,24 +37,32 @@ typedef struct {
 typedef
 struct struct_app_ebr_header_data
 {
-    char type;
-    char range;
-    char codetype;
-    char codenumber;
-    short pacsum;
-    short strnum;
-    short pacnum;
-    Address sourceaddr;
-    Address destaddr;
-    short sourceport;
-    short destport;
-    int length;
-    char* check;
-    char* payload;
-    GFType* coef;
+    char type; // type of message
+    char range; // saved
+    char codetype; // type of the coding
+    char codenumber; // number of the coded times
+    short pacsum; // total sum of the packets
+    short strnum; // no. of the packet_stream
+    short pacnum; // no. of the packet
+    Address sourceaddr; // source address
+    Address destaddr; // destination address
+    short sourceport; // source port
+    short destport; // destination port
+    int length; // length of each payload
+    char check[4]; // saved
+
+    // char* payload; // payload
+    // GFType* coef; // coef of the payload
 }EbrHeader;
 
-typedef
+typedef struct {
+    EbrHeader header;
+    char payload[MARVEL kMaxPacketLength];
+    GFType coef[RLNC kMaxPartNum];
+}EbrHeaderMsg;
+
+
+/*typedef
 struct struct_app_ebr_client_str {
     Address localAddr;
     Address remoteAddr;
@@ -120,23 +135,23 @@ struct struct_app_ebr_server_str
 
     // Whether or not to perform sequence number check on incoming data packets
     BOOL useSeqNoCheck;
-#endif /* ADDON_BOEINGFCS */
+#endif *//* ADDON_BOEINGFCS *//*
     STAT_AppStatistics* stats;
 }
         AppDataEbrServer;
 
-/*typedef struct {
+*//*typedef struct {
     EbrHeader ebr_header;
     char* message;
 } EbrMsg;*/
 
-EbrHeader* NewEbrHeader(char type, char range, char code_type, char code_number,
+EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
                         Address source_addr, Address dest_addr, short source_port, short dest_port,
                         int length, char* check, char* payload, GFType* coef);
 
 void init_broadcast_addr();
 
-EbrHeader* CopyEbrHeader(EbrHeader* header);
+EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header);
 
 #endif //MARVELCODING_HEADER_H
