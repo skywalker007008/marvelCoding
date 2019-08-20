@@ -15,6 +15,12 @@
 #include "marvel_constant.h"
 #include "marvel_app.h"
 
+#ifdef MARVELCODING_DEBUG_H
+
+#include "debug.h"
+
+#endif
+
 // constexpr int SERVER_SIZE = sizeof(class marvel::MarvelServer);
 
 
@@ -25,24 +31,27 @@ namespace marvel {
         MarvelServer(MarvelApp* app, uint32_t host, uint16_t port);
         ~MarvelServer();
         void start();
-        void RecvProcess();
+        ssize_t RecvProcess(char* msg, Address* host, uint16_t* port);
         OFSTREAM* GetStream();
         void shutdown();
         bool MatchAddr(EbrHeaderMsg* header_msg);
-        void LoadHeader(EbrHeaderMsg* header_msg);
+        char* LoadHeader(EbrHeaderMsg* header_msg);
         CODEC* FindCodec(EbrHeaderMsg* header_msg);
         bool IsMatchHeader(EbrHeaderMsg* header_msg, int pl);
         void TransferMessage(EbrHeaderMsg* header_msg);
+        bool AbleToTransfer(EbrHeaderMsg* header_msg);
 
     private:
-        void RecvMessage(int serv_socket, struct sockaddr_in* serv_addr);
+        ssize_t RecvMessage(int serv_socket, struct sockaddr_in* serv_addr,
+                            Address* host, uint16_t* port, char* msg);
         uint32_t host_;
         uint16_t port_;
         MarvelApp* app_;
         CODEC** codec_;
-        int map_codec_[256];
+        bool codec_status_[MARVEL kMaxCacheSize];
         HeaderSymbol** map_header_;
         int codec_num_;
+
     };
 
     static void StartServer(MarvelServer* server);

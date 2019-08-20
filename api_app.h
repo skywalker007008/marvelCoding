@@ -14,9 +14,9 @@
 namespace marvel {
     namespace api {
         // Log app to client & server
-        MARVEL_CLIENT* LogInClient(MARVEL_APP *app);
+        MARVEL_CLIENT* LogInClient(MARVEL_APP *app, uint16_t port);
 
-        MARVEL_SERVER* LogInServer(MARVEL_APP *app);
+        MARVEL_SERVER* LogInServer(MARVEL_APP *app, uint16_t port);
 
         // app to log out
         void LogOut(MARVEL_CLIENT client);
@@ -28,8 +28,8 @@ namespace marvel {
                                 uint32_t host, uint16_t port, char *msg);
 
         // For a server to inform App of message received.
-        void RecvMessageFromClient(MARVEL_CLIENT client,
-                                   uint32_t host, uint16_t port, const char *msg);
+        int RecvMessageFromServer(MARVEL_SERVER server,
+                                   uint32_t* host, uint16_t* port, char *msg);
     }
 }
 

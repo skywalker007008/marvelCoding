@@ -150,33 +150,6 @@ api_app.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/api_app.cpp.s
 .PHONY : api_app.cpp.s
 
-app_ebr.o: app_ebr.cpp.o
-
-.PHONY : app_ebr.o
-
-# target to build an object file
-app_ebr.cpp.o:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/app_ebr.cpp.o
-.PHONY : app_ebr.cpp.o
-
-app_ebr.i: app_ebr.cpp.i
-
-.PHONY : app_ebr.i
-
-# target to preprocess a source file
-app_ebr.cpp.i:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/app_ebr.cpp.i
-.PHONY : app_ebr.cpp.i
-
-app_ebr.s: app_ebr.cpp.s
-
-.PHONY : app_ebr.s
-
-# target to generate assembly for a file
-app_ebr.cpp.s:
-	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/app_ebr.cpp.s
-.PHONY : app_ebr.cpp.s
-
 codec/codec.o: codec/codec.cpp.o
 
 .PHONY : codec/codec.o
@@ -567,9 +540,6 @@ help:
 	@echo "... api_app.o"
 	@echo "... api_app.i"
 	@echo "... api_app.s"
-	@echo "... app_ebr.o"
-	@echo "... app_ebr.i"
-	@echo "... app_ebr.s"
 	@echo "... codec/codec.o"
 	@echo "... codec/codec.i"
 	@echo "... codec/codec.s"

@@ -17,6 +17,12 @@
 #include "codec/codec.h"
 #include "codec/header.h"
 
+#ifdef MARVELCODING_DEBUG_H
+
+#include "debug.h"
+
+#endif
+
 // constexpr int CLIENT_SIZE = sizeof(marvel::MarvelClient);
 
 namespace marvel {

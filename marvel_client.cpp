@@ -31,7 +31,6 @@ void MARVEL_CLIENT::BuildCodec() {
 
 int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size) {
     int sock;
-    struct sockaddr_in serv_addr;
     int send_bytes = 0;
     size_t len = ROUND(strlen(msg), packet_size);
     int packet_sum = len / packet_size;
@@ -72,7 +71,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int pack
     Address dest_addr;
     dest_addr.host = host;
 
-    // connect
+    /*// connect
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if connection successful
         if (connect(sock, (struct sockaddr*)&broadcast_addr, ADDR_SIZE) < 0) {
@@ -84,7 +83,7 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int pack
             // MARVEL_LOG SocketConnected(GetStream(), &serv_addr);
             break;
         }
-    }
+    }*/
 
 
 
@@ -110,7 +109,8 @@ int MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     int remain = length;
     int totalBytes = 0;
     int sendBytes;*/
-    send(sock, header_msg, HEADER_MSG_SIZE, 0);
+    sendto(sock, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
+    // sendto(sock, header_msg, HEADER_MSG_SIZE, 0);
     /*while (remain > 0) {
         if (remain >= PER_TRANS_SIZE) {
             sendBytes = send(sock, msg, PER_TRANS_SIZE, 0);
