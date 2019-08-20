@@ -39,7 +39,8 @@ ssize_t MARVEL_SERVER::RecvProcess(char* msg, Address* host, uint16_t* port) { /
         serv_socket = NewSocket(app_->get_stream());
         std::cout << "new socket\n";
         // add details
-        PackSockaddr(&serv_addr, AF_INET, host_, port_);
+        // PackSockaddr(&serv_addr, AF_INET, host_, port_);
+        PackSockaddr(&serv_addr, AF_INET, htonl(INADDR_ANY), port_);
         std::cout << "pack socket\n";
         // bind the socket
         BindSocket(app_-> get_stream(), serv_socket, &serv_addr);
@@ -69,7 +70,7 @@ ssize_t MARVEL_SERVER::RecvMessage(
     struct sockaddr_in clnt_addr;
     ssize_t length;
     int recv_bytes = 0;
-    EbrHeaderMsg* header_msg;
+    EbrHeaderMsg* header_msg = (EbrHeaderMsg*)malloc(HEADER_MSG_SIZE);
     char* msg_buf;
 
     while (true) {
@@ -78,7 +79,7 @@ ssize_t MARVEL_SERVER::RecvMessage(
             throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
         }
 #ifdef MARVELCODING_DEBUG_H
-
+        printf("Recv Message:%d bytes", length);
 #endif
         if ((header_msg->header).type == MSG_TYPE || (header_msg->header).type == RESEND_MSG_TYPE) {
             if (MatchAddr(header_msg)) {

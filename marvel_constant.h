@@ -37,20 +37,19 @@ constexpr int INIT_SERVER_ID = 1;
 
 #define ADDRIN_SIZE sizeof(struct sockaddr_in)
 #define ADDR_SIZE sizeof(struct sockaddr)
-#define ROUND(a,b) (((a) / (b)) + (b))
+#define ROUND(a,b) (((a) % (b) == 0) ? (a) : ((a) + (b) - ((a) % (b))))
 constexpr int MAX_POOL_NUM = 40;
 constexpr int kDefaultPacketSize = 256 * sizeof(char);
 
 static POOL pool{MAX_POOL_NUM};
 
 namespace marvel {
-    constexpr int MAX_BUF_SIZE = 1024;
     constexpr int PER_TRANS_SIZE = 32;
     constexpr int MAX_CONNECT_NUM = 2;
     constexpr int MAX_RETRY_TIME = 2;
     constexpr int kMaxPacketLength = 256;
     constexpr int kMaxCacheSize = 16;
-    constexpr int kMaxMsgLength = 65536;
+    constexpr int kMaxMsgLength = 512;
 
 
 }

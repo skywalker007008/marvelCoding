@@ -38,7 +38,7 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
     GFType** coef;
 
     // check if msg longer than maxmium length
-    if (strlen(msg) > MAX_BUF_SIZE) {
+    if (strlen(msg) > kMaxMsgLength) {
         throw MARVEL_ERR MessageOversizedException();
     } else {
         // add encode
@@ -53,7 +53,7 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
     // create a socket
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
         // check if socket created successfully
-        sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+        sock = socket(AF_INET, SOCK_DGRAM, 0);
         if (sock < 0) {
             app_ -> log("Socket Create Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
@@ -75,7 +75,7 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
                                              packet_sum, id_, i,
                                              addr_, dest_addr, port_, port,
                                              packet_size, nullptr, message + i * packet_size, coef[i]);
-            send_bytes = sendMessage(sock, header_msg);
+            send_bytes += sendMessage(sock, header_msg);
         }
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;

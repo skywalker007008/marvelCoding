@@ -21,7 +21,8 @@
 #define COEF_SIZE ((RLNC kMaxPartNum) * sizeof(GFType))
 #define HEADER_MSG_SIZE (HEADER_SIZE + MSG_SIZE + COEF_SIZE)
 
-static struct sockaddr_in broadcast_addr;
+extern struct sockaddr_in broadcast_addr;
+extern struct sockaddr_in any_addr;
 
 constexpr uint16_t kDefaultPort = 666;
 
@@ -66,7 +67,7 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
                         Address source_addr, Address dest_addr, short source_port, short dest_port,
                         int length, char* check, char* payload, GFType* coef);
 
-void init_broadcast_addr();
+void init_addr();
 
 EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header);
 

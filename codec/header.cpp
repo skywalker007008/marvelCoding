@@ -11,7 +11,8 @@
 #include <arpa/inet.h>
 #include "../marvel_constant.h"
 
-// static struct sockaddr_in broadcast_addr;
+struct sockaddr_in broadcast_addr;
+struct sockaddr_in any_addr;
 
 EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
@@ -40,10 +41,15 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
     return header_msg;
 }
 
-void init_broadcast_addr() {
+void init_addr() {
     broadcast_addr.sin_port = kDefaultPort;
     broadcast_addr.sin_family = AF_INET;
-    broadcast_addr.sin_addr.s_addr = inet_addr("255.255.255.255");
+    // broadcast_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
+    broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    any_addr.sin_port = kDefaultPort;
+    any_addr.sin_family = AF_INET;
+    any_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 }
 
 EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header_msg) {

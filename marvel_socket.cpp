@@ -15,7 +15,7 @@
 int MARVEL NewSocket(OFSTREAM* stream) {
     int serv_socket;
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
-        serv_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+        serv_socket = socket(AF_INET, SOCK_DGRAM, 0);
         if (serv_socket < 0) {
             MARVEL_LOG log(stream, "Socket Create Failed. Retrying...");
             if (i == MAX_RETRY_TIME) {
@@ -32,7 +32,8 @@ void MARVEL PackSockaddr(struct sockaddr_in *sockaddr, sa_family_t family, uint3
     memset(sockaddr, 0, ADDRIN_SIZE);
     sockaddr->sin_family = family;
     sockaddr->sin_addr.s_addr = host;
-    sockaddr->sin_port = htons(port);
+    // sockaddr->sin_port = htons(port);
+    sockaddr->sin_port = (port);
 }
 
 void MARVEL BindSocket(OFSTREAM* stream, int sock, struct sockaddr_in *sockaddr) {
