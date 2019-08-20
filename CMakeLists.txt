@@ -23,8 +23,7 @@ set(SOURCE_FILES main.cpp
                  test_app.h
                  test_app.cpp
                  sample.cpp
-                 marvel_app.h
-                 marvel_app.cpp)
+                 )
 
 set(CODEC codec/codec.h
           codec/codec.cpp
@@ -33,7 +32,7 @@ set(CODEC codec/codec.h
           codec/test_codec.h
           codec/test_codec.cpp
           codec/header.h
-          codec/header.cpp)
+          codec/header.cpp test_local.cpp)
 
 set(MATRIX matrix/Matrix.hpp
            matrix/SquareMatrix.hpp
@@ -41,12 +40,16 @@ set(MATRIX matrix/Matrix.hpp
            matrix/Vector2.hpp
            matrix/Vector3.hpp)
 
-# set(APP)
+set(APP marvel_app.h
+        marvel_app.cpp
+        test_app.h
+        test_app.cpp)
 
 set(DEBUG debug.h
-          debug.cpp)
+          debug.cpp )
 
-add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} ${DEBUG} main.cpp)
+# add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} ${DEBUG} main.cpp)
+add_executable(testLocal ${SOURCE_FILES} ${CODEC} ${APP} ${DEBUG} test_local.cpp)
 # add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
 
 # target_link_libraries(marvelCoding ${CMAKE_THREAD_LIBS_INIT})

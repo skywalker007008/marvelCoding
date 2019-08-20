@@ -555,6 +555,33 @@ test_app.cpp.s:
 	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_app.cpp.s
 .PHONY : test_app.cpp.s
 
+test_local.o: test_local.cpp.o
+
+.PHONY : test_local.o
+
+# target to build an object file
+test_local.cpp.o:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_local.cpp.o
+.PHONY : test_local.cpp.o
+
+test_local.i: test_local.cpp.i
+
+.PHONY : test_local.i
+
+# target to preprocess a source file
+test_local.cpp.i:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_local.cpp.i
+.PHONY : test_local.cpp.i
+
+test_local.s: test_local.cpp.s
+
+.PHONY : test_local.s
+
+# target to generate assembly for a file
+test_local.cpp.s:
+	$(MAKE) -f CMakeFiles/marvelCoding.dir/build.make CMakeFiles/marvelCoding.dir/test_local.cpp.s
+.PHONY : test_local.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -612,6 +639,9 @@ help:
 	@echo "... test_app.o"
 	@echo "... test_app.i"
 	@echo "... test_app.s"
+	@echo "... test_local.o"
+	@echo "... test_local.i"
+	@echo "... test_local.s"
 .PHONY : help
 
 
