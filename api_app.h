@@ -24,12 +24,12 @@ namespace marvel {
         void LogOut(MARVEL_SERVER server);
 
         // For a client App to send Message
-        int SendMessageToServer(MARVEL_CLIENT client,
-                                uint32_t host, uint16_t port, char *msg);
+        ssize_t SendMessageToServer(MARVEL_CLIENT client,
+                                Address host, uint16_t port, char *msg);
 
         // For a server to inform App of message received.
-        int RecvMessageFromServer(MARVEL_SERVER server,
-                                   uint32_t* host, uint16_t* port, char *msg);
+        ssize_t RecvMessageFromServer(MARVEL_SERVER server,
+                                                 Address* host, uint16_t* port, char* msg);
     }
 }
 

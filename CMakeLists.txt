@@ -46,7 +46,7 @@ set(MATRIX matrix/Matrix.hpp
 set(DEBUG debug.h
           debug.cpp)
 
-add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} main.cpp)
+add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} ${DEBUG} main.cpp)
 # add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
 
 # target_link_libraries(marvelCoding ${CMAKE_THREAD_LIBS_INIT})

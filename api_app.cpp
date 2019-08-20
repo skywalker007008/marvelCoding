@@ -34,30 +34,25 @@ void MARVEL_API LogOut(MARVEL_SERVER server) {
     // memset(server, 0, CLIENT_SIZE);
 }
 
-int MARVEL_API SendMessageToServer(MARVEL_CLIENT client,
-                             uint32_t host, uint16_t port, char* msg) {
-    int send_bytes = 0;
+ssize_t MARVEL_API SendMessageToServer(MARVEL_CLIENT client,
+                             Address host, uint16_t port, char* msg) {
+    ssize_t send_bytes = 0;
     try {
-        send_bytes = client.SendProcess(host, port, msg, kDefaultPacketSize);
+        send_bytes = client.SendProcess(host.host, port, msg, kDefaultPacketSize);
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
     return send_bytes;
 }
 
-int MARVEL_API RecvMessageFromServer(MARVEL_SERVER server,
-                               uint32_t* host, uint16_t* port, char* msg) {
+ssize_t MARVEL_API RecvMessageFromServer(MARVEL_SERVER server,
+                               Address* host, uint16_t* port, char* msg) {
     // client -> app_ -> print();
-    int recv_bytes = 0;
-    EbrHeaderMsg* header_msg = (EbrHeaderMsg*)malloc(HEADER_MSG_SIZE);
+    ssize_t recv_bytes = 0;
     try {
-        server.RecvProcess(header_msg);
+        recv_bytes = server.RecvProcess(msg, host, port);
     } catch (MARVEL_ERR MarvelException exp){
         throw exp;
     }
-    *host = (header_msg -> header).sourceaddr.host;
-    *port = (header_msg -> header).sourceport;
-    recv_bytes = (header_msg -> header).length;
-    memcpy(msg, header_msg -> payload, recv_bytes);
     return recv_bytes;
 }

@@ -27,6 +27,8 @@
 #define OFSTREAM std::ofstream
 #define POOL std::threadpool
 
+#define DEBUG debug::
+
 // #define TO_STRING(x) std::to_string(x)
 #define TO_STRING std::to_string
 
@@ -48,6 +50,7 @@ namespace marvel {
     constexpr int MAX_RETRY_TIME = 2;
     constexpr int kMaxPacketLength = 256;
     constexpr int kMaxCacheSize = 16;
+    constexpr int kMaxMsgLength = 65536;
 
 
 }

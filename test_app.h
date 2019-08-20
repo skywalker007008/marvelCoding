@@ -23,7 +23,7 @@ public:
     App(uint32_t host, const STRING& name);
     // ~App();
     // Send message to a destination
-    void SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) override;
+    ssize_t SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) override;
     // Handle the message
     void HandleException(MARVEL_EXCEPTION err) override;
     // close this APP
@@ -33,8 +33,10 @@ public:
     uint32_t get_host() override;
     uint16_t get_port() override;
     void RecvMessage(char* msg, EbrHeaderMsg* header_msg) override ;
+    ssize_t App::RecvMessage(char* msg, uint32_t* host, uint16_t* port);
     void start();
     void log(STRING log_msg);
+    void log(char* log_msg);
 
 private:
     STRING name_;

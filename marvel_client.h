@@ -50,7 +50,7 @@ namespace marvel {
          * @param serv_addr where to send
          * @return Total send bytes
          */
-        int sendMessage(int sock, EbrHeaderMsg* header_msg);
+        ssize_t sendMessage(int sock, EbrHeaderMsg* header_msg);
 
         /*!
          * API function for APP to send message
@@ -60,7 +60,7 @@ namespace marvel {
          * @param msg char* format
          * @return Total send bytes
          */
-        int SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size);
+        ssize_t SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size);
 
         /*!
          * Init a default codec library

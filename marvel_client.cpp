@@ -29,9 +29,9 @@ void MARVEL_CLIENT::BuildCodec() {
     // _codec = new CODEC_LIB();
 }
 
-int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size) {
+ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int packet_size) {
     int sock;
-    int send_bytes = 0;
+    ssize_t send_bytes = 0;
     size_t len = ROUND(strlen(msg), packet_size);
     int packet_sum = len / packet_size;
     char* message = (char*)malloc(len * sizeof(char));
@@ -65,27 +65,8 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int pack
         }
     }
 
-    // Server get init address
-    // init server's address
-    // PackSockaddr(&serv_addr, AF_INET, host, port);
     Address dest_addr;
     dest_addr.host = host;
-
-    /*// connect
-    for (int i = 0; i < MAX_RETRY_TIME; i++) {
-        // check if connection successful
-        if (connect(sock, (struct sockaddr*)&broadcast_addr, ADDR_SIZE) < 0) {
-            app_ -> log("Socket Connect Failed. Retrying...");
-            if (i == MAX_RETRY_TIME) {
-                throw MARVEL_ERR SocketConnectFailedException(serv_addr);
-            }
-        } else {
-            // MARVEL_LOG SocketConnected(GetStream(), &serv_addr);
-            break;
-        }
-    }*/
-
-
 
     // start-to-send
     try {
@@ -104,12 +85,13 @@ int MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int pack
 
 }
 
-int MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
+ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     /*int length = strlen(msg);
     int remain = length;
     int totalBytes = 0;
     int sendBytes;*/
-    sendto(sock, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
+    ssize_t send_bytes;
+    send_bytes = sendto(sock, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
     // sendto(sock, header_msg, HEADER_MSG_SIZE, 0);
     /*while (remain > 0) {
         if (remain >= PER_TRANS_SIZE) {
@@ -140,7 +122,7 @@ int MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
             break;
         }
     }*/
-    return (header_msg -> header).length;
+    return send_bytes;
 }
 
 OFSTREAM* MARVEL_CLIENT::GetStream() {

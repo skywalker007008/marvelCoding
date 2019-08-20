@@ -13,7 +13,7 @@
 #include "marvel_exception.h"
 #include "marvel_client.h"
 #include "marvel_server.h"
-#include "app_ebr.h"
+
 #include "codec/header.h"
 
 namespace marvel {
@@ -21,7 +21,7 @@ namespace marvel {
      public:
         // MarvelApp();
         // virtual ~MarvelApp();
-        virtual void SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) {}
+        virtual ssize_t SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) {}
         // Handle the message
         virtual void HandleException(MARVEL_EXCEPTION err) {}
         // close this APP

@@ -77,11 +77,14 @@ ssize_t MARVEL_SERVER::RecvMessage(
         if (length < 0) {
             throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
         }
+#ifdef MARVELCODING_DEBUG_H
+
+#endif
         if ((header_msg->header).type == MSG_TYPE || (header_msg->header).type == RESEND_MSG_TYPE) {
             if (MatchAddr(header_msg)) {
                 msg_buf = LoadHeader(header_msg);
                 if (msg_buf != nullptr) {
-                    recv_bytes = (header_msg -> header).length * (header_msg -> header).pacsum);
+                    recv_bytes = (header_msg -> header).length * (header_msg -> header).pacsum;
                     memcpy(msg, msg_buf, recv_bytes);
                     return recv_bytes;
                 }
@@ -108,11 +111,11 @@ void MARVEL_SERVER::shutdown() {
 }
 
 void MARVEL_SERVER::start() {
-    try {
+    /*try {
         RecvProcess();
     } catch (MARVEL_ERR MarvelException exp) {
         app_->HandleException(exp);
-    }
+    }*/
 }
 
 bool MARVEL_SERVER::MatchAddr(EbrHeaderMsg* header_msg) {
@@ -150,7 +153,7 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
 CODEC* MARVEL_SERVER::FindCodec(EbrHeaderMsg* header_msg) {
     uint16_t num = ((header_msg -> header).strnum);
     int pl;
-    for (pl = 0; pl < MARVEL kMaxCacheSize, pl++) {
+    for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
         if (codec_status_[pl] && IsMatchHeader(header_msg, pl)) {
             return codec_[pl];
         }
@@ -159,7 +162,7 @@ CODEC* MARVEL_SERVER::FindCodec(EbrHeaderMsg* header_msg) {
         return nullptr;
     }
     // TODO: Init a codec
-    for (pl = 0; pl < MARVEL kMaxCacheSize, pl++) {
+    for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
         if (!codec_status_[pl]) {
             break;
         }
@@ -219,9 +222,6 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
     // memset(header_new -> payload, 0, header_new -> strnum);
     codec -> get_encode_message(msg);
     int sock = NewSocket(app_ -> get_stream());
-    /*if (connect(sock, (struct sockaddr*)&broadcast_addr, ADDR_SIZE) < 0) {
-        app_ -> log("Socket Connect Failed.");
-    }*/
     int pack_size = (header_msg -> header).length;
 
     try {
@@ -243,5 +243,5 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
 }
 
 bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
-
+    return true;
 }
