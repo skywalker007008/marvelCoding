@@ -4,7 +4,6 @@
 
 constexpr uint32_t kDefaultClientHost = 255;
 constexpr uint32_t kDefaultServerHost = 0;
-constexpr uint16_t kDefaultPort = 58371;
 
 
 /* int main() {

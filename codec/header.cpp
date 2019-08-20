@@ -11,7 +11,7 @@
 #include <arpa/inet.h>
 #include "../marvel_constant.h"
 
-static struct sockaddr_in broadcast_addr;
+// static struct sockaddr_in broadcast_addr;
 
 EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,

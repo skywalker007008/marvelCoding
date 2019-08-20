@@ -17,7 +17,7 @@ App::App(uint32_t host, const STRING& name)
     server_ = MARVEL_API LogInServer(this, kDefaultPort);
     // pool.commit(start);
     // pool.commit(MARVEL StartClient, client_);
-    pool.commit(MARVEL StartServer, server_);
+    // pool.commit(MARVEL StartServer, server_);
     // std::thread t1(MARVEL StartClient, client_);
     // t1.join();
     // std::thread t2(MARVEL StartServer, server_);
@@ -62,11 +62,11 @@ ssize_t App::RecvMessage(char* msg, uint32_t* host, uint16_t* port) {
     log("MessageRecv!\t" + TO_STRING(recv_bytes) + "bytes");
     log("Host: " + TO_STRING(temp_host.host) + "\tPort: " + TO_STRING(*port));
     log("Message:");
-    log(msg);
+    log_char(msg);
     *host = temp_host.host;
 }
 
-void App::RecvMessage(char* msg, EbrHeaderMsg* header_msg) {
+void App::RecvMessageDebug(char* msg, EbrHeaderMsg* header_msg) {
     *stream_ << "Recv Message:\t" << (header_msg -> header).pacsum * (header_msg -> header).length << "bytes\n";
     *stream_ << "Source addr:\t" << (header_msg -> header).sourceaddr.host << "\n";
     *stream_ << "Source port:\t" << (header_msg -> header).sourceport << "\n";
@@ -78,7 +78,7 @@ void App::log(STRING log_msg) {
     *stream_ << log_msg << std::endl;
 }
 
-void App::log(char* log_msg) {
+void App::log_char(char* log_msg) {
     *stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
     *stream_ << log_msg << std::endl;
 }
@@ -91,7 +91,7 @@ uint32_t App::get_host() {
     return host_;
 }
 uint16_t App::get_port() {
-    return 58371;
+    return kDefaultPort;
 }
 
 void App::shutdown() {

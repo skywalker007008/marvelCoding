@@ -14,6 +14,7 @@
 #include <fstream>
 #include "marvel_constant.h"
 #include "marvel_app.h"
+#include "codec/header.h"
 
 #ifdef MARVELCODING_DEBUG_H
 

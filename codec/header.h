@@ -21,7 +21,7 @@
 #define COEF_SIZE ((RLNC kMaxPartNum) * sizeof(GFType))
 #define HEADER_MSG_SIZE (HEADER_SIZE + MSG_SIZE + COEF_SIZE)
 
-extern struct sockaddr_in broadcast_addr;
+static struct sockaddr_in broadcast_addr;
 
 constexpr uint16_t kDefaultPort = 666;
 

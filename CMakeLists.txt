@@ -5,8 +5,7 @@ find_package(Threads)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES main.cpp
-                 marvel_client.h
+set(SOURCE_FILES marvel_client.h
                  marvel_client.cpp
                  marvel_exception.h
                  marvel_constant.h
@@ -22,7 +21,6 @@ set(SOURCE_FILES main.cpp
                  api_app.cpp
                  test_app.h
                  test_app.cpp
-                 sample.cpp
                  )
 
 set(CODEC codec/codec.h
@@ -52,4 +50,4 @@ set(DEBUG debug.h
 add_executable(testLocal ${SOURCE_FILES} ${CODEC} ${APP} ${DEBUG} test_local.cpp)
 # add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
 
-# target_link_libraries(marvelCoding ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(testLocal ${CMAKE_THREAD_LIBS_INIT})

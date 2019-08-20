@@ -21,7 +21,7 @@ namespace marvel {
      public:
         // MarvelApp();
         // virtual ~MarvelApp();
-        virtual ssize_t SendMessage(uint32_t dest_host, uint16_t dest_port, char* msg) {}
+        // virtual ssize_t (*SendMessage)(uint32_t dest_host, uint16_t dest_port, char* msg) {}
         // Handle the message
         virtual void HandleException(MARVEL_EXCEPTION err) {}
         // close this APP
@@ -31,7 +31,7 @@ namespace marvel {
         virtual uint32_t get_host() {}
         virtual uint16_t get_port() {}
          virtual void log(STRING log_msg) {}
-         virtual void RecvMessage(char* msg, EbrHeaderMsg* header_msg) {}
+         // virtual ssize_t RecvMessage(char* msg, uint32_t* host, uint16_t* port) {}
     };
 }
 #endif //MARVELCODING_MARVEL_APP_H
