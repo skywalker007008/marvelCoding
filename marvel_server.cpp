@@ -14,6 +14,7 @@
 #include "marvel_log.h"
 #include "marvel_socket.h"
 #include "codec/header.h"
+#include <sys/types.h>
 
 MARVEL_SERVER::MarvelServer(
         MARVEL_APP* app, uint32_t host, uint16_t port)
@@ -41,7 +42,7 @@ ssize_t MARVEL_SERVER::RecvProcess(char* msg, Address* host, uint16_t* port) { /
         // add details
         // PackSockaddr(&serv_addr, AF_INET, host_, port_);
         PackSockaddr(&serv_addr, AF_INET, htonl(INADDR_ANY), port_);
-        std::cout << "pack socket\n";
+        std::cout << pthread_self() << "pack socket\n";
         // bind the socket
         BindSocket(app_-> get_stream(), serv_socket, &serv_addr);
         std::cout << "bind socket\n";
@@ -91,6 +92,7 @@ ssize_t MARVEL_SERVER::RecvMessage(
                     memcpy(msg, msg_buf, recv_bytes);
                     memcpy(host, &(header_msg -> header).sourceaddr, sizeof(Address));
                     *port = (header_msg -> header).sourceport;
+                    close(serv_socket);
                     return recv_bytes;
                 }
             } else {

@@ -9,10 +9,10 @@
 #include "test_app.h"
 #include "api_app.h"
 
-int main() {
+int main(int argc, char* argv[]) {
     RLNC init(8);
     init_addr();
-    App server(inet_addr("192.168.0.1"), "SERVER");
+    App server(inet_addr(argv[1]), argv[2]);
     char* msg = (char*)malloc(MARVEL kMaxMsgLength * sizeof(char));
     char a;
 

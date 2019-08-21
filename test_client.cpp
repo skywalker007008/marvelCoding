@@ -35,12 +35,11 @@ void test_local() {
     // t1.join();
     printf("Thread1 start.\n");
 
-    // std::thread t3(&App::SendMessage, &client2, inet_addr("192.168.0.1"), kDefaultPort, msg);
+    std::thread t3(&App::SendMessage, &client2, inet_addr("192.168.0.1"), kDefaultPort, msg);
     printf("Thread3 start.\n");
 
     while (true) {
         char a;
-        std::cout << "stdin a";
         std::cin >> a;
         if (a == 'E') {
             break;
@@ -49,11 +48,11 @@ void test_local() {
 
 }
 
-int main() {
-    test_local();
-    /*RLNC init(8);
+int main(int argc, char* argv[]) {
+    // test_local();
+    RLNC init(8);
     init_addr();
-    App client(inet_addr("192.168.0.2"), "CLIENT");
+    App client(inet_addr(argv[1]), argv[2]);
     char* msg = (char*)malloc(MARVEL kMaxMsgLength * sizeof(char));
     for (int i = 0; i < MARVEL kMaxMsgLength; i++) {
         msg[i] = rand() % 64 + 1;
@@ -70,7 +69,7 @@ int main() {
         if (a == 'E') {
             break;
         }
-    }*/
+    }
     return 0;
 }
 

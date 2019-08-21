@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <cstring>
 #include "marvel_client.h"
+#include <unistd.h>
 #include "marvel_exception.h"
 #include "marvel_log.h"
 #include "marvel_socket.h"
@@ -81,6 +82,7 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
         throw exp;
     }
     id_++;
+    close(sock);
     return send_bytes;
 
 }
