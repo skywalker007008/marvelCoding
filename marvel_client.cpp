@@ -15,10 +15,7 @@
 #include "marvel_socket.h"
 #include "codec/header.h"
 
-#ifdef MARVELCODING_DEBUG_H
 #include "debug.h"
-#endif // MARVELCODING_DEBUG_H
-
 
 MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
         :host_(host), port_(port), app_(app) {

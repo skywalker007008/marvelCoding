@@ -14,7 +14,7 @@ void log_send_message(EbrHeaderMsg* msg);
 
 void log_recv_message(EbrHeaderMsg* msg);
 
-void log_recv_final_message(EbrHeaderMsg* msg);
+void log_recv_final_message(EbrHeaderMsg* header_msg, char* msg, int length);
 
 void log_transfer_message(EbrHeaderMsg* msg);
 

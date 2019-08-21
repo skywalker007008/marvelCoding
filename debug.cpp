@@ -25,7 +25,7 @@ void log_send_message(EbrHeaderMsg* msg) {
 
     for (int i = 0; i < length / 32; i++) {
         for (int j = 0; j < 32; j++) {
-            printf("%x ", payload[i * 32 + j]);
+            printf("%x ", (uint8_t)payload[i * 32 + j]);
         }
         printf("\n");
     }
@@ -48,7 +48,7 @@ void log_recv_message(EbrHeaderMsg* msg) {
 
     for (int i = 0; i < length / 32; i++) {
         for (int j = 0; j < 32; j++) {
-            printf("%x ", payload[i * 32 + j]);
+            printf("%x ", (uint8_t)payload[i * 32 + j]);
         }
         printf("\n");
     }
@@ -69,7 +69,7 @@ void log_recv_final_message(EbrHeaderMsg* header_msg, char* msg, int length) {
 
     for (int i = 0; i < length / 32; i++) {
         for (int j = 0; j < 32; j++) {
-            printf("%x ", payload[i * 32 + j]);
+            printf("%x ", (uint8_t)payload[i * 32 + j]);
         }
         printf("\n");
     }
@@ -94,7 +94,7 @@ void log_transfer_message(EbrHeaderMsg* msg) {
 
     for (int i = 0; i < length / 32; i++) {
         for (int j = 0; j < 32; j++) {
-            printf("%x ", payload[i * 32 + j]);
+            printf("%x ", (uint8_t)payload[i * 32 + j]);
         }
         printf("\n");
     }
