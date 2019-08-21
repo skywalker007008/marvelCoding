@@ -85,14 +85,10 @@ void App::log_char(char* log_msg) {
     for (int i = 0; i < strlen(log_msg) / 32; i++) {
         for (int j = 0; j < 32; j++) {
             *stream_ << (short)log_msg[i * 32 + j] << " ";
-            // std::cout << (short)(log_msg[i * 32 + j]) << " ";
-            printf("%x ", (short)(log_msg[i * 32 + j]));
         }
         *stream_ << "\n";
-        // std::cout << "\n";
-        printf("\n");
     }
-    printf("\n");
+    *stream_ << "\n";
 }
 
 OFSTREAM* App::get_stream() {

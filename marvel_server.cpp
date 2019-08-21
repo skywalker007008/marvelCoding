@@ -14,7 +14,10 @@
 #include "marvel_log.h"
 #include "marvel_socket.h"
 #include "codec/header.h"
-#include <sys/types.h>
+
+#ifdef MARVELCODING_DEBUG_H
+#include "debug.h"
+#endif // MARVELCODING_DEBUG_H
 
 MARVEL_SERVER::MarvelServer(
         MARVEL_APP* app, uint32_t host, uint16_t port)
@@ -93,6 +96,9 @@ ssize_t MARVEL_SERVER::RecvMessage(
                     memcpy(host, &(header_msg -> header).sourceaddr, sizeof(Address));
                     *port = (header_msg -> header).sourceport;
                     close(serv_socket);
+#ifdef MARVELCODING_DEBUG_H
+#include "debug.h"
+#endif // MARVELCODING_DEBUG_H
                     return recv_bytes;
                 }
             } else {
@@ -241,12 +247,17 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
             memcpy(header_msg_new -> payload, msg + i * pack_size, pack_size);
             memcpy(header_msg_new -> coef, coef[i], num * sizeof(GFType));
             sendto(sock, header_msg_new, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, ADDR_SIZE);
+#ifdef MARVELCODING_DEBUG_H
+#include "debug.h"
+#endif // MARVELCODING_DEBUG_H
             //send_bytes = sendMessage(sock, header);
+            free(header_msg_new);
         }
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
     free(msg);
+    close(sock);
 }
 
 bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
