@@ -190,6 +190,7 @@ CODEC* MARVEL_SERVER::FindCodec(EbrHeaderMsg* header_msg) {
     header_symbol -> destaddr = (header_msg -> header).destaddr;
     header_symbol -> sourceport = (header_msg -> header).sourceport;
     header_symbol -> sourceaddr = (header_msg -> header).sourceaddr;
+    header_symbol -> codenumber = (header_msg -> header).codenumber;
     map_header_[pl] = header_symbol;
     codec_num_++;
     return codec;
@@ -209,7 +210,8 @@ bool MARVEL_SERVER::IsMatchHeader(EbrHeaderMsg* header_msg, int pl) {
 }
 
 void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
-    CODEC* codec = FindCodec(header_msg);
+    // CODEC* codec = FindCodec(header_msg);
+    CODEC* codec = nullptr;
     uint8_t num;
     GFType** coef;
     if (codec == nullptr) {
@@ -234,6 +236,7 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
     // EbrHeader* header_new = CopyEbrHeader(header);
     // memset(header_new -> payload, 0, header_new -> strnum);
     codec -> get_encode_message(msg);
+    free(codec);
     int sock = NewSocket(app_ -> get_stream());
     int pack_size = (header_msg -> header).length;
 
@@ -261,5 +264,31 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
 }
 
 bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
+    int pl;
+    for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
+        if (IsMatchHeader(header_msg, pl)) {
+            HeaderSymbol *symbol = map_header_[pl];
+            if (symbol -> codenumber > (header_msg->header).codenumber) {
+                return false;
+            }
+        }
+    }
+    for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
+        if (!codec_status_[pl]) {
+            break;
+        }
+    }
+
+    HeaderSymbol* header_symbol;
+    header_symbol = (HeaderSymbol*) malloc(sizeof(HeaderSymbol));
+    header_symbol -> strnum = (header_msg -> header).strnum;
+    header_symbol -> destport = (header_msg -> header).destport;
+    header_symbol -> destaddr = (header_msg -> header).destaddr;
+    header_symbol -> sourceport = (header_msg -> header).sourceport;
+    header_symbol -> sourceaddr = (header_msg -> header).sourceaddr;
+    header_symbol -> codenumber = (header_msg -> header).codenumber;
+    map_header_[pl] = header_symbol;
+    codec_status_[pl] = true;
+
     return true;
 }

@@ -32,6 +32,7 @@ typedef struct {
 
 typedef struct {
     uint16_t strnum;
+    short codenumber;
     Address sourceaddr;
     Address destaddr;
     short sourceport;
