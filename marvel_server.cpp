@@ -70,23 +70,27 @@ ssize_t MARVEL_SERVER::RecvMessage(
     struct sockaddr_in clnt_addr;
     ssize_t length;
     int recv_bytes = 0;
-    EbrHeaderMsg* header_msg = (EbrHeaderMsg*)malloc(HEADER_MSG_SIZE);
+    EbrHeaderMsg* header_msg;
     char* msg_buf;
+    char* header_msg_buf = (char*)malloc(HEADER_MSG_SIZE);
 
     while (true) {
-        length = recvfrom(serv_socket, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*) &clnt_addr, &clnt_addr_size);
+        length = recvfrom(serv_socket, header_msg_buf, HEADER_MSG_SIZE, 0, (struct sockaddr*) &clnt_addr, &clnt_addr_size);
         if (length < 0) {
             throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
         }
 #ifdef MARVELCODING_DEBUG_H
-        printf("Recv Message:%d bytes", length);
+        std::cout << "Recv Message\n";
 #endif
+        header_msg = (EbrHeaderMsg*)header_msg_buf;
         if ((header_msg->header).type == MSG_TYPE || (header_msg->header).type == RESEND_MSG_TYPE) {
             if (MatchAddr(header_msg)) {
                 msg_buf = LoadHeader(header_msg);
                 if (msg_buf != nullptr) {
                     recv_bytes = (header_msg -> header).length * (header_msg -> header).pacsum;
                     memcpy(msg, msg_buf, recv_bytes);
+                    memcpy(host, &(header_msg -> header).sourceaddr, sizeof(Address));
+                    *port = (header_msg -> header).sourceport;
                     return recv_bytes;
                 }
             } else {
@@ -100,7 +104,6 @@ ssize_t MARVEL_SERVER::RecvMessage(
             // TODO: ACK
         }
     }
-
 }
 
 OFSTREAM* MARVEL_SERVER::GetStream() {
@@ -171,6 +174,7 @@ CODEC* MARVEL_SERVER::FindCodec(EbrHeaderMsg* header_msg) {
 
     CODEC* codec = new CODEC((header_msg -> header).pacsum, (header_msg -> header).length);
     codec_[pl] = codec;
+    codec_status_[pl] = true;
     HeaderSymbol* header_symbol;
     header_symbol = (HeaderSymbol*) malloc(sizeof(HeaderSymbol));
     header_symbol -> strnum = num;

@@ -19,11 +19,12 @@ int main() {
     uint32_t host;
     uint16_t port;
 
-    server.RecvMessage(msg, &host, &port);
+    // server.RecvMessage(msg, &host, &port);
 
     // std::thread t2(&App::RecvMessage, &server, msg, &host, &port);
 
     while (true) {
+        server.RecvMessage(msg, &host, &port);
         std::cout << "Input a:";
         std::cin >> a;
         if (a == 'E') {

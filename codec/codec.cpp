@@ -63,6 +63,9 @@ void CODEC::RecvMessage(char* msg, GFType* coef) {
 }
 
 bool CODEC::LinkMsg() {
+    if (_recv_num < _vec_size) {
+        return false;
+    }
     // TODO: Reform the msg with previous _vec_size rows is full-trace
     GFType** orig_mat = (GFType**)malloc(_recv_num * sizeof(GFType*));
     // TODO: Copy the cache_mat
@@ -74,6 +77,7 @@ bool CODEC::LinkMsg() {
     GFType temp;
     GFType shift_temp;
     char* msg_temp = (char*) malloc(_packet_size * sizeof(char));
+
     for (int i = 0; i < _vec_size; i++) {
         // TODO: Turn the [i][i] into 1(change both orig and dest)
         temp = orig_mat[i][i];

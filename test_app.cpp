@@ -46,6 +46,7 @@ ssize_t App::SendMessage(uint32_t dest_host, uint16_t dest_port, char *msg) {
     }
 
     log("MessageSent!\t" + TO_STRING(send_bytes) + "bytes");
+    log_char(msg);
     return send_bytes;
 }
 
@@ -64,6 +65,7 @@ ssize_t App::RecvMessage(char* msg, uint32_t* host, uint16_t* port) {
     log("Message:");
     log_char(msg);
     *host = temp_host.host;
+    return recv_bytes;
 }
 
 void App::RecvMessageDebug(char* msg, EbrHeaderMsg* header_msg) {
@@ -80,7 +82,17 @@ void App::log(STRING log_msg) {
 
 void App::log_char(char* log_msg) {
     *stream_ << "[" << MARVEL_LOG pass_time() << "]\n";
-    *stream_ << log_msg << std::endl;
+    for (int i = 0; i < strlen(log_msg) / 32; i++) {
+        for (int j = 0; j < 32; j++) {
+            *stream_ << (short)log_msg[i * 32 + j] << " ";
+            // std::cout << (short)(log_msg[i * 32 + j]) << " ";
+            printf("%x ", (short)(log_msg[i * 32 + j]));
+        }
+        *stream_ << "\n";
+        // std::cout << "\n";
+        printf("\n");
+    }
+    printf("\n");
 }
 
 OFSTREAM* App::get_stream() {
