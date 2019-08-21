@@ -14,6 +14,8 @@ void log_send_message(EbrHeaderMsg* msg);
 
 void log_recv_message(EbrHeaderMsg* msg);
 
+void log_send_init_message(uint32_t host, uint16_t port, char* msg, int length, uint8_t strnum);
+
 void log_recv_final_message(EbrHeaderMsg* header_msg, char* msg, int length);
 
 void log_transfer_message(EbrHeaderMsg* msg);

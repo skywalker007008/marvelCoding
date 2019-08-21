@@ -266,10 +266,12 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
 bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
     int pl;
     for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
-        if (IsMatchHeader(header_msg, pl)) {
+        if (codec_status_[pl] && IsMatchHeader(header_msg, pl)) {
             HeaderSymbol *symbol = map_header_[pl];
-            if (symbol -> codenumber > (header_msg->header).codenumber) {
+            if (symbol -> codenumber != (header_msg->header).codenumber) {
                 return false;
+            } else {
+                return true;
             }
         }
     }

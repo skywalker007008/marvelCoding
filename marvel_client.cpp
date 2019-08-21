@@ -51,6 +51,9 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
         coef = codec.encode();
         codec.get_encode_message(message);
     }
+#ifdef MARVELCODING_DEBUG_H
+    log_send_init_message(host, port, msg, strlen(msg), id_);
+#endif
 
     // create a socket
     for (int i = 0; i < MAX_RETRY_TIME; i++) {
