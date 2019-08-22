@@ -75,6 +75,7 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
 
     Address dest_addr;
     dest_addr.host = host;
+    int id = id_;
 
     // start-to-send
     try {
@@ -88,10 +89,10 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
-    id_++;
+    id++;
+    id_ = id;
     close(sock);
     return send_bytes;
-
 }
 
 ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {

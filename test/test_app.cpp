@@ -40,7 +40,7 @@ ssize_t App::SendMessage(uint32_t dest_host, uint16_t dest_port, char *msg) {
     Address host;
     host.host = dest_host;
     try {
-        send_bytes = MARVEL_API SendMessageToServer(*client_, host, dest_port, msg);
+        send_bytes = MARVEL_API SendMessageToServer(client_, host, dest_port, msg);
     } catch (MARVEL_EXCEPTION exp) {
         HandleException(exp);
     }
@@ -55,7 +55,7 @@ ssize_t App::RecvMessage(char* msg, uint32_t* host, uint16_t* port) {
     Address temp_host;
 
     try {
-        recv_bytes = MARVEL_API RecvMessageFromServer(*server_, &temp_host, port, msg);
+        recv_bytes = MARVEL_API RecvMessageFromServer(server_, &temp_host, port, msg);
     } catch (MARVEL_EXCEPTION exp) {
         HandleException(exp);
     }

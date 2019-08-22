@@ -33,23 +33,22 @@ void MARVEL_API LogOut(MARVEL_SERVER server) {
     // memset(server, 0, CLIENT_SIZE);
 }
 
-ssize_t MARVEL_API SendMessageToServer(MARVEL_CLIENT client,
+ssize_t MARVEL_API SendMessageToServer(MARVEL_CLIENT* client,
                              Address host, uint16_t port, char* msg) {
     ssize_t send_bytes = 0;
     try {
-        send_bytes = client.SendProcess(host.host, port, msg, kDefaultPacketSize);
+        send_bytes = client -> SendProcess(host.host, port, msg, kDefaultPacketSize);
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
     return send_bytes;
 }
 
-ssize_t MARVEL_API RecvMessageFromServer(MARVEL_SERVER server,
+ssize_t MARVEL_API RecvMessageFromServer(MARVEL_SERVER* server,
                                Address* host, uint16_t* port, char* msg) {
-    // client -> app_ -> print();
     ssize_t recv_bytes = 0;
     try {
-        recv_bytes = server.RecvProcess(msg, host, port);
+        recv_bytes = server -> RecvProcess(msg, host, port);
     } catch (MARVEL_ERR MarvelException exp){
         throw exp;
     }
