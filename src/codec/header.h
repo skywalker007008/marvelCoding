@@ -101,12 +101,12 @@ typedef struct {
     char* msg;
     GFType** coef;
     uint8_t pacsum;
-    int pacsize;
+    uint16_t pacsize;
 }ClientCacheHeaderMsg;
 
 typedef struct {
     ClientCacheHeader header;
-    int misscoef[RLNC kMaxPartNum];
+    uint8_t misscoef[RLNC kMaxPartNum];
 }ClientCacheRequest;
 
 void init_addr();
@@ -118,10 +118,14 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
 
 EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header);
 
-void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, uint8_t pacsum, int pacsize,
-                          char* msg, GFType** coef, Address destaddr, short destport);
+void NewClientCacheHeader(ClientCacheHeader* header, uint8_t strnum, Address destaddr, uint16_t destport);
 
-void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum, Address destaddr, short destport, int* miss_packet);
+void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, uint8_t pacsum, uint16_t pacsize,
+                          char* msg, GFType** coef, Address destaddr, uint16_t destport);
+
+void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
+                           Address destaddr, uint16_t destport,
+                           uint8_t* miss_packet, uint8_t pacsum);
 
 bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request);
 

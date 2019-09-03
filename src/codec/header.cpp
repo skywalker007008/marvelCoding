@@ -31,9 +31,9 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
     header -> sourceport = source_port;
     header -> destport = dest_port;
     header -> length = length;
-    if (check == nullptr) {
-        memset(header -> check, 0, 4);
-    }
+    /*if (check == nullptr) {
+        //memset(header -> check, 0, 4);
+    }*/
     EbrHeaderMsg* header_msg = (EbrHeaderMsg*)malloc(HEADER_MSG_SIZE);
     header_msg -> header = *header;
     memcpy(header_msg -> payload, payload, MSG_SIZE);
@@ -72,6 +72,33 @@ EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header_msg) {
     memcpy(header_msg_new -> payload, header_msg -> payload, MSG_SIZE);
     memcpy(header_msg_new -> coef, header_msg -> coef, COEF_SIZE);
     return header_msg_new;
+}
+
+void NewClientCacheHeader(ClientCacheHeader* header, uint8_t strnum, Address destaddr, uint16_t destport) {
+    header -> strnum = strnum;
+    (header -> destaddr).host = destaddr.host;
+    header -> destport = destport;
+}
+
+void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, uint8_t pacsum, uint16_t pacsize,
+                             char* msg, GFType** coef, Address destaddr, uint16_t destport) {
+    ClientCacheHeader* header = (ClientCacheHeader*)malloc(sizeof(ClientCacheHeader));
+    NewClientCacheHeader(header, strnum, destaddr, destport);
+    header_msg -> header = header;
+    header_msg -> pacsum = pacsum;
+    header_msg -> pacsize = pacsize;
+    header_msg -> coef = coef;
+    header_msg -> msg = msg;
+}
+
+void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
+                           Address destaddr, uint16_t destport,
+                           uint8_t* miss_packet, uint8_t pacsum) {
+    ClientCacheHeader* header = (ClientCacheHeader*)malloc(sizeof(ClientCacheHeader));
+    NewClientCacheHeader(header, strnum, destaddr, destport);
+    memcpy(&(request->header), header, sizeof(ClientCacheHeader));
+    memset(request->misscoef, 0, RLNC kMaxPartNum * sizeof(uint8_t));
+    memcpy(request->misscoef, miss_packet, pacsum * sizeof(uint8_t));
 }
 
 bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request) {
