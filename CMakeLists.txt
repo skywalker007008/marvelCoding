@@ -3,9 +3,11 @@ project(marvelCoding)
 
 find_package(Threads)
 
-add_definitions(-D MARVEL_DEBUG)
-
 set(CMAKE_CXX_STANDARD 14)
+# Control whether debug mode
+add_definitions(-D MARVEL_DEBUG)
+# Control which protocal we use
+add_definitions(-D MARVEL_TCP)
 
 set(SOURCE_FILES
         src/exception/marvel_exception.h

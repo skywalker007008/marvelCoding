@@ -25,6 +25,8 @@ int MARVEL NewSocket(OFSTREAM* stream) {
             break;
         }
     }
+    bool broadcast = true;
+    setsockopt(serv_socket, SOL_SOCKET, SO_BROADCAST, (const char*)broadcast, sizeof(bool));
     return serv_socket;
 }
 
