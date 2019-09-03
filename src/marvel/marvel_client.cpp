@@ -85,6 +85,7 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
                                              addr_, dest_addr, port_, port,
                                              packet_size, nullptr, message + i * packet_size, coef[i]);
             send_bytes += sendMessage(sock, header_msg);
+            free(header_msg);
         }
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
@@ -92,6 +93,10 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
     id++;
     id_ = id;
     close(sock);
+#ifdef MARVEL_TCP
+    AddCache(message, coef, id_, dest_addr, port, packet_size, packet_sum);
+#endif
+    free_array2(coef, packet_sum);
     return send_bytes;
 }
 
@@ -116,6 +121,11 @@ void MARVEL_CLIENT::shutdown() {
 
 void MARVEL_CLIENT::start() {
 
+}
+
+void MARVEL_CLIENT::AddCache(char* msg, GFType** coef, uint8_t strnum, Address dest_addr,
+                             short dest_port, int packet_size, uint8_t packet_sum) {
+    // TODO: Add the msg into the str
 }
 
 

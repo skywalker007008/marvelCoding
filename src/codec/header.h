@@ -10,6 +10,7 @@
 
 #include "codec.h"
 #include "../include/marvel_constant.h"
+#include <endian.h>
 
 #define MSG_TYPE 0
 #define RESEND_TYPE 1
@@ -32,29 +33,53 @@ typedef struct {
 
 typedef struct {
     uint16_t strnum;
-    short codenumber;
+    uint8_t codenumber;
     Address sourceaddr;
     Address destaddr;
-    short sourceport;
-    short destport;
+    uint16_t sourceport;
+    uint16_t destport;
 }HeaderSymbol;
+
+typedef struct {
+    uint32_t host;
+}Address;
 
 typedef
 struct struct_app_ebr_header_data
 {
-    char type; // type of message
-    char range; // saved
-    char codetype; // type of the coding
-    char codenumber; // number of the coded times
-    short pacsum; // total sum of the packets
-    short strnum; // no. of the packet_stream
-    short pacnum; // no. of the packet
+#if defined(__BIG_ENDIAN)
+    char type:4; // type of message
+    char range:4; // No. of the hop
+#elif defined(__LITTLE_ENDIAN)
+    char range:4; // No. of the hop
+    char type:4; // type of message
+#endif
+
+#if defined(__BIG_ENDIAN)
+    char codetype:4; // type of the coding(actually only one)
+    char codenumber:4; // number of the coded times
+#elif defined(__LITTLE_ENDIAN)
+    char codenumber:4; // number of the coded times
+    char codetype:4; // type of the coding(actually only one)
+#endif
+
+#if defined(__BIG_ENDIAN)
+    uint8_t pacsum:4; // total sum of the packets
+    uint8_t pacnum:4; // no. of the packet
+#elif defined(__LITTLE_ENDIAN)
+    uint8_t pacnum:4; // no. of the packet
+    uint8_t pacsum:4; // total sum of the packets
+#endif
+    uint8_t strnum; // no. of the packet_stream
+
     Address sourceaddr; // source address
     Address destaddr; // destination address
-    short sourceport; // source port
-    short destport; // destination port
-    int length; // length of each payload
-    char check[4]; // saved
+
+    uint16_t sourceport; // source port
+    uint16_t destport; // destination port
+
+    uint16_t length; // length of each payload
+    uint16_t check; // handle error
 }EbrHeader;
 
 typedef struct {
@@ -63,13 +88,41 @@ typedef struct {
     GFType coef[RLNC kMaxPartNum];
 }EbrHeaderMsg;
 
+// Cache Used
+
+typedef struct {
+    uint8_t strnum;
+    Address destaddr;
+    uint16_t destport;
+}ClientCacheHeader
+
+typedef struct {
+    ClientCacheHeader* header;
+    char* msg;
+    GFType** coef;
+    uint8_t pacsum;
+    int pacsize;
+}ClientCacheHeaderMsg;
+
+typedef struct {
+    ClientCacheHeader header;
+    int misscoef[RLNC kMaxPartNum];
+}ClientCacheRequest;
+
+void init_addr();
+
 EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
                         Address source_addr, Address dest_addr, short source_port, short dest_port,
                         int length, char* check, char* payload, GFType* coef);
 
-void init_addr();
-
 EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header);
+
+void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, uint8_t pacsum, int pacsize,
+                          char* msg, GFType** coef, Address destaddr, short destport);
+
+void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum, Address destaddr, short destport, int* miss_packet);
+
+bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request);
 
 #endif //MARVELCODING_HEADER_H

@@ -66,9 +66,24 @@ EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header_msg) {
     (header_msg_new -> header).sourceport = (header_msg -> header).sourceport;
     (header_msg_new -> header).destport = (header_msg -> header).destport;
     (header_msg_new -> header).length = (header_msg -> header).length;
+    (header_msg_new -> header).check = (header_msg -> header).check;
     // (header_msg_new -> header).check = header -> check;
-    memcpy((header_msg_new -> header).check, (header_msg -> header).check, 4);
+    //memcpy((header_msg_new -> header).check, (header_msg -> header).check, 4);
     memcpy(header_msg_new -> payload, header_msg -> payload, MSG_SIZE);
     memcpy(header_msg_new -> coef, header_msg -> coef, COEF_SIZE);
     return header_msg_new;
+}
+
+bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request) {
+    ClientCacheHeader* header1 = header_client -> header;
+    ClientCacheHeader header2 = header_request -> header;
+    /*if (memcmp(header1, &header2, sizeof(ClientCacheHeader))) {
+        */
+    if (header1->strnum == header2.strnum &&
+            header1->destport == header2.destport &&
+            (header1->destaddr).host == (header2.destaddr).host) {
+        return true;
+    } else {
+        return false;
+    }
 }
