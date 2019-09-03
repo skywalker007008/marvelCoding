@@ -137,19 +137,21 @@ void CODEC::get_decode_message(char* buf) {
 }
 
 GFType** CODEC::encode() {
+    // TODO: Generate a matrix
     GFType** rand_list = (GFType**)malloc(_vec_size * sizeof(GFType*));
     GFType rand;
     memset(_encode_msg, 0, _recv_num * _packet_size * sizeof(char));
     memcpy(_raw_msg, _cache_msg, _recv_num * _packet_size * sizeof(char));
+    GenerateEncodeMat(_recv_num, rand_list);
     for (int i = 0; i < _recv_num; i++) {
-        rand_list[i] = (GFType*)malloc(_recv_num * sizeof(GFType));
+        // rand_list[i] = (GFType*)malloc(_recv_num * sizeof(GFType));
         for (int t = 0; t < _recv_num; t++) {
-            rand = std::rand() % gFieldSize;
+            rand = rand_list[i][t];
             for (int j = 0; j < _packet_size; j++) {
                 _encode_msg[i * _packet_size + j] ^=
                         gf_mul(rand, (uint8_t) _raw_msg[t * _packet_size + j]);
             }
-            rand_list[i][t] = rand;
+            // rand_list[i][t] = rand;
         }
     }
     rand_list = gf_newcoef(rand_list, _cache_coef_mat, _recv_num, _vec_size);
@@ -196,6 +198,70 @@ void RLNC coef_init() {
 void RLNC init(unsigned int m) {
     gf_init(m, prim_poly[m]);
     coef_init();
+}
+
+void RLNC GenerateEncodeMat(int recv_num, GFType** rand) {
+    for (int i = 0; i < recv_num; i++) {
+        rand[i] = (GFType *) malloc(recv_num * sizeof(GFType));
+    }
+    while (true) {
+        for (int i = 0; i < recv_num; i++) {
+            memset(rand[i], 0, recv_num * sizeof(GFType));
+            for (int t = 0; t < recv_num; t++) {
+                rand[i][t] = std::rand() % gFieldSize;
+            }
+        }
+        if (is_full(rand, recv_num)) {
+            break;
+        }
+    }
+}
+
+bool RLNC is_full(GFType** rand, int vec_size) {
+    GFType** orig_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
+    // TODO: Copy the cache_mat
+    for (int i = 0; i < vec_size; i++) {
+        orig_mat[i] = (GFType*) malloc(vec_size * sizeof(GFType));
+        memcpy(orig_mat[i], rand[i], vec_size * sizeof(GFType));
+    }
+    // TODO: Turn it into a lower-triangle-matrix
+    GFType temp;
+    GFType shift_temp;
+    for (int i = 0; i < vec_size; i++) {
+        // TODO: Turn the [i][i] into 1(change both orig and dest)
+        temp = orig_mat[i][i];
+        // if [i][i] == 0, needs shift
+        if (temp == 0) {
+            // TODO: Find a row j while [j][i] != 0
+            for (int j = i; j < vec_size; j++) {
+                if (orig_mat[j][i] != 0) {
+                    // TODO: Shift the 2 lines
+                    for (int k = 0; k < vec_size; k++) {
+                        shift_temp = orig_mat[i][k];
+                        orig_mat[i][k] = orig_mat[j][k];
+                        orig_mat[j][k] = shift_temp;
+                    }
+                    break;
+                }
+                // TODO: if not found, return false
+                if (j == vec_size - 1) {
+                    return false;
+                }
+            }
+            temp = orig_mat[i][i];
+        }
+        for (int j = 0; j < vec_size; j++) {
+            orig_mat[i][j] = gf_div(orig_mat[i][j], temp);
+        }
+        // TODO: Turn the column[i] into 1,0,0,0......
+        for (int t = i + 1; t < vec_size; t++) {
+            temp = orig_mat[t][i];
+            for (int j = 0; j < vec_size; j++) {
+                orig_mat[t][j] = gf_sub(orig_mat[t][j], gf_mul(temp, orig_mat[i][j]));
+            }
+        }
+    }
+    return true;
 }
 
 

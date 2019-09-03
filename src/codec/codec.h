@@ -131,6 +131,10 @@ namespace rlnc {
     void coef_init();
 
     void init(unsigned int m);
+
+    void GenerateEncodeMat(int recv_num, GFType** rand);
+
+    bool is_full(GFType** rand, int vec_size);
 }
 
 #endif //RLNC_CODEC_H

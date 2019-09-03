@@ -219,8 +219,9 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
     CODEC* codec = nullptr;
     uint8_t num;
     GFType** coef;
+    int size = (header_msg -> header).pacsum;
     if (codec == nullptr) {
-        codec = new CODEC(1, (header_msg -> header).length);
+        codec = new CODEC(size, (header_msg -> header).length);
         codec -> RecvMessage(header_msg -> payload, header_msg -> coef);
         coef = codec -> encode();
         num = 1;
