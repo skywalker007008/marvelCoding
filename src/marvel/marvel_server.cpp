@@ -246,6 +246,7 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
     int sock = NewSocket(app_ -> get_stream());
     int pack_size = (header_msg -> header).length;
 
+
     try {
         for (uint8_t i = 0; i < num; i++) {
             EbrHeaderMsg* header_msg_new = CopyEbrHeaderMsg(header_msg);
