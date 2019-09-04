@@ -115,6 +115,13 @@ namespace marvel {
             int pos_;
             int size_;
         };
+
+        class AppCacheFullException : public MarvelException {
+        public:
+            AppCacheFullException();
+
+            STRING print();
+        };
     } // namespace err
 } // namespace marvel
 

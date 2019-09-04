@@ -16,6 +16,7 @@
 #include "../src/marvel/marvel_server.h"
 #include "../src/marvel/marvel_app.h"
 #include "../src/thread/threadpool.h"
+#include "../src/codec/header.h"
 
 class App : public MARVEL_APP {
 public:
@@ -37,6 +38,9 @@ public:
     void start();
     void log(STRING log_msg);
     void log_char(char* log_msg);
+    void AddCache(ClientCacheHeaderMsg* header_msg) override;
+    void FindCache(ClientCacheRequest* request, ClientCacheHeaderMsg* header) override ;
+    void RemoveCache() override ;
 
 private:
     STRING name_;
@@ -44,6 +48,11 @@ private:
     uint32_t host_;
     MARVEL_CLIENT* client_;
     MARVEL_SERVER* server_;
+
+#ifdef MARVELCODING_QUEUE_H
+    struct ClientCacheList client_cache_list_;
+    int cache_num_;
+#endif
 };
 
 #endif //MARVELCODING_TEST_APP_H

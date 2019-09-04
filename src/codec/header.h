@@ -11,6 +11,8 @@
 #include "codec.h"
 #include "../include/marvel_constant.h"
 #include <endian.h>
+#include "../include/queue.h"
+#include "../include/alloc.h"
 
 #define MSG_TYPE 0
 #define RESEND_TYPE 1
@@ -82,7 +84,7 @@ struct struct_app_ebr_header_data
     uint16_t check; // handle error
 }EbrHeader;
 
-typedef struct {
+typedef struct EbrHeaderMsg{
     EbrHeader header;
     char payload[MARVEL kMaxPacketLength];
     GFType coef[RLNC kMaxPartNum];
@@ -94,9 +96,12 @@ typedef struct {
     uint8_t strnum;
     Address destaddr;
     uint16_t destport;
-}ClientCacheHeader
+}ClientCacheHeader;
 
-typedef struct {
+typedef struct ClientCacheHeaderMsg {
+#ifdef MARVELCODING_QUEUE_H
+    TAILQ_ENTRY(ClientCacheHeaderMsg) cache_link;
+#endif
     ClientCacheHeader* header;
     char* msg;
     GFType** coef;
@@ -104,10 +109,16 @@ typedef struct {
     uint16_t pacsize;
 }ClientCacheHeaderMsg;
 
-typedef struct {
+typedef struct ClientCacheRequest{
     ClientCacheHeader header;
     uint8_t misscoef[RLNC kMaxPartNum];
 }ClientCacheRequest;
+
+#ifdef MARVELCODING_QUEUE_H
+
+TAILQ_HEAD(ClientCacheList, ClientCacheHeaderMsg);
+
+#endif
 
 void init_addr();
 
@@ -122,6 +133,19 @@ void NewClientCacheHeader(ClientCacheHeader* header, uint8_t strnum, Address des
 
 void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, uint8_t pacsum, uint16_t pacsize,
                           char* msg, GFType** coef, Address destaddr, uint16_t destport);
+
+void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* dest_header) {
+    memcpy(dest_header->header, src_header->header, sizeof(ClientCacheHeader));
+    uint8_t pacsum = src_header -> pacsum;
+    dest_header -> pacsize = src_header -> pacsize;
+    dest_header -> pacsum = pacsum;
+    alloc_array(char)(dest_header->msg, dest_header->pacsize);
+    alloc_array2<GFType>(dest_header->coef, pacsum, pacsum);
+    memcpy(dest_header->msg, src_header->msg, dest_header->pacsize * pacsum);
+    for (int i = 0; i < pacsum; i++) {
+        memcpy(dest_header->coef[i], src_header->coef[i], pacsum * sizeof(GFType));
+    }
+}
 
 void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
                            Address destaddr, uint16_t destport,

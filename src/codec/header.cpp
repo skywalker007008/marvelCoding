@@ -14,6 +14,11 @@
 struct sockaddr_in broadcast_addr;
 struct sockaddr_in any_addr;
 
+#ifdef MARVELCODING_QUEUE_H
+// struct ClientCacheList client_cache_list;
+
+#endif
+
 EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
                         Address source_addr, Address dest_addr, short source_port, short dest_port,

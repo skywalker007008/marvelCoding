@@ -17,6 +17,7 @@
 #ifdef MARVEL_DEBUG
 
 #include "../include/debug.h"
+#include "../include/alloc.h"
 
 #endif
 
@@ -94,9 +95,13 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
     id_ = id;
     close(sock);
 #ifdef MARVEL_TCP
-    AddCache(message, coef, id_, dest_addr, port, packet_size, packet_sum);
+    try {
+        AddCache(message, coef, id_, dest_addr, port, packet_size, packet_sum);
+    } catch (MARVEL_ERR AppCacheFullException exp) {
+        throw exp;
+    }
 #endif
-    free_array2(coef, packet_sum);
+    free_array2((void**)coef, packet_sum);
     return send_bytes;
 }
 
@@ -124,8 +129,15 @@ void MARVEL_CLIENT::start() {
 }
 
 void MARVEL_CLIENT::AddCache(char* msg, GFType** coef, uint8_t strnum, Address dest_addr,
-                             short dest_port, int packet_size, uint8_t packet_sum) {
+                             uint16_t dest_port, uint16_t packet_size, uint8_t packet_sum) {
     // TODO: Add the msg into the str
+    ClientCacheHeaderMsg* header_msg = (ClientCacheHeaderMsg*)malloc(sizeof(ClientCacheHeaderMsg));
+    NewClientCacheHeaderMsg(header_msg, strnum, packet_sum, packet_size, msg, coef, dest_addr, dest_port);
+    try {
+        app_->AddCache(header_msg);
+    } catch (MARVEL_ERR AppCacheFullException exp) {
+        throw exp;
+    }
 }
 
 

@@ -72,6 +72,12 @@ STRING MARVEL_ERR MessageRecvFailedException::print() {
             + " Failed Size: " + TO_STRING(size_));
 }
 
+MARVEL_ERR AppCacheFullException::AppCacheFullException() {}
+
+STRING MARVEL_ERR AppCacheFullException::print() {
+    return "Cache Full!\n";
+}
+
 
 
 

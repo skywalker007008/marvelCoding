@@ -346,6 +346,36 @@ src/include/debug.cpp.s:
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/debug.cpp.s
 .PHONY : src/include/debug.cpp.s
 
+src/include/free.o: src/include/free.cpp.o
+
+.PHONY : src/include/free.o
+
+# target to build an object file
+src/include/free.cpp.o:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/free.cpp.o
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/free.cpp.o
+.PHONY : src/include/free.cpp.o
+
+src/include/free.i: src/include/free.cpp.i
+
+.PHONY : src/include/free.i
+
+# target to preprocess a source file
+src/include/free.cpp.i:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/free.cpp.i
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/free.cpp.i
+.PHONY : src/include/free.cpp.i
+
+src/include/free.s: src/include/free.cpp.s
+
+.PHONY : src/include/free.s
+
+# target to generate assembly for a file
+src/include/free.cpp.s:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/free.cpp.s
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/free.cpp.s
+.PHONY : src/include/free.cpp.s
+
 src/include/list.o: src/include/list.cpp.o
 
 .PHONY : src/include/list.o
@@ -671,6 +701,9 @@ help:
 	@echo "... src/include/debug.o"
 	@echo "... src/include/debug.i"
 	@echo "... src/include/debug.s"
+	@echo "... src/include/free.o"
+	@echo "... src/include/free.i"
+	@echo "... src/include/free.s"
 	@echo "... src/include/list.o"
 	@echo "... src/include/list.i"
 	@echo "... src/include/list.s"

@@ -78,7 +78,7 @@ namespace marvel {
         void start();
 
         void AddCache(char* msg, GFType** coef, uint8_t strnum, Address dest_addr,
-                      short dest_port, int packet_size, uint8_t packet_sum);
+                      uint16_t dest_port, uint16_t packet_size, uint8_t packet_sum);
 
     private:
         /*! ptr of the codec_lib */
