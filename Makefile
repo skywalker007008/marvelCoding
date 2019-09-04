@@ -346,6 +346,36 @@ src/include/debug.cpp.s:
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/debug.cpp.s
 .PHONY : src/include/debug.cpp.s
 
+src/include/list.o: src/include/list.cpp.o
+
+.PHONY : src/include/list.o
+
+# target to build an object file
+src/include/list.cpp.o:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/list.cpp.o
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/list.cpp.o
+.PHONY : src/include/list.cpp.o
+
+src/include/list.i: src/include/list.cpp.i
+
+.PHONY : src/include/list.i
+
+# target to preprocess a source file
+src/include/list.cpp.i:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/list.cpp.i
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/list.cpp.i
+.PHONY : src/include/list.cpp.i
+
+src/include/list.s: src/include/list.cpp.s
+
+.PHONY : src/include/list.s
+
+# target to generate assembly for a file
+src/include/list.cpp.s:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/list.cpp.s
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/list.cpp.s
+.PHONY : src/include/list.cpp.s
+
 src/include/marvel_constant.o: src/include/marvel_constant.cpp.o
 
 .PHONY : src/include/marvel_constant.o
@@ -641,6 +671,9 @@ help:
 	@echo "... src/include/debug.o"
 	@echo "... src/include/debug.i"
 	@echo "... src/include/debug.s"
+	@echo "... src/include/list.o"
+	@echo "... src/include/list.i"
+	@echo "... src/include/list.s"
 	@echo "... src/include/marvel_constant.o"
 	@echo "... src/include/marvel_constant.i"
 	@echo "... src/include/marvel_constant.s"

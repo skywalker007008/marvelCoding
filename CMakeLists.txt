@@ -26,7 +26,7 @@ set(SOURCE_FILES
         src/marvel/marvel_server.cpp
         src/api/api_app.h
         src/api/api_app.cpp
-                 )
+        src/include/queue.h src/include/list.h src/include/list.cpp)
 
 set(TEST test/test_app.h
          test/test_app.cpp)
