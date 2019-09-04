@@ -134,18 +134,7 @@ void NewClientCacheHeader(ClientCacheHeader* header, uint8_t strnum, Address des
 void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, uint8_t pacsum, uint16_t pacsize,
                           char* msg, GFType** coef, Address destaddr, uint16_t destport);
 
-void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* dest_header) {
-    memcpy(dest_header->header, src_header->header, sizeof(ClientCacheHeader));
-    uint8_t pacsum = src_header -> pacsum;
-    dest_header -> pacsize = src_header -> pacsize;
-    dest_header -> pacsum = pacsum;
-    alloc_array(char)(dest_header->msg, dest_header->pacsize);
-    alloc_array2<GFType>(dest_header->coef, pacsum, pacsum);
-    memcpy(dest_header->msg, src_header->msg, dest_header->pacsize * pacsum);
-    for (int i = 0; i < pacsum; i++) {
-        memcpy(dest_header->coef[i], src_header->coef[i], pacsum * sizeof(GFType));
-    }
-}
+void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* dest_header);
 
 void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
                            Address destaddr, uint16_t destport,
