@@ -91,10 +91,7 @@ typedef struct EbrHeaderMsg {
 }EbrHeaderMsg;
 
 #ifdef MARVEL_TCP
-typedef struct EbrResendMsg {
-    EbrHeader header;
-    uint16_t symbol;
-};
+typedef EbrHeader EbrResendMsg;
 #endif
 
 // Cache Used
@@ -146,7 +143,7 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
 EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header);
 
 #ifdef MARVEL_TCP
-EbrResendMsg* NewEbrResendMsg(ServerCacheHeaderMsg* cache_msg);
+EbrResendMsg* NewEbrResendMsg(ServerCacheHeaderMsg* cache_msg, Address sourceaddr, uint16_t sourceport);
 
 uint16_t ResendValue(bool recv[]);
 #endif

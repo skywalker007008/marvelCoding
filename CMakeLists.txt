@@ -9,6 +9,8 @@ add_definitions(-D MARVEL_DEBUG)
 # Control which protocal we use
 add_definitions(-D MARVEL_TCP)
 
+# add_definitions(-D MODE_WINDOW)
+
 set(SOURCE_FILES
         src/exception/marvel_exception.h
         src/exception/marvel_exception.cpp

@@ -41,6 +41,7 @@ public:
     void AddCache(ClientCacheHeaderMsg* header_msg) override;
     void FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) override ;
     void RemoveCache() override ;
+    void SendResendRequest(EbrResendMsg* msg) override ;
 
 private:
     STRING name_;

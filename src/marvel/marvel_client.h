@@ -80,6 +80,10 @@ namespace marvel {
         void AddCache(char* msg, GFType** coef, uint8_t strnum, Address dest_addr,
                       uint16_t dest_port, uint16_t packet_size, uint8_t packet_sum);
 
+        void SendResendRequest(EbrResendMsg* msg);
+
+        void SendResendRequestThread(EbrResendMsg* msg);
+
     private:
         /*! ptr of the codec_lib */
         CODEC* codec_;

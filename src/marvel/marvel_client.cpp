@@ -140,5 +140,22 @@ void MARVEL_CLIENT::AddCache(char* msg, GFType** coef, uint8_t strnum, Address d
     }
 }
 
+void MARVEL_CLIENT::SendResendRequest(EbrResendMsg* msg) {
+    std::thread t(MARVEL_CLIENT::SendResendRequestThread, this, msg);
+}
+
+void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
+    EbrResendMsg* buf = (EbrResendMsg)malloc(sizeof(EbrResendMsg));
+    memcpy(buf, msg, sizeof(EbrResendMsg));
+    struct sockaddr_in destaddr;
+    destaddr.sin_port = kDefaultPort;
+    // destaddr.sin_port = msg->sourceport;
+    destaddr.sin_family = AF_INET;
+    destaddr.sin_addr.s_addr = htonl(msg->sourceaddr.host);
+    // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+    sendto(sock, buf, sizeof(EbrResendMsg), 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
+}
+
 
 

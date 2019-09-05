@@ -33,6 +33,7 @@ namespace marvel {
          virtual void log(STRING log_msg) {}
          virtual void AddCache(ClientCacheHeaderMsg* header_msg) {}
          virtual void FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {}
+         virtual void SendResendRequest(EbrResendMsg* msg) {}
          virtual void RemoveCache() {}
          // virtual ssize_t RecvMessage(char* msg, uint32_t* host, uint16_t* port) {}
     };

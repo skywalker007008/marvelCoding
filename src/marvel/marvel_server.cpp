@@ -330,6 +330,8 @@ void MARVEL_SERVER::RemoveCache() {
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
     TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&server_cache_list_, header, cache_link);
+    free(header->codec);
+    free(header);
 }
 #endif
 
@@ -338,9 +340,13 @@ void MARVEL_SERVER::AskResend() {
     // USE MACRO
     sleep(3000);
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
-    EbrResendMsg* resend_msg = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
-    resend_msg = NewEbrResendMsg(header);
-
-
+    if (header -> recvnum != header -> size) {
+        EbrResendMsg *resend_msg = (EbrResendMsg *) malloc(sizeof(EbrResendMsg));
+        Address addr;
+        addr.host = host_;
+        resend_msg = NewEbrResendMsg(header, addr, port_);
+        app_ -> SendResendRequest(resend_msg);
+    }
+    std::thread t(MARVEL_SERVER::RemoveCache, this);
 }
 #endif

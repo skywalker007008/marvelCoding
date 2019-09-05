@@ -51,8 +51,8 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
 void init_addr() {
     broadcast_addr.sin_port = kDefaultPort;
     broadcast_addr.sin_family = AF_INET;
-    // broadcast_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
-    broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    broadcast_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
+    // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
     any_addr.sin_port = kDefaultPort;
     any_addr.sin_family = AF_INET;
@@ -84,25 +84,34 @@ EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header_msg) {
 #ifdef MARVEL_TCP
 EbrResendMsg* NewEbrResendMsg(ServerCacheHeaderMsg* cache_msg, Address sourceaddr, uint16_t sourceport) {
     EbrResendMsg* resend_msg = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
-    EbrHeader header = resend_msg -> header;
-    header.pacnum = 0;
-    header.pacsum = cache_msg->size;
-    header.sourceport = sourceport;
-    header.sourceaddr.host = sourceaddr.host;
-    header.destaddr.host = cache_msg -> sourceaddr.host;
-    header.destport = cache_msg -> sourceport;
-    header.strnum = cache_msg -> strnum;
-    header.codenumber = 0;
+    resend_msg -> pacsum = cache_msg->size;
+    resend_msg -> sourceport = sourceport;
+    resend_msg -> sourceaddr.host = sourceaddr.host;
+    resend_msg -> destaddr.host = cache_msg -> sourceaddr.host;
+    resend_msg -> destport = cache_msg -> sourceport;
+    resend_msg -> strnum = cache_msg -> strnum;
+    resend_msg -> codenumber = 0;
+    resend_msg -> codetype = 0;
+    resend_msg -> range = 0;
+    resend_msg -> type = RESEND_TYPE;
 
-    header.codetype = 0;
-    header.range = 0;
-    header.type = RESEND_TYPE;
-    header.length = cache_msg -> size;
-
+#ifdef MODE_WINDOW
+    for (int i = 0; i < 16; i++) {
+        if (cache_msg -> recv[i]) {
+            break;
+        }
+    }
+    resend_msg -> pacnum = i;
+    resend_msg -> length = 0;
+    resend_msg -> check = 0;
+#else
     uint16_t check = ResendValue(cache_msg->recv);
-    header.check = check;
-    resend_msg->symbol = check;
+    resend_msg -> length = check;
+    resend_msg -> check = check;
+    resend_msg -> pacnum = cache_msg -> size - cache_msg -> recvnum;
+#endif
     return resend_msg;
+
 }
 
 uint16_t ResendValue(bool recv[]) {

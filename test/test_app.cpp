@@ -148,6 +148,10 @@ void App::RemoveCache() {
     TAILQ_REMOVE(&client_cache_list_, header, cache_link);
 }
 
+void App::SendResendRequest(EbrResendMsg* msg) {
+    client_ -> SendResendRequest(msg);
+}
+
 static void MARVEL StartClient(MARVEL_CLIENT* client) {
     client->start();
 }
