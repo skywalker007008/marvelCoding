@@ -19,6 +19,8 @@ struct sockaddr_in any_addr;
 
 #endif
 
+#define bit(n) (1 << (n))
+
 EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
                         Address source_addr, Address dest_addr, short source_port, short dest_port,
@@ -79,6 +81,42 @@ EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header_msg) {
     return header_msg_new;
 }
 
+#ifdef MARVEL_TCP
+EbrResendMsg* NewEbrResendMsg(ServerCacheHeaderMsg* cache_msg, Address sourceaddr, uint16_t sourceport) {
+    EbrResendMsg* resend_msg = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
+    EbrHeader header = resend_msg -> header;
+    header.pacnum = 0;
+    header.pacsum = cache_msg->size;
+    header.sourceport = sourceport;
+    header.sourceaddr.host = sourceaddr.host;
+    header.destaddr.host = cache_msg -> sourceaddr.host;
+    header.destport = cache_msg -> sourceport;
+    header.strnum = cache_msg -> strnum;
+    header.codenumber = 0;
+
+    header.codetype = 0;
+    header.range = 0;
+    header.type = RESEND_TYPE;
+    header.length = cache_msg -> size;
+
+    uint16_t check = ResendValue(cache_msg->recv);
+    header.check = check;
+    resend_msg->symbol = check;
+    return resend_msg;
+}
+
+uint16_t ResendValue(bool recv[]) {
+    uint16_t check = 0;
+    for (int i = 0; i < 16; i++) {
+        if (recv[i]) {
+            check |= bit(i);
+        }
+    }
+    return check;
+}
+
+#endif
+
 void NewClientCacheHeader(ClientCacheHeader* header, uint8_t strnum, Address destaddr, uint16_t destport) {
     header -> strnum = strnum;
     (header -> destaddr).host = destaddr.host;
@@ -127,6 +165,33 @@ bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* h
     if (header1->strnum == header2.strnum &&
             header1->destport == header2.destport &&
             (header1->destaddr).host == (header2.destaddr).host) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
+                       CODEC* codec, uint8_t size, ServerCacheHeaderMsg* header) {
+    header -> strnum = strnum;
+    (header->sourceaddr).host = sourceaddr.host;
+    header -> sourceport = sourceport;
+    header -> codec = codec;
+    header -> size = size;
+    header -> recvnum = 0;
+    memset(header->recv, false, 16 * sizeof(bool));
+}
+
+void NewServerCacheMsg(EbrHeaderMsg* header_msg, ServerCacheHeaderMsg* header) {
+    CODEC codec((header_msg->header).pacsum, (header_msg->header).length);
+    NewServerCacheMsg((header_msg->header).sourceaddr, (header_msg->header).sourceport,
+                      (header_msg->header).strnum, &codec, (header_msg->header).pacsum, header);
+}
+
+bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg) {
+    if (header->sourceport == (msg->header).sourceport
+        && (header->sourceaddr).host == ((msg->header).sourceaddr).host
+        && header->strnum == (msg->header).strnum) {
         return true;
     } else {
         return false;

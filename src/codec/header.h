@@ -84,11 +84,18 @@ struct struct_app_ebr_header_data
     uint16_t check; // handle error
 }EbrHeader;
 
-typedef struct EbrHeaderMsg{
+typedef struct EbrHeaderMsg {
     EbrHeader header;
     char payload[MARVEL kMaxPacketLength];
     GFType coef[RLNC kMaxPartNum];
 }EbrHeaderMsg;
+
+#ifdef MARVEL_TCP
+typedef struct EbrResendMsg {
+    EbrHeader header;
+    uint16_t symbol;
+};
+#endif
 
 // Cache Used
 
@@ -109,14 +116,28 @@ typedef struct ClientCacheHeaderMsg {
     uint16_t pacsize;
 }ClientCacheHeaderMsg;
 
-typedef struct ClientCacheRequest{
+typedef struct ClientCacheRequest {
     ClientCacheHeader header;
     uint8_t misscoef[RLNC kMaxPartNum];
 }ClientCacheRequest;
 
+typedef struct ServerCacheHeaderMsg {
+#ifdef MARVELCODING_QUEUE_H
+    TAILQ_ENTRY(ServerCacheHeaderMsg) cache_link;
+#endif
+    Address sourceaddr;
+    uint16_t sourceport;
+    uint8_t strnum;
+    CODEC* codec;
+    uint8_t size;
+    uint8_t recvnum;
+    bool recv[16];
+};
+
 #ifdef MARVELCODING_QUEUE_H
 
 TAILQ_HEAD(ClientCacheList, ClientCacheHeaderMsg);
+TAILQ_HEAD(ServerCacheList, ServerCacheHeaderMsg);
 
 #endif
 
@@ -128,6 +149,12 @@ EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_n
                         int length, char* check, char* payload, GFType* coef);
 
 EbrHeaderMsg* CopyEbrHeaderMsg(EbrHeaderMsg* header);
+
+#ifdef MARVEL_TCP
+EbrResendMsg* NewEbrResendMsg(ServerCacheHeaderMsg* cache_msg);
+
+uint16_t ResendValue(bool recv[]);
+#endif
 
 void NewClientCacheHeader(ClientCacheHeader* header, uint8_t strnum, Address destaddr, uint16_t destport);
 
@@ -141,5 +168,12 @@ void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
                            uint8_t* miss_packet, uint8_t pacsum);
 
 bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request);
+
+void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
+                       CODEC* codec, uint8_t size, ServerCacheHeaderMsg* header);
+
+void NewServerCacheMsg(EbrHeaderMsg* header_msg, ServerCacheHeaderMsg* header);
+
+bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg);
 
 #endif //MARVELCODING_HEADER_H

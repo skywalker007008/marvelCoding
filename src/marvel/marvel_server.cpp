@@ -32,6 +32,9 @@ MARVEL_SERVER::MarvelServer(
     for (int i = 0; i < MARVEL kMaxCacheSize; i++) {
         codec_status_[i] = false;
     }
+#ifdef MARVELCODING_QUEUE_H
+    TAILQ_INIT(&server_cache_list_);
+#endif
 }
 
 MARVEL_SERVER::~MarvelServer() {
@@ -83,12 +86,13 @@ ssize_t MARVEL_SERVER::RecvMessage(
     char* header_msg_buf = (char*)malloc(HEADER_MSG_SIZE);
 
     while (true) {
-        length = recvfrom(serv_socket, header_msg_buf, HEADER_MSG_SIZE, 0, (struct sockaddr*) &clnt_addr, &clnt_addr_size);
+        length = recvfrom(serv_socket, header_msg_buf, HEADER_MSG_SIZE, 0, (struct sockaddr *) &clnt_addr,
+                          &clnt_addr_size);
         if (length < 0) {
             throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
         }
 
-        header_msg = (EbrHeaderMsg*)header_msg_buf;
+        header_msg = (EbrHeaderMsg *) header_msg_buf;
 #ifdef MARVELCODING_DEBUG_H
         log_recv_message(header_msg);
 #endif
@@ -96,10 +100,10 @@ ssize_t MARVEL_SERVER::RecvMessage(
             if (MatchAddr(header_msg)) {
                 msg_buf = LoadHeader(header_msg);
                 if (msg_buf != nullptr) {
-                    recv_bytes = (header_msg -> header).length * (header_msg -> header).pacsum;
+                    recv_bytes = (header_msg->header).length * (header_msg->header).pacsum;
                     memcpy(msg, msg_buf, recv_bytes);
-                    memcpy(host, &(header_msg -> header).sourceaddr, sizeof(Address));
-                    *port = (header_msg -> header).sourceport;
+                    memcpy(host, &(header_msg->header).sourceaddr, sizeof(Address));
+                    *port = (header_msg->header).sourceport;
                     close(serv_socket);
 #ifdef MARVELCODING_DEBUG_H
                     log_recv_final_message(header_msg, msg, recv_bytes);
@@ -111,11 +115,12 @@ ssize_t MARVEL_SERVER::RecvMessage(
                     TransferMessage(header_msg);
                 }
             }
-        } else if ((header_msg->header).type == RESEND_TYPE) {
-            // TODO: Require RESEND
-        } else if ((header_msg->header).type == ACK_TYPE) {
-            // TODO: ACK
         }
+#ifdef MARVEL_TCP
+        else if ((header_msg->header).type == RESEND_TYPE) {
+            // TODO: Require RESEND
+        }
+#endif
     }
 }
 
@@ -144,7 +149,38 @@ bool MARVEL_SERVER::MatchAddr(EbrHeaderMsg* header_msg) {
 }
 
 char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
-    // TODO: Find the codec for the header
+
+#ifdef MARVELCODING_QUEUE_H
+    ServerCacheHeaderMsg *header;
+    TAILQ_FOREACH(header, &server_cache_list_, cache_link) {
+        if (MatchServerCacheMsg(header, header_msg)) {
+            break;
+        }
+    }
+    if (header == nullptr) {
+        header = (ServerCacheHeaderMsg *) malloc(sizeof(ServerCacheHeaderMsg));
+        NewServerCacheMsg(header_msg, header);
+        std::thread t(MARVEL_SERVER::AskResend, this);
+        TAILQ_INSERT_TAIL(&server_cache_list_, header, cache_link);
+    }
+    if (!header->recv[(header_msg->header).pacnum]) {
+        header->codec->RecvMessage(header_msg->payload, header_msg->coef);
+        (header->recvnum)++;
+    }
+    if (header->recvnum == header->size) {
+        header->codec->decode();
+        char *msg = (char *) malloc(MARVEL kMaxMsgLength);
+        header->codec->get_decode_message(msg);
+        if (TAILQ_FIRST(&server_cache_list_) == header) {
+            TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
+        }
+        TAILQ_REMOVE(&server_cache_list_, header, cache_link);
+        return msg;
+    } else {
+        return nullptr;
+    }
+#else
+    /*// TODO: Find the codec for the header
     CODEC* codec = FindCodec(header_msg);
     if (codec == nullptr) {
         return nullptr;
@@ -164,11 +200,12 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
         return msg;
     } else {
         return nullptr;
-    }
+    }*/
+#endif
 }
 
 CODEC* MARVEL_SERVER::FindCodec(EbrHeaderMsg* header_msg) {
-    uint16_t num = ((header_msg -> header).strnum);
+    /*uint16_t num = ((header_msg -> header).strnum);
     int pl;
     for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
         if (codec_status_[pl] && IsMatchHeader(header_msg, pl)) {
@@ -198,11 +235,11 @@ CODEC* MARVEL_SERVER::FindCodec(EbrHeaderMsg* header_msg) {
     header_symbol -> codenumber = (header_msg -> header).codenumber;
     map_header_[pl] = header_symbol;
     codec_num_++;
-    return codec;
+    return codec;*/
 }
 
 bool MARVEL_SERVER::IsMatchHeader(EbrHeaderMsg* header_msg, int pl) {
-    HeaderSymbol* header_symbol = map_header_[pl];
+    /*HeaderSymbol* header_symbol = map_header_[pl];
     if (header_symbol -> destaddr.host == (header_msg -> header).destaddr.host
         && header_symbol -> sourceaddr.host == (header_msg -> header).sourceaddr.host
         && header_symbol -> destport == (header_msg -> header).destport
@@ -211,34 +248,17 @@ bool MARVEL_SERVER::IsMatchHeader(EbrHeaderMsg* header_msg, int pl) {
         return true;
     } else {
         return false;
-    }
+    }*/
+    return true;
 }
 
 void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
-    // CODEC* codec = FindCodec(header_msg);
-    CODEC* codec = nullptr;
-    uint8_t num;
     GFType** coef;
     int size = (header_msg -> header).pacsum;
-    if (codec == nullptr) {
-        codec = new CODEC(size, (header_msg -> header).length);
-        codec -> RecvMessage(header_msg -> payload, header_msg -> coef);
-        coef = codec -> encode();
-        num = 1;
-    } else {
-        if (codec -> is_enough()) {
-            return;
-        }
-        codec -> RecvMessage(header_msg -> payload, header_msg -> coef);
-
-        // TODO: Signal to encode message.
-
-        // TODO: Transfer the message.
-        coef = codec -> encode();
-        num = codec -> get_recv_num();
-
-    }
-    char *msg = (char*)malloc(num * (header_msg -> header).length);
+    CODEC* codec = new CODEC(size, (header_msg -> header).length);
+    codec -> RecvMessage(header_msg -> payload, header_msg -> coef);
+    coef = codec -> encode();
+    char *msg = (char*)malloc((header_msg -> header).length);
     // EbrHeader* header_new = CopyEbrHeader(header);
     // memset(header_new -> payload, 0, header_new -> strnum);
     codec -> get_encode_message(msg);
@@ -247,21 +267,20 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
     int pack_size = (header_msg -> header).length;
 
     try {
-        for (uint8_t i = 0; i < num; i++) {
-            EbrHeaderMsg* header_msg_new = CopyEbrHeaderMsg(header_msg);
-            // (header_msg -> header).pacsum = num;
-            // (header_msg -> header).pacnum = i;
-            // TODO: Add codenumber
-            (header_msg_new -> header).codenumber++;
-            memcpy(header_msg_new -> payload, msg + i * pack_size, pack_size);
-            memcpy(header_msg_new -> coef, coef[i], num * sizeof(GFType));
-            sendto(sock, header_msg_new, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, ADDR_SIZE);
+        EbrHeaderMsg *header_msg_new = CopyEbrHeaderMsg(header_msg);
+        // (header_msg -> header).pacsum = num;
+        // (header_msg -> header).pacnum = i;
+        // TODO: Add codenumber
+        (header_msg_new->header).codenumber++;
+        (header_msg_new->header).range--;
+        memcpy(header_msg_new->payload, msg , pack_size);
+        memcpy(header_msg_new->coef, coef[0], size * sizeof(GFType));
+        sendto(sock, header_msg_new, HEADER_MSG_SIZE, 0, (struct sockaddr *) &broadcast_addr, ADDR_SIZE);
 #ifdef MARVELCODING_DEBUG_H
-            log_transfer_message(header_msg_new);
+        log_transfer_message(header_msg_new);
 #endif // MARVELCODING_DEBUG_H
-            //send_bytes = sendMessage(sock, header);
-            free(header_msg_new);
-        }
+        free(header_msg_new);
+
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
@@ -270,7 +289,7 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
 }
 
 bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
-    int pl;
+    /*int pl;
     for (pl = 0; pl < MARVEL kMaxCacheSize; pl++) {
         if (codec_status_[pl] && IsMatchHeader(header_msg, pl)) {
             HeaderSymbol *symbol = map_header_[pl];
@@ -296,7 +315,29 @@ bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
     header_symbol -> sourceaddr = (header_msg -> header).sourceaddr;
     header_symbol -> codenumber = (header_msg -> header).codenumber;
     map_header_[pl] = header_symbol;
-    codec_status_[pl] = true;
+    codec_status_[pl] = true;*/
+#ifdef MARVEL_ROUTE
 
-    return true;
+#else
+    return (header_msg->header).range > 0;
+#endif
 }
+
+#ifdef MARVELCODING_QUEUE_H
+void MARVEL_SERVER::RemoveCache() {
+    // USE MACRO
+    sleep(3000);
+    ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
+    TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
+    TAILQ_REMOVE(&server_cache_list_, header, cache_link);
+}
+#endif
+
+#ifdef MARVELCODING_QUEUE_H
+void MARVEL_SERVER::AskResend() {
+    // USE MACRO
+    sleep(3000);
+    ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
+
+}
+#endif

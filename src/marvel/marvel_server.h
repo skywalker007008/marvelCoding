@@ -35,6 +35,8 @@ namespace marvel {
         bool IsMatchHeader(EbrHeaderMsg* header_msg, int pl);
         void TransferMessage(EbrHeaderMsg* header_msg);
         bool AbleToTransfer(EbrHeaderMsg* header_msg);
+        void RemoveCache();
+        void AskResend();
 
     private:
         ssize_t RecvMessage(int serv_socket, struct sockaddr_in* serv_addr,
@@ -46,6 +48,9 @@ namespace marvel {
         bool codec_status_[MARVEL kMaxCacheSize];
         HeaderSymbol** map_header_;
         int codec_num_;
+#ifdef MARVELCODING_QUEUE_H
+        struct ServerCacheList server_cache_list_;
+#endif
 
     };
 
