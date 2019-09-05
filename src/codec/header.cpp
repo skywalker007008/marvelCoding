@@ -147,24 +147,14 @@ void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* 
     }
 }
 
-void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
-                           Address destaddr, uint16_t destport,
-                           uint8_t* miss_packet, uint8_t pacsum) {
-    ClientCacheHeader* header = (ClientCacheHeader*)malloc(sizeof(ClientCacheHeader));
-    NewClientCacheHeader(header, strnum, destaddr, destport);
-    memcpy(&(request->header), header, sizeof(ClientCacheHeader));
-    memset(request->misscoef, 0, RLNC kMaxPartNum * sizeof(uint8_t));
-    memcpy(request->misscoef, miss_packet, pacsum * sizeof(uint8_t));
-}
-
-bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request) {
+bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, EbrResendMsg* header_request) {
     ClientCacheHeader* header1 = header_client -> header;
-    ClientCacheHeader header2 = header_request -> header;
+    EbrHeader header2 = header_request -> header;
     /*if (memcmp(header1, &header2, sizeof(ClientCacheHeader))) {
         */
     if (header1->strnum == header2.strnum &&
-            header1->destport == header2.destport &&
-            (header1->destaddr).host == (header2.destaddr).host) {
+            header1->destport == header2.sourceport &&
+            (header1->destaddr).host == (header2.sourceaddr).host) {
         return true;
     } else {
         return false;

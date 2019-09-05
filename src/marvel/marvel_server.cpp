@@ -338,6 +338,9 @@ void MARVEL_SERVER::AskResend() {
     // USE MACRO
     sleep(3000);
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
+    EbrResendMsg* resend_msg = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
+    resend_msg = NewEbrResendMsg(header);
+
 
 }
 #endif

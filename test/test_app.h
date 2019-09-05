@@ -39,7 +39,7 @@ public:
     void log(STRING log_msg);
     void log_char(char* log_msg);
     void AddCache(ClientCacheHeaderMsg* header_msg) override;
-    void FindCache(ClientCacheRequest* request, ClientCacheHeaderMsg* header) override ;
+    void FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) override ;
     void RemoveCache() override ;
 
 private:

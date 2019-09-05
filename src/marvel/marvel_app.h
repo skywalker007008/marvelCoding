@@ -32,7 +32,7 @@ namespace marvel {
         virtual uint16_t get_port() {}
          virtual void log(STRING log_msg) {}
          virtual void AddCache(ClientCacheHeaderMsg* header_msg) {}
-         virtual void FindCache(ClientCacheRequest* request, ClientCacheHeaderMsg* header) {}
+         virtual void FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {}
          virtual void RemoveCache() {}
          // virtual ssize_t RecvMessage(char* msg, uint32_t* host, uint16_t* port) {}
     };

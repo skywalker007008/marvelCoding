@@ -127,7 +127,7 @@ void App::AddCache(ClientCacheHeaderMsg* header_msg) {
     std::thread t(&App::RemoveCache, this);
 }
 
-void App::FindCache(ClientCacheRequest* request, ClientCacheHeaderMsg* header) {
+void App::FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {
     ClientCacheHeaderMsg* header_msg;
     TAILQ_FOREACH(header_msg, &client_cache_list_, cache_link) {
         if (MatchCacheHeader(header_msg, request)) {

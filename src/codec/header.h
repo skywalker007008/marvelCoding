@@ -116,11 +116,6 @@ typedef struct ClientCacheHeaderMsg {
     uint16_t pacsize;
 }ClientCacheHeaderMsg;
 
-typedef struct ClientCacheRequest {
-    ClientCacheHeader header;
-    uint8_t misscoef[RLNC kMaxPartNum];
-}ClientCacheRequest;
-
 typedef struct ServerCacheHeaderMsg {
 #ifdef MARVELCODING_QUEUE_H
     TAILQ_ENTRY(ServerCacheHeaderMsg) cache_link;
@@ -163,11 +158,7 @@ void NewClientCacheHeaderMsg(ClientCacheHeaderMsg* header_msg, uint8_t strnum, u
 
 void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* dest_header);
 
-void NewClientCacheRequest(ClientCacheRequest* request, uint8_t strnum,
-                           Address destaddr, uint16_t destport,
-                           uint8_t* miss_packet, uint8_t pacsum);
-
-bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, ClientCacheRequest* header_request);
+bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, EbrResendMsg* header_request);
 
 void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
                        CODEC* codec, uint8_t size, ServerCacheHeaderMsg* header);
