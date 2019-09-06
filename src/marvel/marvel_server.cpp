@@ -119,6 +119,7 @@ ssize_t MARVEL_SERVER::RecvMessage(
 #ifdef MARVEL_TCP
         else if ((header_msg->header).type == RESEND_TYPE) {
             // TODO: Require RESEND
+            app_ -> SendResendMsg(header_msg);
         }
 #endif
     }

@@ -84,6 +84,14 @@ namespace marvel {
 
         void SendResendRequestThread(EbrResendMsg* msg);
 
+        void SendResendMsg(EbrHeaderMsg* msg);
+
+        void SendResendMsgThread(EbrHeaderMsg* msg);
+
+        void AddCache(ClientCacheHeaderMsg* header_msg);
+        void FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header);
+        void RemoveCache();
+
     private:
         /*! ptr of the codec_lib */
         CODEC* codec_;
@@ -95,6 +103,11 @@ namespace marvel {
         /*! port of this client */
         uint16_t port_;
         uint8_t id_;
+
+#ifdef MARVELCODING_QUEUE_H
+        struct ClientCacheList client_cache_list_;
+        int cache_num_;
+#endif
     };
 
     static void StartClient(MarvelClient* client);

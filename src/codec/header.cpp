@@ -19,7 +19,7 @@ struct sockaddr_in any_addr;
 
 #endif
 
-#define bit(n) (1 << (n))
+
 
 EbrHeaderMsg* NewEbrHeaderMsg(char type, char range, char code_type, char code_number,
                         short pac_sum, short str_num, short pac_num,
@@ -118,7 +118,7 @@ uint16_t ResendValue(bool recv[]) {
     uint16_t check = 0;
     for (int i = 0; i < 16; i++) {
         if (recv[i]) {
-            check |= bit(i);
+            check |= bit1(i);
         }
     }
     return check;
@@ -158,7 +158,7 @@ void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* 
 
 bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, EbrResendMsg* header_request) {
     ClientCacheHeader* header1 = header_client -> header;
-    EbrHeader header2 = header_request -> header;
+    EbrHeader header2 = *header_request;
     /*if (memcmp(header1, &header2, sizeof(ClientCacheHeader))) {
         */
     if (header1->strnum == header2.strnum &&

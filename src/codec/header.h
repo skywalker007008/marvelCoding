@@ -24,6 +24,9 @@
 #define COEF_SIZE ((RLNC kMaxPartNum) * sizeof(GFType))
 #define HEADER_MSG_SIZE (HEADER_SIZE + MSG_SIZE + COEF_SIZE)
 
+#define bit1(n) (1 << (n))
+#define bit(n, pl) (((n) >> (pl)) & 0x1)
+
 extern struct sockaddr_in broadcast_addr;
 extern struct sockaddr_in any_addr;
 

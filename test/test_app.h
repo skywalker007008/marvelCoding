@@ -38,10 +38,8 @@ public:
     void start();
     void log(STRING log_msg);
     void log_char(char* log_msg);
-    void AddCache(ClientCacheHeaderMsg* header_msg) override;
-    void FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) override ;
-    void RemoveCache() override ;
     void SendResendRequest(EbrResendMsg* msg) override ;
+    void SendResendMsg(EbrHeaderMsg* msg) override ;
 
 private:
     STRING name_;
@@ -50,10 +48,6 @@ private:
     MARVEL_CLIENT* client_;
     MARVEL_SERVER* server_;
 
-#ifdef MARVELCODING_QUEUE_H
-    struct ClientCacheList client_cache_list_;
-    int cache_num_;
-#endif
 };
 
 #endif //MARVELCODING_TEST_APP_H

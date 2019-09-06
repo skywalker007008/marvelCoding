@@ -25,10 +25,6 @@ App::App(uint32_t host, const STRING& name)
     // t1.join();
     // std::thread t2(MARVEL StartServer, server_);
     // t2.join();
-#ifdef MARVELCODING_QUEUE_H
-    TAILQ_INIT(&client_cache_list_);
-    cache_num_++;
-#endif
 }
 
 /* App::~App() {
@@ -119,37 +115,12 @@ void App::start() {
 
 }
 
-void App::AddCache(ClientCacheHeaderMsg* header_msg) {
-    if (cache_num_ >= 32) {
-        throw new MARVEL_ERR AppCacheFullException();
-    }
-    TAILQ_INSERT_TAIL(&client_cache_list_, header_msg, cache_link);
-    std::thread t(&App::RemoveCache, this);
-}
-
-void App::FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {
-    ClientCacheHeaderMsg* header_msg;
-    TAILQ_FOREACH(header_msg, &client_cache_list_, cache_link) {
-        if (MatchCacheHeader(header_msg, request)) {
-            CopyCacheHeaderMsg(header_msg, header);
-            return;
-        }
-    }
-    free(header);
-    header = nullptr;
-}
-
-void App::RemoveCache() {
-    // MACRO
-    // Time Exceed then remove this cache
-    sleep(3000);
-    ClientCacheHeaderMsg* header = TAILQ_FIRST(&client_cache_list_);
-    TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
-    TAILQ_REMOVE(&client_cache_list_, header, cache_link);
-}
-
 void App::SendResendRequest(EbrResendMsg* msg) {
     client_ -> SendResendRequest(msg);
+}
+
+void App::SendResendMsg(EbrHeaderMsg* msg) {
+    client_ -> SendResendMsg(msg);
 }
 
 static void MARVEL StartClient(MARVEL_CLIENT* client) {

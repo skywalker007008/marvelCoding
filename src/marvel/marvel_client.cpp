@@ -18,6 +18,7 @@
 
 #include "../include/debug.h"
 #include "../include/alloc.h"
+#include "../codec/header.h"
 
 #endif
 
@@ -26,6 +27,10 @@ MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
     addr_.host = host;
     BuildCodec();
     id_ = 0;
+#ifdef MARVELCODING_QUEUE_H
+    TAILQ_INIT(&client_cache_list_);
+    cache_num_ = 0;
+#endif
 }
 
 MARVEL_CLIENT::~MarvelClient() {
@@ -134,7 +139,7 @@ void MARVEL_CLIENT::AddCache(char* msg, GFType** coef, uint8_t strnum, Address d
     ClientCacheHeaderMsg* header_msg = (ClientCacheHeaderMsg*)malloc(sizeof(ClientCacheHeaderMsg));
     NewClientCacheHeaderMsg(header_msg, strnum, packet_sum, packet_size, msg, coef, dest_addr, dest_port);
     try {
-        app_->AddCache(header_msg);
+        AddCache(header_msg);
     } catch (MARVEL_ERR AppCacheFullException exp) {
         throw exp;
     }
@@ -145,7 +150,7 @@ void MARVEL_CLIENT::SendResendRequest(EbrResendMsg* msg) {
 }
 
 void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
-    EbrResendMsg* buf = (EbrResendMsg)malloc(sizeof(EbrResendMsg));
+    EbrResendMsg* buf = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
     memcpy(buf, msg, sizeof(EbrResendMsg));
     struct sockaddr_in destaddr;
     destaddr.sin_port = kDefaultPort;
@@ -155,6 +160,85 @@ void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
     // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
     sendto(sock, buf, sizeof(EbrResendMsg), 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
+}
+
+void MARVEL_CLIENT::SendResendMsg(EbrHeaderMsg* msg) {
+    std::thread t(MARVEL_CLIENT::SendResendMsgThread, this, msg);
+}
+
+
+void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
+    ClientCacheHeaderMsg* header_msg;
+    FindCache((EbrResendMsg*)msg, header_msg);
+    if (header_msg == nullptr) {
+        return;
+    }
+    struct sockaddr_in destaddr;
+    destaddr.sin_port = kDefaultPort;
+    // destaddr.sin_port = msg->sourceport;
+    destaddr.sin_family = AF_INET;
+    destaddr.sin_addr.s_addr = htonl(msg->header.sourceaddr.host);
+    char* payload = (char*)malloc(msg->header.length);
+    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+
+#ifndef MODE_WINDOW
+    for (int i = 0; i < msg->header.pacsum; i++) {
+        if (bit(msg->header.length, i) == 0x0) {
+            EbrHeaderMsg* ebrheader_msg =
+                    NewEbrHeaderMsg(RESEND_MSG_TYPE, 0, 0, 0,
+                                    header_msg->pacsum, header_msg->header->strnum, i,
+                                    addr_, header_msg->header->destaddr,
+                                    port_, header_msg->header->destport,
+                                    header_msg->pacsize, 0,
+                                    header_msg->msg + i * header_msg->pacsize, header_msg->coef[i]);
+            sendto(sock, ebrheader_msg, HEADER_MSG_SIZE, (struct sockaddr*)destaddr, sizeof(struct sockaddr));
+            free(ebrheader_msg);
+        }
+    }
+#else
+    for (int i = msg->header.pacnum; i < msg->header.pacsum; i++) {
+        EbrHeaderMsg *ebrheader_msg =
+                NewEbrHeaderMsg(RESEND_MSG_TYPE, 0, 0, 0,
+                                header_msg->pacsum, header_msg->header->strnum, i,
+                                addr_, header_msg->header->destaddr,
+                                port_, header_msg->header->destport,
+                                header_msg->pacsize, 0,
+                                header_msg->msg + i * header_msg->pacsize, header_msg->coef[i]);
+        sendto(sock, ebrheader_msg, HEADER_MSG_SIZE, (struct sockaddr *) destaddr, sizeof(struct sockaddr));
+        free(ebrheader_msg);
+    }
+#endif // MODE_WINDOW
+
+}
+
+
+void MARVEL_CLIENT::AddCache(ClientCacheHeaderMsg* header_msg) {
+    if (cache_num_ >= 32) {
+        throw new MARVEL_ERR AppCacheFullException();
+    }
+    TAILQ_INSERT_TAIL(&client_cache_list_, header_msg, cache_link);
+    std::thread t(MARVEL_CLIENT::RemoveCache, this);
+}
+
+void MARVEL_CLIENT::FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {
+    ClientCacheHeaderMsg* header_msg;
+    TAILQ_FOREACH(header_msg, &client_cache_list_, cache_link) {
+        if (MatchCacheHeader(header_msg, request)) {
+            CopyCacheHeaderMsg(header_msg, header);
+            return;
+        }
+    }
+    free(header);
+    header = nullptr;
+}
+
+void MARVEL_CLIENT::RemoveCache() {
+    // MACRO
+    // Time Exceed then remove this cache
+    sleep(3000);
+    ClientCacheHeaderMsg* header = TAILQ_FIRST(&client_cache_list_);
+    TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
+    TAILQ_REMOVE(&client_cache_list_, header, cache_link);
 }
 
 
