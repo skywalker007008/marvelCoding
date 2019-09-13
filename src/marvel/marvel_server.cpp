@@ -161,7 +161,7 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
     if (header == nullptr) {
         header = (ServerCacheHeaderMsg *) malloc(sizeof(ServerCacheHeaderMsg));
         NewServerCacheMsg(header_msg, header);
-        std::thread t(MARVEL_SERVER::AskResend, this);
+        std::thread t(&MARVEL_SERVER::AskResend, this);
         TAILQ_INSERT_TAIL(&server_cache_list_, header, cache_link);
     }
     if (!header->recv[(header_msg->header).pacnum]) {
@@ -327,7 +327,7 @@ bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
 #ifdef MARVELCODING_QUEUE_H
 void MARVEL_SERVER::RemoveCache() {
     // USE MACRO
-    sleep(3000);
+    mysleep(3000);
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
     TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&server_cache_list_, header, cache_link);
@@ -339,7 +339,7 @@ void MARVEL_SERVER::RemoveCache() {
 #ifdef MARVELCODING_QUEUE_H
 void MARVEL_SERVER::AskResend() {
     // USE MACRO
-    sleep(3000);
+    mysleep(3000);
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
     if (header -> recvnum != header -> size) {
         EbrResendMsg *resend_msg = (EbrResendMsg *) malloc(sizeof(EbrResendMsg));
@@ -348,6 +348,6 @@ void MARVEL_SERVER::AskResend() {
         resend_msg = NewEbrResendMsg(header, addr, port_);
         app_ -> SendResendRequest(resend_msg);
     }
-    std::thread t(MARVEL_SERVER::RemoveCache, this);
+    // std::thread t(&MARVEL_SERVER::RemoveCache, this);
 }
 #endif

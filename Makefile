@@ -316,36 +316,6 @@ src/exception/marvel_exception.cpp.s:
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/exception/marvel_exception.cpp.s
 .PHONY : src/exception/marvel_exception.cpp.s
 
-src/include/alloc.o: src/include/alloc.cpp.o
-
-.PHONY : src/include/alloc.o
-
-# target to build an object file
-src/include/alloc.cpp.o:
-	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/alloc.cpp.o
-	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/alloc.cpp.o
-.PHONY : src/include/alloc.cpp.o
-
-src/include/alloc.i: src/include/alloc.cpp.i
-
-.PHONY : src/include/alloc.i
-
-# target to preprocess a source file
-src/include/alloc.cpp.i:
-	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/alloc.cpp.i
-	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/alloc.cpp.i
-.PHONY : src/include/alloc.cpp.i
-
-src/include/alloc.s: src/include/alloc.cpp.s
-
-.PHONY : src/include/alloc.s
-
-# target to generate assembly for a file
-src/include/alloc.cpp.s:
-	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/alloc.cpp.s
-	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/alloc.cpp.s
-.PHONY : src/include/alloc.cpp.s
-
 src/include/debug.o: src/include/debug.cpp.o
 
 .PHONY : src/include/debug.o
@@ -698,9 +668,6 @@ help:
 	@echo "... src/exception/marvel_exception.o"
 	@echo "... src/exception/marvel_exception.i"
 	@echo "... src/exception/marvel_exception.s"
-	@echo "... src/include/alloc.o"
-	@echo "... src/include/alloc.i"
-	@echo "... src/include/alloc.s"
 	@echo "... src/include/debug.o"
 	@echo "... src/include/debug.i"
 	@echo "... src/include/debug.s"

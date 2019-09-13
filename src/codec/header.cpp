@@ -196,3 +196,10 @@ bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg) {
         return false;
     }
 }
+
+void mysleep(int sec) {
+    struct timeval tv;
+    tv.tv_sec = sec / 1000;
+    tv.tv_usec = sec % 1000;
+    select(0, nullptr, nullptr, nullptr, &tv);
+}

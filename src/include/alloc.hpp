@@ -5,14 +5,17 @@
  * 
  */
 
-#include "alloc.h"
+#ifndef MARVELCODING_FREE_H
+#define MARVELCODING_FREE_H
 
-void free_array2(void** array2, int vec_size) {
+#include <stdlib.h>
+
+/*void free_array2(void** array2, int vec_size) {
     for (int i = 0; i < vec_size; i++) {
         free(array2[i]);
     }
     free(array2);
-}
+}*/
 
 template <typename T>
 void alloc_array2(T** array2, int vec_size, int size) {
@@ -26,3 +29,5 @@ template <typename T>
 void alloc_array(T* array, int size) {
     array = (T*)malloc(size * sizeof(T));
 }
+
+#endif //MARVELCODING_FREE_H

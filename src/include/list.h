@@ -203,6 +203,4 @@ void          _list_clear       (list_head **, size_t value_size);
    }
 #endif
 
-#endif
-
 #endif //MARVELCODING_LIST_H

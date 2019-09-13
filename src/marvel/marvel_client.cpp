@@ -17,7 +17,7 @@
 #ifdef MARVEL_DEBUG
 
 #include "../include/debug.h"
-#include "../include/alloc.h"
+#include "../include/alloc.hpp"
 #include "../codec/header.h"
 
 #endif
@@ -106,14 +106,21 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
         throw exp;
     }
 #endif
-    free_array2((void**)coef, packet_sum);
+    //free_array2((void**)coef, packet_sum);
+    /*for (int i = 0; i < packet_sum; i++) {
+        free(coef[i]);
+    }
+    free(coef);*/
     return send_bytes;
 }
 
 ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
-
-    ssize_t send_bytes;
-    send_bytes = sendto(sock, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
+    ssize_t send_bytes = HEADER_SIZE + header_msg->header.length + header_msg->header.pacsum;
+    char* msg = (char*)malloc(send_bytes);
+    memcpy(msg, header_msg, HEADER_SIZE);
+    memcpy(msg + HEADER_SIZE, header_msg->coef, header_msg->header.pacsum * sizeof(GFType));
+    memcpy(msg + HEADER_SIZE + header_msg->header.pacsum, header_msg->payload, header_msg->header.length*sizeof(char));
+    send_bytes = sendto(sock, msg, send_bytes, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
 
 #ifdef MARVELCODING_DEBUG_H
     log_send_message(header_msg);
@@ -146,7 +153,7 @@ void MARVEL_CLIENT::AddCache(char* msg, GFType** coef, uint8_t strnum, Address d
 }
 
 void MARVEL_CLIENT::SendResendRequest(EbrResendMsg* msg) {
-    std::thread t(MARVEL_CLIENT::SendResendRequestThread, this, msg);
+    std::thread t(&MARVEL_CLIENT::SendResendRequestThread, this, msg);
 }
 
 void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
@@ -163,7 +170,7 @@ void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
 }
 
 void MARVEL_CLIENT::SendResendMsg(EbrHeaderMsg* msg) {
-    std::thread t(MARVEL_CLIENT::SendResendMsgThread, this, msg);
+    std::thread t(&MARVEL_CLIENT::SendResendMsgThread, this, msg);
 }
 
 
@@ -191,7 +198,7 @@ void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
                                     port_, header_msg->header->destport,
                                     header_msg->pacsize, 0,
                                     header_msg->msg + i * header_msg->pacsize, header_msg->coef[i]);
-            sendto(sock, ebrheader_msg, HEADER_MSG_SIZE, (struct sockaddr*)destaddr, sizeof(struct sockaddr));
+            sendto(sock, ebrheader_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
             free(ebrheader_msg);
         }
     }
@@ -217,7 +224,7 @@ void MARVEL_CLIENT::AddCache(ClientCacheHeaderMsg* header_msg) {
         throw new MARVEL_ERR AppCacheFullException();
     }
     TAILQ_INSERT_TAIL(&client_cache_list_, header_msg, cache_link);
-    std::thread t(MARVEL_CLIENT::RemoveCache, this);
+    // std::thread t(&MARVEL_CLIENT::RemoveCache, this);
 }
 
 void MARVEL_CLIENT::FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {
@@ -235,10 +242,12 @@ void MARVEL_CLIENT::FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* heade
 void MARVEL_CLIENT::RemoveCache() {
     // MACRO
     // Time Exceed then remove this cache
-    sleep(3000);
+
+    mysleep(3000);
     ClientCacheHeaderMsg* header = TAILQ_FIRST(&client_cache_list_);
-    TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
+    /*TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&client_cache_list_, header, cache_link);
+    free(header);*/
 }
 
 

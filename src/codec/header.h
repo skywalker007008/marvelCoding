@@ -12,7 +12,7 @@
 #include "../include/marvel_constant.h"
 #include <endian.h>
 #include "../include/queue.h"
-#include "../include/alloc.h"
+#include "../include/alloc.hpp"
 
 #define MSG_TYPE 0
 #define RESEND_TYPE 1
@@ -44,10 +44,6 @@ typedef struct {
     uint16_t sourceport;
     uint16_t destport;
 }HeaderSymbol;
-
-typedef struct {
-    uint32_t host;
-}Address;
 
 typedef
 struct struct_app_ebr_header_data
@@ -127,7 +123,7 @@ typedef struct ServerCacheHeaderMsg {
     uint8_t size;
     uint8_t recvnum;
     bool recv[16];
-};
+}ServerCacheHeaderMsg;
 
 #ifdef MARVELCODING_QUEUE_H
 
@@ -166,5 +162,7 @@ void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
 void NewServerCacheMsg(EbrHeaderMsg* header_msg, ServerCacheHeaderMsg* header);
 
 bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg);
+
+void mysleep(int sec);
 
 #endif //MARVELCODING_HEADER_H
