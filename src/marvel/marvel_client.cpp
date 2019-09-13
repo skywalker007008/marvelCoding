@@ -116,6 +116,10 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
 
 ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     ssize_t send_bytes = HEADER_SIZE + header_msg->header.length + header_msg->header.pacsum;
+    RS::ReedSolomon<header_msg->header.length, 2> rs;
+    char* encode_msg = (char*)malloc(header_msg->header.length + 2);
+    rs.Encode(header_msg->payload, encode_msg);
+    memcpy(&(header_msg->header.check), encode_msg + header_msg->header.length, 2);
     char* msg = (char*)malloc(send_bytes);
     memcpy(msg, header_msg, HEADER_SIZE);
     memcpy(msg + HEADER_SIZE, header_msg->coef, header_msg->header.pacsum * sizeof(GFType));

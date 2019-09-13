@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iostream>
 #include "../thread/threadpool.h"
+#include "RS-FEC.h"
 
 #define MARVEL marvel::
 #define MARVEL_LOG marvel::log::
@@ -50,11 +51,8 @@ namespace marvel {
     constexpr int kMaxPacketLength = 256;
     constexpr int kMaxCacheSize = 16;
     constexpr int kMaxMsgLength = 2048;
-
-
+    constexpr int kCheckLength = 16;
 }
-
-
 
 #endif //MARVELCODING_MARVELCONSTANT_H
 
