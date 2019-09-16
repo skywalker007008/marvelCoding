@@ -48,6 +48,9 @@ namespace marvel {
         bool codec_status_[MARVEL kMaxCacheSize];
         HeaderSymbol** map_header_;
         int codec_num_;
+
+        pthread_mutex_t mutex_askresend_;
+        pthread_mutex_t mutex_removecache_;
 #ifdef MARVELCODING_QUEUE_H
         struct ServerCacheList server_cache_list_;
 #endif

@@ -32,6 +32,8 @@ MARVEL_SERVER::MarvelServer(
     for (int i = 0; i < MARVEL kMaxCacheSize; i++) {
         codec_status_[i] = false;
     }
+    pthread_mutex_init(&mutex_askresend_, NULL);
+    pthread_mutex_init(&mutex_removecache_, NULL);
 #ifdef MARVELCODING_QUEUE_H
     TAILQ_INIT(&server_cache_list_);
 #endif
@@ -81,18 +83,21 @@ ssize_t MARVEL_SERVER::RecvMessage(
     struct sockaddr_in clnt_addr;
     ssize_t length;
     int recv_bytes = 0;
-    EbrHeaderMsg* header_msg;
+    EbrHeaderMsg* header_msg = (EbrHeaderMsg*)malloc(sizeof(EbrHeaderMsg));
     char* msg_buf;
     char* header_msg_buf = (char*)malloc(HEADER_MSG_SIZE);
 
     while (true) {
         length = recvfrom(serv_socket, header_msg_buf, HEADER_MSG_SIZE, 0, (struct sockaddr *) &clnt_addr,
                           &clnt_addr_size);
+#ifdef MARVELCODING_DEBUG_H
+        // printf("Recv Message\n");
+#endif
         if (length < 0) {
             throw MARVEL_ERR MessageRecvFailedException(recv_bytes, PER_TRANS_SIZE);
         }
 
-        header_msg = (EbrHeaderMsg *) header_msg_buf;
+        ReadBufToHeaderMsg(header_msg_buf, header_msg);
 #ifdef MARVELCODING_DEBUG_H
         log_recv_message(header_msg);
 #endif
@@ -162,16 +167,17 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
         header = (ServerCacheHeaderMsg *) malloc(sizeof(ServerCacheHeaderMsg));
         NewServerCacheMsg(header_msg, header);
         std::thread t(&MARVEL_SERVER::AskResend, this);
+        t.detach();
         TAILQ_INSERT_TAIL(&server_cache_list_, header, cache_link);
     }
     if (!header->recv[(header_msg->header).pacnum]) {
-        header->codec->RecvMessage(header_msg->payload, header_msg->coef);
+        header->codec.RecvMessage(header_msg->payload, header_msg->coef);
         (header->recvnum)++;
     }
     if (header->recvnum == header->size) {
-        header->codec->decode();
+        header->codec.decode();
         char *msg = (char *) malloc(MARVEL kMaxMsgLength);
-        header->codec->get_decode_message(msg);
+        header->codec.get_decode_message(msg);
         if (TAILQ_FIRST(&server_cache_list_) == header) {
             TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
         }
@@ -328,11 +334,13 @@ bool MARVEL_SERVER::AbleToTransfer(EbrHeaderMsg* header_msg) {
 void MARVEL_SERVER::RemoveCache() {
     // USE MACRO
     mysleep(3000);
+    pthread_mutex_lock(&(this->mutex_removecache_));
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
     TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&server_cache_list_, header, cache_link);
-    free(header->codec);
+    free(&header->codec);
     free(header);
+    pthread_mutex_unlock(&(this->mutex_removecache_));
 }
 #endif
 
@@ -340,6 +348,7 @@ void MARVEL_SERVER::RemoveCache() {
 void MARVEL_SERVER::AskResend() {
     // USE MACRO
     mysleep(3000);
+    pthread_mutex_lock(&(this->mutex_askresend_));
     ServerCacheHeaderMsg* header = TAILQ_FIRST(&server_cache_list_);
     if (header -> recvnum != header -> size) {
         EbrResendMsg *resend_msg = (EbrResendMsg *) malloc(sizeof(EbrResendMsg));
@@ -348,6 +357,8 @@ void MARVEL_SERVER::AskResend() {
         resend_msg = NewEbrResendMsg(header, addr, port_);
         app_ -> SendResendRequest(resend_msg);
     }
-    // std::thread t(&MARVEL_SERVER::RemoveCache, this);
+    std::thread t(&MARVEL_SERVER::RemoveCache, this);
+    t.detach();
+    pthread_mutex_unlock(&(this->mutex_askresend_));
 }
 #endif

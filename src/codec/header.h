@@ -85,8 +85,8 @@ struct struct_app_ebr_header_data
 
 typedef struct EbrHeaderMsg {
     EbrHeader header;
-    char payload[MARVEL kMaxPacketLength];
     GFType coef[RLNC kMaxPartNum];
+    char payload[MARVEL kMaxPacketLength];
 }EbrHeaderMsg;
 
 #ifdef MARVEL_TCP
@@ -119,7 +119,7 @@ typedef struct ServerCacheHeaderMsg {
     Address sourceaddr;
     uint16_t sourceport;
     uint8_t strnum;
-    CODEC* codec;
+    CODEC codec;
     uint8_t size;
     uint8_t recvnum;
     bool recv[16];
@@ -157,11 +157,13 @@ void CopyCacheHeaderMsg(ClientCacheHeaderMsg* src_header, ClientCacheHeaderMsg* 
 bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, EbrResendMsg* header_request);
 
 void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
-                       CODEC* codec, uint8_t size, ServerCacheHeaderMsg* header);
+                       CODEC &codec, uint8_t size, ServerCacheHeaderMsg* header);
 
 void NewServerCacheMsg(EbrHeaderMsg* header_msg, ServerCacheHeaderMsg* header);
 
 bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg);
+
+void ReadBufToHeaderMsg(char* src, EbrHeaderMsg* header_msg);
 
 void mysleep(int sec);
 

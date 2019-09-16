@@ -52,6 +52,7 @@ void init_addr() {
     broadcast_addr.sin_port = kDefaultPort;
     broadcast_addr.sin_family = AF_INET;
     broadcast_addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
+    // broadcast_addr.sin_addr.s_addr = inet_addr("192.168.0.1");
     // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
     any_addr.sin_port = kDefaultPort;
@@ -171,7 +172,7 @@ bool MatchCacheHeader(ClientCacheHeaderMsg* header_client, EbrResendMsg* header_
 }
 
 void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
-                       CODEC* codec, uint8_t size, ServerCacheHeaderMsg* header) {
+                       CODEC &codec, uint8_t size, ServerCacheHeaderMsg* header) {
     header -> strnum = strnum;
     (header->sourceaddr).host = sourceaddr.host;
     header -> sourceport = sourceport;
@@ -184,7 +185,7 @@ void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
 void NewServerCacheMsg(EbrHeaderMsg* header_msg, ServerCacheHeaderMsg* header) {
     CODEC codec((header_msg->header).pacsum, (header_msg->header).length);
     NewServerCacheMsg((header_msg->header).sourceaddr, (header_msg->header).sourceport,
-                      (header_msg->header).strnum, &codec, (header_msg->header).pacsum, header);
+                      (header_msg->header).strnum, codec, (header_msg->header).pacsum, header);
 }
 
 bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg) {
@@ -197,9 +198,34 @@ bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg) {
     }
 }
 
+void ReadBufToHeaderMsg(char* src, EbrHeaderMsg* header_msg) {
+    EbrHeader* header = (EbrHeader*)src;
+    char* dst = (char*)header_msg;
+    int length = header -> length;
+    int pacsum = header -> pacsum;
+    for (int i = 0; i < HEADER_SIZE; i++) {
+        dst[i] = src[i];
+    }
+    for (int i = 0; i < pacsum; i++) {
+
+        header_msg->coef[i] = (uint8_t)src[HEADER_SIZE + 2 * i + 1];
+    }
+
+    for (int i = 0; i < length; i++) {
+        header_msg->payload[i] = src[HEADER_SIZE + pacsum * sizeof(GFType) + i];
+    }
+}
+
 void mysleep(int sec) {
     struct timeval tv;
     tv.tv_sec = sec / 1000;
     tv.tv_usec = sec % 1000;
     select(0, nullptr, nullptr, nullptr, &tv);
 }
+
+/*
+void copy(void* dst, void* src, int size, int unit) {
+    for (int i = 0; i < size / unit; i++) {
+
+    }
+}*/

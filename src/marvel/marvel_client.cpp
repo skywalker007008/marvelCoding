@@ -27,6 +27,9 @@ MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
     addr_.host = host;
     BuildCodec();
     id_ = 0;
+    pthread_mutex_init(&mutex_remove_, NULL);
+    pthread_mutex_init(&mutex_resend_, NULL);
+    pthread_mutex_init(&mutex_request_, NULL);
 #ifdef MARVELCODING_QUEUE_H
     TAILQ_INIT(&client_cache_list_);
     cache_num_ = 0;
@@ -78,6 +81,8 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
             break;
         }
     }
+    int optval = 1;
+    setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(int));
 
     Address dest_addr;
     dest_addr.host = host;
@@ -115,17 +120,28 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
 }
 
 ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
-    ssize_t send_bytes = HEADER_SIZE + header_msg->header.length + header_msg->header.pacsum;
-    RS::ReedSolomon<header_msg->header.length, 2> rs;
+    ssize_t send_bytes = HEADER_SIZE + header_msg->header.length + header_msg->header.pacsum * sizeof(GFType);
+    /*RS::ReedSolomon<header_msg->header.length, 2> rs;
     char* encode_msg = (char*)malloc(header_msg->header.length + 2);
     rs.Encode(header_msg->payload, encode_msg);
-    memcpy(&(header_msg->header.check), encode_msg + header_msg->header.length, 2);
+    memcpy(&(header_msg->header.check), encode_msg + header_msg->header.length, 2);*/
     char* msg = (char*)malloc(send_bytes);
-    memcpy(msg, header_msg, HEADER_SIZE);
+    for (int i = 0; i < HEADER_SIZE; i++) {
+        msg[i] = ((char*)header_msg)[i];
+    }
+    for (int i = 0; i < header_msg->header.pacsum; i++) {
+        msg[HEADER_SIZE + 2 * i] = 0;
+        msg[HEADER_SIZE + 2 * i + 1] = (uint8_t)header_msg->coef[i];
+    }
+    for (int i = 0; i < header_msg->header.length; i++) {
+        msg[HEADER_SIZE + header_msg->header.pacsum * sizeof(GFType) + i] = header_msg->payload[i];
+    }
+    /*memcpy(msg, header_msg, HEADER_SIZE);
     memcpy(msg + HEADER_SIZE, header_msg->coef, header_msg->header.pacsum * sizeof(GFType));
-    memcpy(msg + HEADER_SIZE + header_msg->header.pacsum, header_msg->payload, header_msg->header.length*sizeof(char));
+    memcpy(msg + HEADER_SIZE + header_msg->header.pacsum, header_msg->payload, header_msg->header.length*sizeof(char));*/
     send_bytes = sendto(sock, msg, send_bytes, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
-
+    // send_bytes = sendto(sock, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
+    // free(msg);
 #ifdef MARVELCODING_DEBUG_H
     log_send_message(header_msg);
 #endif // MARVELCODING_DEBUG_H
@@ -158,9 +174,12 @@ void MARVEL_CLIENT::AddCache(char* msg, GFType** coef, uint8_t strnum, Address d
 
 void MARVEL_CLIENT::SendResendRequest(EbrResendMsg* msg) {
     std::thread t(&MARVEL_CLIENT::SendResendRequestThread, this, msg);
+    t.detach();
 }
 
 void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
+    pthread_mutex_lock(&(this->mutex_request_));
+
     EbrResendMsg* buf = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
     memcpy(buf, msg, sizeof(EbrResendMsg));
     struct sockaddr_in destaddr;
@@ -171,14 +190,18 @@ void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
     // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
     sendto(sock, buf, sizeof(EbrResendMsg), 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
+
+    pthread_mutex_unlock(&(this->mutex_request_));
 }
 
 void MARVEL_CLIENT::SendResendMsg(EbrHeaderMsg* msg) {
     std::thread t(&MARVEL_CLIENT::SendResendMsgThread, this, msg);
+    t.detach();
 }
 
 
 void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
+    pthread_mutex_lock(&(this->mutex_resend_));
     ClientCacheHeaderMsg* header_msg;
     FindCache((EbrResendMsg*)msg, header_msg);
     if (header_msg == nullptr) {
@@ -219,6 +242,7 @@ void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
         free(ebrheader_msg);
     }
 #endif // MODE_WINDOW
+    pthread_mutex_unlock(&(this->mutex_resend_));
 
 }
 
@@ -228,7 +252,8 @@ void MARVEL_CLIENT::AddCache(ClientCacheHeaderMsg* header_msg) {
         throw new MARVEL_ERR AppCacheFullException();
     }
     TAILQ_INSERT_TAIL(&client_cache_list_, header_msg, cache_link);
-    // std::thread t(&MARVEL_CLIENT::RemoveCache, this);
+    std::thread t(&MARVEL_CLIENT::RemoveCache, this);
+    t.detach();
 }
 
 void MARVEL_CLIENT::FindCache(EbrResendMsg* request, ClientCacheHeaderMsg* header) {
@@ -248,10 +273,12 @@ void MARVEL_CLIENT::RemoveCache() {
     // Time Exceed then remove this cache
 
     mysleep(3000);
+    pthread_mutex_lock(&(this->mutex_remove_));
     ClientCacheHeaderMsg* header = TAILQ_FIRST(&client_cache_list_);
-    /*TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
+    TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&client_cache_list_, header, cache_link);
-    free(header);*/
+    free(header);
+    pthread_mutex_unlock(&(this->mutex_remove_));
 }
 
 

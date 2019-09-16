@@ -104,6 +104,10 @@ namespace marvel {
         uint16_t port_;
         uint8_t id_;
 
+        pthread_mutex_t mutex_remove_;
+        pthread_mutex_t mutex_resend_;
+        pthread_mutex_t mutex_request_;
+
 #ifdef MARVELCODING_QUEUE_H
         struct ClientCacheList client_cache_list_;
         int cache_num_;
