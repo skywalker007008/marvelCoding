@@ -216,6 +216,19 @@ void ReadBufToHeaderMsg(char* src, EbrHeaderMsg* header_msg) {
     }
 }
 
+void ReadHeaderMsgToBuf(EbrHeaderMsg* header_msg, char* dst) {
+    for (int i = 0; i < HEADER_SIZE; i++) {
+        dst[i] = ((char*)header_msg)[i];
+    }
+    for (int i = 0; i < header_msg->header.pacsum; i++) {
+        dst[HEADER_SIZE + 2 * i] = 0;
+        dst[HEADER_SIZE + 2 * i + 1] = (uint8_t)header_msg->coef[i];
+    }
+    for (int i = 0; i < header_msg->header.length; i++) {
+        dst[HEADER_SIZE + header_msg->header.pacsum * sizeof(GFType) + i] = header_msg->payload[i];
+    }
+}
+
 void mysleep(int sec) {
     struct timeval tv;
     tv.tv_sec = sec / 1000;

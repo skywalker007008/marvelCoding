@@ -126,7 +126,8 @@ ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     rs.Encode(header_msg->payload, encode_msg);
     memcpy(&(header_msg->header.check), encode_msg + header_msg->header.length, 2);*/
     char* msg = (char*)malloc(send_bytes);
-    for (int i = 0; i < HEADER_SIZE; i++) {
+    ReadHeaderMsgToBuf(header_msg, msg);
+    /*for (int i = 0; i < HEADER_SIZE; i++) {
         msg[i] = ((char*)header_msg)[i];
     }
     for (int i = 0; i < header_msg->header.pacsum; i++) {
@@ -135,7 +136,7 @@ ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     }
     for (int i = 0; i < header_msg->header.length; i++) {
         msg[HEADER_SIZE + header_msg->header.pacsum * sizeof(GFType) + i] = header_msg->payload[i];
-    }
+    }*/
     /*memcpy(msg, header_msg, HEADER_SIZE);
     memcpy(msg + HEADER_SIZE, header_msg->coef, header_msg->header.pacsum * sizeof(GFType));
     memcpy(msg + HEADER_SIZE + header_msg->header.pacsum, header_msg->payload, header_msg->header.length*sizeof(char));*/
@@ -145,6 +146,7 @@ ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
 #ifdef MARVELCODING_DEBUG_H
     log_send_message(header_msg);
 #endif // MARVELCODING_DEBUG_H
+    free(msg);
     return send_bytes;
 }
 
@@ -225,8 +227,12 @@ void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
                                     port_, header_msg->header->destport,
                                     header_msg->pacsize, 0,
                                     header_msg->msg + i * header_msg->pacsize, header_msg->coef[i]);
-            sendto(sock, ebrheader_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
+            int send_bytes = HEADER_SIZE + ebrheader_msg -> header.length + ebrheader_msg->header.pacsum * sizeof(GFType);
+            char* msg = (char*)malloc(send_bytes);
+            ReadHeaderMsgToBuf(ebrheader_msg, msg);
+            sendto(sock, msg, send_bytes, 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
             free(ebrheader_msg);
+            free(msg);
         }
     }
 #else

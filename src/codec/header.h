@@ -165,6 +165,8 @@ bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg);
 
 void ReadBufToHeaderMsg(char* src, EbrHeaderMsg* header_msg);
 
+void ReadHeaderMsgToBuf(EbrHeaderMsg* header_msg, char* dst);
+
 void mysleep(int sec);
 
 #endif //MARVELCODING_HEADER_H

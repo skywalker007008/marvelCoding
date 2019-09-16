@@ -282,11 +282,15 @@ void MARVEL_SERVER::TransferMessage(EbrHeaderMsg* header_msg) {
         (header_msg_new->header).range--;
         memcpy(header_msg_new->payload, msg , pack_size);
         memcpy(header_msg_new->coef, coef[0], size * sizeof(GFType));
-        sendto(sock, header_msg_new, HEADER_MSG_SIZE, 0, (struct sockaddr *) &broadcast_addr, ADDR_SIZE);
+        int size = HEADER_SIZE + header_msg ->header.length + header_msg->header.pacsum * sizeof(GFType);
+        char* msg = (char*)malloc(size);
+        ReadHeaderMsgToBuf(header_msg_new, msg);
+        sendto(sock, msg, HEADER_MSG_SIZE, 0, (struct sockaddr *) &broadcast_addr, ADDR_SIZE);
 #ifdef MARVELCODING_DEBUG_H
         log_transfer_message(header_msg_new);
 #endif // MARVELCODING_DEBUG_H
         free(header_msg_new);
+        free(msg);
 
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
