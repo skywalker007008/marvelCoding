@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD 14)
 add_definitions(-D MARVEL_DEBUG)
 # Control which protocal we use
 add_definitions(-D MARVEL_TCP)
+# Test MACRO
+# Test Resend
+add_definitions(-D TEST_RESEND)
 
 # add_definitions(-D MODE_WINDOW)
 

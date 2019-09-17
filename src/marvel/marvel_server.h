@@ -51,6 +51,7 @@ namespace marvel {
 
         pthread_mutex_t mutex_askresend_;
         pthread_mutex_t mutex_removecache_;
+        pthread_mutex_t mutex_addcache_;
 #ifdef MARVELCODING_QUEUE_H
         struct ServerCacheList server_cache_list_;
 #endif

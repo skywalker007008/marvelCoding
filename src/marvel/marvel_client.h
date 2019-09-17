@@ -107,6 +107,7 @@ namespace marvel {
         pthread_mutex_t mutex_remove_;
         pthread_mutex_t mutex_resend_;
         pthread_mutex_t mutex_request_;
+        pthread_mutex_t mutex_addcache_;
 
 #ifdef MARVELCODING_QUEUE_H
         struct ClientCacheList client_cache_list_;

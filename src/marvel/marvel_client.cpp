@@ -30,6 +30,7 @@ MARVEL_CLIENT::MarvelClient(MARVEL_APP* app, uint32_t host, uint16_t port)
     pthread_mutex_init(&mutex_remove_, NULL);
     pthread_mutex_init(&mutex_resend_, NULL);
     pthread_mutex_init(&mutex_request_, NULL);
+    pthread_mutex_init(&mutex_addcache_, NULL);
 #ifdef MARVELCODING_QUEUE_H
     TAILQ_INIT(&client_cache_list_);
     cache_num_ = 0;
@@ -105,11 +106,21 @@ ssize_t MARVEL_CLIENT::SendProcess(uint32_t host, uint16_t port, char* msg, int 
     id_ = id;
     close(sock);
 #ifdef MARVEL_TCP
+    pthread_mutex_lock(&mutex_addcache_);
+#if defined(TEST_RESEND)
+    printf("AddCache Prepared!---");
+    printf("strnum: %d\n", id_);
+#endif
     try {
         AddCache(message, coef, id_, dest_addr, port, packet_size, packet_sum);
     } catch (MARVEL_ERR AppCacheFullException exp) {
         throw exp;
     }
+#if defined(TEST_RESEND)
+    printf("AddCache Prepared!---");
+    printf("strnum: %d\n", id_);
+#endif
+    pthread_mutex_unlock(&mutex_addcache_);
 #endif
     //free_array2((void**)coef, packet_sum);
     /*for (int i = 0; i < packet_sum; i++) {
@@ -127,19 +138,6 @@ ssize_t MARVEL_CLIENT::sendMessage(int sock, EbrHeaderMsg* header_msg) {
     memcpy(&(header_msg->header.check), encode_msg + header_msg->header.length, 2);*/
     char* msg = (char*)malloc(send_bytes);
     ReadHeaderMsgToBuf(header_msg, msg);
-    /*for (int i = 0; i < HEADER_SIZE; i++) {
-        msg[i] = ((char*)header_msg)[i];
-    }
-    for (int i = 0; i < header_msg->header.pacsum; i++) {
-        msg[HEADER_SIZE + 2 * i] = 0;
-        msg[HEADER_SIZE + 2 * i + 1] = (uint8_t)header_msg->coef[i];
-    }
-    for (int i = 0; i < header_msg->header.length; i++) {
-        msg[HEADER_SIZE + header_msg->header.pacsum * sizeof(GFType) + i] = header_msg->payload[i];
-    }*/
-    /*memcpy(msg, header_msg, HEADER_SIZE);
-    memcpy(msg + HEADER_SIZE, header_msg->coef, header_msg->header.pacsum * sizeof(GFType));
-    memcpy(msg + HEADER_SIZE + header_msg->header.pacsum, header_msg->payload, header_msg->header.length*sizeof(char));*/
     send_bytes = sendto(sock, msg, send_bytes, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
     // send_bytes = sendto(sock, header_msg, HEADER_MSG_SIZE, 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
     // free(msg);
@@ -181,7 +179,10 @@ void MARVEL_CLIENT::SendResendRequest(EbrResendMsg* msg) {
 
 void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
     pthread_mutex_lock(&(this->mutex_request_));
-
+#if defined(TEST_RESEND)
+    printf("SendResendRequest Prepared!---");
+    printf("strnum: %d\n", msg->strnum);
+#endif
     EbrResendMsg* buf = (EbrResendMsg*)malloc(sizeof(EbrResendMsg));
     memcpy(buf, msg, sizeof(EbrResendMsg));
     struct sockaddr_in destaddr;
@@ -192,7 +193,10 @@ void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
     // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
     sendto(sock, buf, sizeof(EbrResendMsg), 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
-
+#if defined(TEST_RESEND)
+    printf("SendResendRequest Finished!---");
+    printf("strnum: %d\n", msg->strnum);
+#endif
     pthread_mutex_unlock(&(this->mutex_request_));
 }
 
@@ -204,6 +208,10 @@ void MARVEL_CLIENT::SendResendMsg(EbrHeaderMsg* msg) {
 
 void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
     pthread_mutex_lock(&(this->mutex_resend_));
+#if defined(TEST_RESEND)
+    printf("Resend Prepared!---");
+    printf("strnum: %d\n", msg->header.strnum);
+#endif
     ClientCacheHeaderMsg* header_msg;
     FindCache((EbrResendMsg*)msg, header_msg);
     if (header_msg == nullptr) {
@@ -248,6 +256,10 @@ void MARVEL_CLIENT::SendResendMsgThread(EbrHeaderMsg* msg) {
         free(ebrheader_msg);
     }
 #endif // MODE_WINDOW
+#if defined(TEST_RESEND)
+    printf("Resend Finished!---");
+    printf("strnum: %d\n", msg->header.strnum);
+#endif
     pthread_mutex_unlock(&(this->mutex_resend_));
 
 }
@@ -279,11 +291,19 @@ void MARVEL_CLIENT::RemoveCache() {
     // Time Exceed then remove this cache
 
     mysleep(3000);
-    pthread_mutex_lock(&(this->mutex_remove_));
     ClientCacheHeaderMsg* header = TAILQ_FIRST(&client_cache_list_);
+#if defined(TEST_RESEND)
+    printf("RemoveCache Prepared!---");
+    printf("strnum: %d\n", header->header->strnum);
+#endif
+    pthread_mutex_lock(&(this->mutex_remove_));
     TAILQ_FIRST(&client_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&client_cache_list_, header, cache_link);
     free(header);
+#if defined(TEST_RESEND)
+    printf("RemoveCache Finished!---");
+    printf("strnum: %d\n", header->header->strnum);
+#endif
     pthread_mutex_unlock(&(this->mutex_remove_));
 }
 
