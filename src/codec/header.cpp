@@ -183,9 +183,14 @@ void NewServerCacheMsg(Address sourceaddr, uint16_t sourceport, uint8_t strnum,
 }
 
 void NewServerCacheMsg(EbrHeaderMsg* header_msg, ServerCacheHeaderMsg* header) {
-    CODEC codec((header_msg->header).pacsum, (header_msg->header).length);
-    NewServerCacheMsg((header_msg->header).sourceaddr, (header_msg->header).sourceport,
-                      (header_msg->header).strnum, codec, (header_msg->header).pacsum, header);
+    CODEC *codec = new CODEC((header_msg->header).pacsum, (header_msg->header).length);
+    header -> strnum = (header_msg->header).strnum;
+    (header->sourceaddr).host = (header_msg->header).sourceaddr.host;
+    header -> sourceport = (header_msg->header).sourceport;
+    header -> codec = *codec;
+    header -> size = (header_msg->header).pacsum;
+    header -> recvnum = 0;
+    memset(header->recv, false, 16 * sizeof(bool));
 }
 
 bool MatchServerCacheMsg(ServerCacheHeaderMsg* header, EbrHeaderMsg* msg) {

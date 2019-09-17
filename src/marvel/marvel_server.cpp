@@ -175,7 +175,9 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
         (header->recvnum)++;
     }
     if (header->recvnum == header->size) {
+        header->codec.LinkMsg();
         header->codec.decode();
+
         char *msg = (char *) malloc(MARVEL kMaxMsgLength);
         header->codec.get_decode_message(msg);
         if (TAILQ_FIRST(&server_cache_list_) == header) {
