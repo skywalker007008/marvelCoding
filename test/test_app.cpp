@@ -18,6 +18,11 @@ App::App(uint32_t host, const STRING& name)
     stream_ = new OFSTREAM(file_name, std::ios::out);
     client_ = MARVEL_API LogInClient(this, kDefaultPort);
     server_ = MARVEL_API LogInServer(this, kDefaultPort);
+#if defined(TEST_RESEND)
+    std::thread t(&MARVEL_SERVER::start, server_);
+    t.detach();
+    printf("Server Start!\n");
+#endif
     // pool.commit(start);
     // pool.commit(MARVEL StartClient, client_);
     // pool.commit(MARVEL StartServer, server_);

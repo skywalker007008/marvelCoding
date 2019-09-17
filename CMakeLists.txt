@@ -59,8 +59,9 @@ set(DEBUG src/include/debug.h
 
 # add_executable(marvelCoding ${SOURCE_FILES} ${CODEC} ${APP} ${DEBUG} main.cpp)
 
-add_executable(testClient ${SOURCE_FILES} ${CODEC} ${APP} ${TEST} ${DEBUG} test/test_client.cpp)
-add_executable(testServer ${SOURCE_FILES} ${CODEC} ${APP} ${TEST} ${DEBUG} test/test_server.cpp)
+# add_executable(testClient ${SOURCE_FILES} ${CODEC} ${APP} ${TEST} ${DEBUG} test/test_client.cpp)
+# add_executable(testServer ${SOURCE_FILES} ${CODEC} ${APP} ${TEST} ${DEBUG} test/test_server.cpp)
+add_executable(testResend ${SOURCE_FILES} ${CODEC} ${APP} ${TEST} ${DEBUG} test/test_resend.cpp)
 # add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
 
 target_link_libraries(testClient ${CMAKE_THREAD_LIBS_INIT})

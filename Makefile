@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named testResend
+
+# Build rule for target.
+testResend: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testResend
+.PHONY : testResend
+
+# fast build rule for target.
+testResend/fast:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/build
+.PHONY : testResend/fast
+
+#=============================================================================
 # Target rules for targets named testServer
 
 # Build rule for target.
@@ -142,6 +155,7 @@ src/api/api_app.o: src/api/api_app.cpp.o
 
 # target to build an object file
 src/api/api_app.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/api/api_app.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/api/api_app.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/api/api_app.cpp.o
 .PHONY : src/api/api_app.cpp.o
@@ -152,6 +166,7 @@ src/api/api_app.i: src/api/api_app.cpp.i
 
 # target to preprocess a source file
 src/api/api_app.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/api/api_app.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/api/api_app.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/api/api_app.cpp.i
 .PHONY : src/api/api_app.cpp.i
@@ -162,6 +177,7 @@ src/api/api_app.s: src/api/api_app.cpp.s
 
 # target to generate assembly for a file
 src/api/api_app.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/api/api_app.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/api/api_app.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/api/api_app.cpp.s
 .PHONY : src/api/api_app.cpp.s
@@ -172,6 +188,7 @@ src/codec/codec.o: src/codec/codec.cpp.o
 
 # target to build an object file
 src/codec/codec.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/codec.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/codec.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/codec.cpp.o
 .PHONY : src/codec/codec.cpp.o
@@ -182,6 +199,7 @@ src/codec/codec.i: src/codec/codec.cpp.i
 
 # target to preprocess a source file
 src/codec/codec.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/codec.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/codec.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/codec.cpp.i
 .PHONY : src/codec/codec.cpp.i
@@ -192,6 +210,7 @@ src/codec/codec.s: src/codec/codec.cpp.s
 
 # target to generate assembly for a file
 src/codec/codec.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/codec.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/codec.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/codec.cpp.s
 .PHONY : src/codec/codec.cpp.s
@@ -202,6 +221,7 @@ src/codec/gf.o: src/codec/gf.cpp.o
 
 # target to build an object file
 src/codec/gf.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/gf.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/gf.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/gf.cpp.o
 .PHONY : src/codec/gf.cpp.o
@@ -212,6 +232,7 @@ src/codec/gf.i: src/codec/gf.cpp.i
 
 # target to preprocess a source file
 src/codec/gf.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/gf.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/gf.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/gf.cpp.i
 .PHONY : src/codec/gf.cpp.i
@@ -222,6 +243,7 @@ src/codec/gf.s: src/codec/gf.cpp.s
 
 # target to generate assembly for a file
 src/codec/gf.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/gf.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/gf.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/gf.cpp.s
 .PHONY : src/codec/gf.cpp.s
@@ -232,6 +254,7 @@ src/codec/header.o: src/codec/header.cpp.o
 
 # target to build an object file
 src/codec/header.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/header.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/header.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/header.cpp.o
 .PHONY : src/codec/header.cpp.o
@@ -242,6 +265,7 @@ src/codec/header.i: src/codec/header.cpp.i
 
 # target to preprocess a source file
 src/codec/header.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/header.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/header.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/header.cpp.i
 .PHONY : src/codec/header.cpp.i
@@ -252,6 +276,7 @@ src/codec/header.s: src/codec/header.cpp.s
 
 # target to generate assembly for a file
 src/codec/header.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/header.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/header.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/header.cpp.s
 .PHONY : src/codec/header.cpp.s
@@ -262,6 +287,7 @@ src/codec/test_codec.o: src/codec/test_codec.cpp.o
 
 # target to build an object file
 src/codec/test_codec.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/test_codec.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/test_codec.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/test_codec.cpp.o
 .PHONY : src/codec/test_codec.cpp.o
@@ -272,6 +298,7 @@ src/codec/test_codec.i: src/codec/test_codec.cpp.i
 
 # target to preprocess a source file
 src/codec/test_codec.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/test_codec.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/test_codec.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/test_codec.cpp.i
 .PHONY : src/codec/test_codec.cpp.i
@@ -282,6 +309,7 @@ src/codec/test_codec.s: src/codec/test_codec.cpp.s
 
 # target to generate assembly for a file
 src/codec/test_codec.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/codec/test_codec.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/codec/test_codec.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/codec/test_codec.cpp.s
 .PHONY : src/codec/test_codec.cpp.s
@@ -292,6 +320,7 @@ src/exception/marvel_exception.o: src/exception/marvel_exception.cpp.o
 
 # target to build an object file
 src/exception/marvel_exception.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/exception/marvel_exception.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/exception/marvel_exception.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/exception/marvel_exception.cpp.o
 .PHONY : src/exception/marvel_exception.cpp.o
@@ -302,6 +331,7 @@ src/exception/marvel_exception.i: src/exception/marvel_exception.cpp.i
 
 # target to preprocess a source file
 src/exception/marvel_exception.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/exception/marvel_exception.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/exception/marvel_exception.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/exception/marvel_exception.cpp.i
 .PHONY : src/exception/marvel_exception.cpp.i
@@ -312,6 +342,7 @@ src/exception/marvel_exception.s: src/exception/marvel_exception.cpp.s
 
 # target to generate assembly for a file
 src/exception/marvel_exception.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/exception/marvel_exception.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/exception/marvel_exception.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/exception/marvel_exception.cpp.s
 .PHONY : src/exception/marvel_exception.cpp.s
@@ -322,6 +353,7 @@ src/include/debug.o: src/include/debug.cpp.o
 
 # target to build an object file
 src/include/debug.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/debug.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/debug.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/debug.cpp.o
 .PHONY : src/include/debug.cpp.o
@@ -332,6 +364,7 @@ src/include/debug.i: src/include/debug.cpp.i
 
 # target to preprocess a source file
 src/include/debug.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/debug.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/debug.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/debug.cpp.i
 .PHONY : src/include/debug.cpp.i
@@ -342,6 +375,7 @@ src/include/debug.s: src/include/debug.cpp.s
 
 # target to generate assembly for a file
 src/include/debug.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/debug.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/debug.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/debug.cpp.s
 .PHONY : src/include/debug.cpp.s
@@ -352,6 +386,7 @@ src/include/list.o: src/include/list.cpp.o
 
 # target to build an object file
 src/include/list.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/list.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/list.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/list.cpp.o
 .PHONY : src/include/list.cpp.o
@@ -362,6 +397,7 @@ src/include/list.i: src/include/list.cpp.i
 
 # target to preprocess a source file
 src/include/list.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/list.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/list.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/list.cpp.i
 .PHONY : src/include/list.cpp.i
@@ -372,6 +408,7 @@ src/include/list.s: src/include/list.cpp.s
 
 # target to generate assembly for a file
 src/include/list.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/list.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/list.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/list.cpp.s
 .PHONY : src/include/list.cpp.s
@@ -382,6 +419,7 @@ src/include/marvel_constant.o: src/include/marvel_constant.cpp.o
 
 # target to build an object file
 src/include/marvel_constant.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/marvel_constant.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/marvel_constant.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/marvel_constant.cpp.o
 .PHONY : src/include/marvel_constant.cpp.o
@@ -392,6 +430,7 @@ src/include/marvel_constant.i: src/include/marvel_constant.cpp.i
 
 # target to preprocess a source file
 src/include/marvel_constant.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/marvel_constant.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/marvel_constant.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/marvel_constant.cpp.i
 .PHONY : src/include/marvel_constant.cpp.i
@@ -402,6 +441,7 @@ src/include/marvel_constant.s: src/include/marvel_constant.cpp.s
 
 # target to generate assembly for a file
 src/include/marvel_constant.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/marvel_constant.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/marvel_constant.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/marvel_constant.cpp.s
 .PHONY : src/include/marvel_constant.cpp.s
@@ -412,6 +452,7 @@ src/include/marvel_log.o: src/include/marvel_log.cpp.o
 
 # target to build an object file
 src/include/marvel_log.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/marvel_log.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/marvel_log.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/marvel_log.cpp.o
 .PHONY : src/include/marvel_log.cpp.o
@@ -422,6 +463,7 @@ src/include/marvel_log.i: src/include/marvel_log.cpp.i
 
 # target to preprocess a source file
 src/include/marvel_log.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/marvel_log.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/marvel_log.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/marvel_log.cpp.i
 .PHONY : src/include/marvel_log.cpp.i
@@ -432,6 +474,7 @@ src/include/marvel_log.s: src/include/marvel_log.cpp.s
 
 # target to generate assembly for a file
 src/include/marvel_log.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/include/marvel_log.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/include/marvel_log.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/include/marvel_log.cpp.s
 .PHONY : src/include/marvel_log.cpp.s
@@ -442,6 +485,7 @@ src/marvel/marvel_app.o: src/marvel/marvel_app.cpp.o
 
 # target to build an object file
 src/marvel/marvel_app.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_app.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_app.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_app.cpp.o
 .PHONY : src/marvel/marvel_app.cpp.o
@@ -452,6 +496,7 @@ src/marvel/marvel_app.i: src/marvel/marvel_app.cpp.i
 
 # target to preprocess a source file
 src/marvel/marvel_app.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_app.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_app.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_app.cpp.i
 .PHONY : src/marvel/marvel_app.cpp.i
@@ -462,6 +507,7 @@ src/marvel/marvel_app.s: src/marvel/marvel_app.cpp.s
 
 # target to generate assembly for a file
 src/marvel/marvel_app.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_app.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_app.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_app.cpp.s
 .PHONY : src/marvel/marvel_app.cpp.s
@@ -472,6 +518,7 @@ src/marvel/marvel_client.o: src/marvel/marvel_client.cpp.o
 
 # target to build an object file
 src/marvel/marvel_client.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_client.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_client.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_client.cpp.o
 .PHONY : src/marvel/marvel_client.cpp.o
@@ -482,6 +529,7 @@ src/marvel/marvel_client.i: src/marvel/marvel_client.cpp.i
 
 # target to preprocess a source file
 src/marvel/marvel_client.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_client.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_client.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_client.cpp.i
 .PHONY : src/marvel/marvel_client.cpp.i
@@ -492,6 +540,7 @@ src/marvel/marvel_client.s: src/marvel/marvel_client.cpp.s
 
 # target to generate assembly for a file
 src/marvel/marvel_client.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_client.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_client.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_client.cpp.s
 .PHONY : src/marvel/marvel_client.cpp.s
@@ -502,6 +551,7 @@ src/marvel/marvel_server.o: src/marvel/marvel_server.cpp.o
 
 # target to build an object file
 src/marvel/marvel_server.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_server.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_server.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_server.cpp.o
 .PHONY : src/marvel/marvel_server.cpp.o
@@ -512,6 +562,7 @@ src/marvel/marvel_server.i: src/marvel/marvel_server.cpp.i
 
 # target to preprocess a source file
 src/marvel/marvel_server.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_server.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_server.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_server.cpp.i
 .PHONY : src/marvel/marvel_server.cpp.i
@@ -522,6 +573,7 @@ src/marvel/marvel_server.s: src/marvel/marvel_server.cpp.s
 
 # target to generate assembly for a file
 src/marvel/marvel_server.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_server.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_server.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_server.cpp.s
 .PHONY : src/marvel/marvel_server.cpp.s
@@ -532,6 +584,7 @@ src/marvel/marvel_socket.o: src/marvel/marvel_socket.cpp.o
 
 # target to build an object file
 src/marvel/marvel_socket.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_socket.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_socket.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_socket.cpp.o
 .PHONY : src/marvel/marvel_socket.cpp.o
@@ -542,6 +595,7 @@ src/marvel/marvel_socket.i: src/marvel/marvel_socket.cpp.i
 
 # target to preprocess a source file
 src/marvel/marvel_socket.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_socket.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_socket.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_socket.cpp.i
 .PHONY : src/marvel/marvel_socket.cpp.i
@@ -552,6 +606,7 @@ src/marvel/marvel_socket.s: src/marvel/marvel_socket.cpp.s
 
 # target to generate assembly for a file
 src/marvel/marvel_socket.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/src/marvel/marvel_socket.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/src/marvel/marvel_socket.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/src/marvel/marvel_socket.cpp.s
 .PHONY : src/marvel/marvel_socket.cpp.s
@@ -562,6 +617,7 @@ test/test_app.o: test/test_app.cpp.o
 
 # target to build an object file
 test/test_app.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/test/test_app.cpp.o
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/test/test_app.cpp.o
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/test/test_app.cpp.o
 .PHONY : test/test_app.cpp.o
@@ -572,6 +628,7 @@ test/test_app.i: test/test_app.cpp.i
 
 # target to preprocess a source file
 test/test_app.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/test/test_app.cpp.i
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/test/test_app.cpp.i
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/test/test_app.cpp.i
 .PHONY : test/test_app.cpp.i
@@ -582,6 +639,7 @@ test/test_app.s: test/test_app.cpp.s
 
 # target to generate assembly for a file
 test/test_app.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/test/test_app.cpp.s
 	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/test/test_app.cpp.s
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/test/test_app.cpp.s
 .PHONY : test/test_app.cpp.s
@@ -612,6 +670,33 @@ test/test_client.s: test/test_client.cpp.s
 test/test_client.cpp.s:
 	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/test/test_client.cpp.s
 .PHONY : test/test_client.cpp.s
+
+test/test_resend.o: test/test_resend.cpp.o
+
+.PHONY : test/test_resend.o
+
+# target to build an object file
+test/test_resend.cpp.o:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/test/test_resend.cpp.o
+.PHONY : test/test_resend.cpp.o
+
+test/test_resend.i: test/test_resend.cpp.i
+
+.PHONY : test/test_resend.i
+
+# target to preprocess a source file
+test/test_resend.cpp.i:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/test/test_resend.cpp.i
+.PHONY : test/test_resend.cpp.i
+
+test/test_resend.s: test/test_resend.cpp.s
+
+.PHONY : test/test_resend.s
+
+# target to generate assembly for a file
+test/test_resend.cpp.s:
+	$(MAKE) -f CMakeFiles/testResend.dir/build.make CMakeFiles/testResend.dir/test/test_resend.cpp.s
+.PHONY : test/test_resend.cpp.s
 
 test/test_server.o: test/test_server.cpp.o
 
@@ -647,6 +732,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... testResend"
 	@echo "... edit_cache"
 	@echo "... testServer"
 	@echo "... testClient"
@@ -698,6 +784,9 @@ help:
 	@echo "... test/test_client.o"
 	@echo "... test/test_client.i"
 	@echo "... test/test_client.s"
+	@echo "... test/test_resend.o"
+	@echo "... test/test_resend.i"
+	@echo "... test/test_resend.s"
 	@echo "... test/test_server.o"
 	@echo "... test/test_server.i"
 	@echo "... test/test_server.s"

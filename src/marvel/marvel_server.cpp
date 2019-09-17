@@ -140,11 +140,17 @@ void MARVEL_SERVER::shutdown() {
 }
 
 void MARVEL_SERVER::start() {
-    /*try {
-        RecvProcess();
-    } catch (MARVEL_ERR MarvelException exp) {
-        app_->HandleException(exp);
-    }*/
+    char* msg = (char*)malloc(MARVEL kMaxMsgLength * sizeof(char));
+    Address address;
+    uint16_t port;
+    char a;
+    while (true) {
+        RecvProcess(msg, &address, &port);
+        scanf("%c", &a);
+        if (a == 'E') {
+            break;
+        }
+    }
 }
 
 bool MARVEL_SERVER::MatchAddr(EbrHeaderMsg* header_msg) {
