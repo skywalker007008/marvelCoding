@@ -189,13 +189,17 @@ void MARVEL_CLIENT::SendResendRequestThread(EbrResendMsg* msg) {
     destaddr.sin_port = kDefaultPort;
     // destaddr.sin_port = msg->sourceport;
     destaddr.sin_family = AF_INET;
-    destaddr.sin_addr.s_addr = htonl(msg->sourceaddr.host);
+    destaddr.sin_addr.s_addr = htonl(msg->destaddr.host);
+    // destaddr.sin_addr.s_addr = (msg->destaddr.host);
     // broadcast_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
-    sendto(sock, buf, sizeof(EbrResendMsg), 0, (struct sockaddr*)&destaddr, sizeof(struct sockaddr));
+    int optval = 1;
+    setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(int));
+    int send_bytes = sendto(sock, buf, sizeof(EbrResendMsg), 0, (struct sockaddr*)&broadcast_addr, sizeof(struct sockaddr));
 #if defined(TEST_RESEND)
     printf("SendResendRequest Finished!---");
     printf("strnum: %d\n", msg->strnum);
+    close(sock);
 #endif
     pthread_mutex_unlock(&(this->mutex_request_));
 }
@@ -290,7 +294,7 @@ void MARVEL_CLIENT::RemoveCache() {
     // MACRO
     // Time Exceed then remove this cache
 
-    mysleep(3000);
+    mysleep(12000);
     ClientCacheHeaderMsg* header = TAILQ_FIRST(&client_cache_list_);
 #if defined(TEST_RESEND)
     printf("RemoveCache Prepared!---");

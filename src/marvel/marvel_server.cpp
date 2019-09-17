@@ -51,17 +51,11 @@ ssize_t MARVEL_SERVER::RecvProcess(char* msg, Address* host, uint16_t* port) { /
     try {
         // create a socket
         serv_socket = NewSocket(app_->get_stream());
-        std::cout << "new socket\n";
         // add details
         // PackSockaddr(&serv_addr, AF_INET, host_, port_);
         PackSockaddr(&serv_addr, AF_INET, htonl(INADDR_ANY), port_);
-        std::cout << pthread_self() << "pack socket\n";
         // bind the socket
         BindSocket(app_-> get_stream(), serv_socket, &serv_addr);
-        std::cout << "bind socket\n";
-        /*// now listen
-        ListenSocket(app_->get_stream(), serv_socket, &serv_addr);
-        std::cout << "listen socket\n";*/
     } catch (MARVEL_ERR MarvelException exp) {
         throw exp;
     }
@@ -125,7 +119,9 @@ ssize_t MARVEL_SERVER::RecvMessage(
 #ifdef MARVEL_TCP
         else if ((header_msg->header).type == RESEND_TYPE) {
             // TODO: Require RESEND
-            app_ -> SendResendMsg(header_msg);
+            if (MatchAddr(header_msg)) {
+                app_->SendResendMsg(header_msg);
+            }
         }
 #endif
     }
@@ -370,7 +366,8 @@ void MARVEL_SERVER::RemoveCache() {
     pthread_mutex_lock(&(this->mutex_removecache_));
     TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
     TAILQ_REMOVE(&server_cache_list_, header, cache_link);
-    free(&header->codec);
+    // free(&header->codec);
+    // delete &(header->codec);
     free(header);
 #if defined(TEST_RESEND)
     printf("Remove Finished!---");
