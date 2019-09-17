@@ -64,5 +64,6 @@ set(DEBUG src/include/debug.h
 add_executable(testResend ${SOURCE_FILES} ${CODEC} ${APP} ${TEST} ${DEBUG} test/test_resend.cpp)
 # add_executable(test_codec ${MATRIX} ${CODEC} main.cpp)
 
-target_link_libraries(testClient ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(testServer ${CMAKE_THREAD_LIBS_INIT})
+# target_link_libraries(testClient ${CMAKE_THREAD_LIBS_INIT})
+# target_link_libraries(testServer ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(testResend ${CMAKE_THREAD_LIBS_INIT})

@@ -22,11 +22,13 @@ int main(int argc, char* argv[]) {
     char a;
 
     while (true) {
-        app.SendMessage(inet_addr("192.168.0.1"), kDefaultPort, msg);
-        std::cout << "Input a:";
-        std::cin >> a;
-        if (a == 'E') {
-            break;
+        if (memcmp(argv[3], "send", 4) == 0) {
+            app.SendMessage(inet_addr("192.168.0.1"), kDefaultPort, msg);
+            std::cout << "Input a:";
+            std::cin >> a;
+            if (a == 'E') {
+                break;
+            }
         }
     }
     return 0;

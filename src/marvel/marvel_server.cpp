@@ -172,12 +172,12 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
     }
     if (header == nullptr) {
         pthread_mutex_lock(&mutex_addcache_);
+        header = (ServerCacheHeaderMsg *) malloc(sizeof(ServerCacheHeaderMsg));
+        NewServerCacheMsg(header_msg, header);
 #if defined(TEST_RESEND)
         printf("AddCache Prepared!---");
         printf("strnum: %d\n", header->strnum);
 #endif
-        header = (ServerCacheHeaderMsg *) malloc(sizeof(ServerCacheHeaderMsg));
-        NewServerCacheMsg(header_msg, header);
         std::thread t(&MARVEL_SERVER::AskResend, this);
         t.detach();
         TAILQ_INSERT_TAIL(&server_cache_list_, header, cache_link);
@@ -188,7 +188,7 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
         pthread_mutex_unlock(&mutex_addcache_);
     }
 #if defined(TEST_RESEND)
-    if ((header_msg->header).pacnum == header_msg->header.pacsum && header_msg->header.type == MSG_TYPE) {
+    if ((header_msg->header).pacnum == header_msg->header.pacsum - 1 && header_msg->header.type == MSG_TYPE) {
         return nullptr;
     }
 #endif
@@ -202,10 +202,10 @@ char* MARVEL_SERVER::LoadHeader(EbrHeaderMsg* header_msg) {
 
         char *msg = (char *) malloc(MARVEL kMaxMsgLength);
         header->codec.get_decode_message(msg);
-        if (TAILQ_FIRST(&server_cache_list_) == header) {
+        /*if (TAILQ_FIRST(&server_cache_list_) == header) {
             TAILQ_FIRST(&server_cache_list_) = TAILQ_NEXT(header, cache_link);
         }
-        TAILQ_REMOVE(&server_cache_list_, header, cache_link);
+        TAILQ_REMOVE(&server_cache_list_, header, cache_link);*/
         return msg;
     } else {
         return nullptr;
